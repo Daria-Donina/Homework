@@ -11,6 +11,10 @@ void swap(int &firstElement, int &secondElement)
 
 void arrayTransformation(int *array, int sizeOfArray)
 {
+	for (int i = 0; i < sizeOfArray; ++i)
+	{
+		array[i] = rand();
+	}
 	int key = array[0];
 	for (int i = 0; i < sizeOfArray; ++i)
 	{
@@ -26,12 +30,9 @@ bool testArrayTransformation()
 {
 	const int size = 5;
 	int array[size];
-	int key = array[0];
-	for (int i = 0; i < size; ++i)
-	{
-		array[i] = rand();
-	}
 	int counter = 0;
+	arrayTransformation(array, size);
+	int key = array[0];
 	for (int i = 0; i < size; ++i)
 	{
 		if (array[i] < key)
@@ -39,7 +40,6 @@ bool testArrayTransformation()
 			counter++;
 		}
 	}
-	arrayTransformation(array, size);
 	for (int i = 0; i < counter; ++i)
 	{
 		if (array[i] >= key)
