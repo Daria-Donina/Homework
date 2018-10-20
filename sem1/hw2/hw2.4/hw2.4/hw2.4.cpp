@@ -9,19 +9,30 @@ void swap(int &firstElement, int &secondElement)
 	secondElement = temp;
 }
 
-void arrayTransformation(int *array, int sizeOfArray)
+void arrayInitialization(int *array, int sizeOfArray)
 {
 	for (int i = 0; i < sizeOfArray; ++i)
 	{
 		array[i] = rand();
 	}
-	int key = array[0];
-	for (int i = 0; i < sizeOfArray; ++i)
+}
+
+void arrayTransformation(int *array, int left, int right)
+{
+	int pivot = array[0];
+	while (left < right)
 	{
-		if (array[i] < key)
+		while (array[left] < pivot && left < right)
 		{
-			swap(array[i], key);
-			key = array[i];
+			left++;
+		}
+		while (array[right] >= pivot && left < right)
+		{
+			right--;
+		}
+		if (left != right)
+		{
+			swap(array[left], array[right]);
 		}
 	}
 }
@@ -31,25 +42,26 @@ bool testArrayTransformation()
 	const int size = 5;
 	int array[size];
 	int counter = 0;
-	arrayTransformation(array, size);
-	int key = array[0];
+	arrayInitialization(array, 5);
+	int pivot = array[0];
+	arrayTransformation(array, 0, 4);
 	for (int i = 0; i < size; ++i)
 	{
-		if (array[i] < key)
+		if (array[i] < pivot)
 		{
 			counter++;
 		}
 	}
 	for (int i = 0; i < counter; ++i)
 	{
-		if (array[i] >= key)
+		if (array[i] >= pivot)
 		{
 			return false;
 		}
 	}
 	for (int i = counter; i < size; ++i)
 	{
-		if (array[i] < key)
+		if (array[i] < pivot)
 		{
 			return false;
 		}
