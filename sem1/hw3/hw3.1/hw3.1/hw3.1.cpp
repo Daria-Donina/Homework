@@ -12,12 +12,16 @@ void swap(int &firstElement, int &secondElement)
 int choosingPivot(int *array, int numOfFirstElement, int numOfLastElement)
 {
 	if (array[numOfFirstElement] <= array[numOfLastElement] &&
-		array[numOfFirstElement] >= array[(numOfLastElement - numOfFirstElement) / 2])
+		array[numOfFirstElement] >= array[(numOfLastElement - numOfFirstElement) / 2] || 
+		array[numOfFirstElement] >= array[numOfLastElement] &&
+		array[numOfFirstElement] <= array[(numOfLastElement - numOfFirstElement) / 2])
 	{
 		return array[numOfFirstElement];
 	}
 	else if (array[numOfLastElement] <= array[numOfFirstElement] &&
-		array[numOfLastElement] >= array[(numOfLastElement - numOfFirstElement) / 2])
+		array[numOfLastElement] >= array[(numOfLastElement - numOfFirstElement) / 2] ||
+		array[numOfLastElement] >= array[numOfFirstElement] &&
+		array[numOfLastElement] <= array[(numOfLastElement - numOfFirstElement) / 2])
 	{
 		return array[numOfLastElement];
 	}
@@ -156,6 +160,22 @@ bool testQSort4()
 	return true;
 }
 
+bool testQSort5()
+{
+	const int size = 5;
+	int array[size] = { 3, 5, 6, 5, 1 };
+	int counter = 0;
+	qSort(array, 0, size - 1);
+	for (int i = 0; i < size - 1; ++i)
+	{
+		if (array[i + 1] < array[i])
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
 
 int main()
 {
@@ -190,6 +210,14 @@ int main()
 	else
 	{
 		printf("Test 4 failed\n");
+	}
+	if (testQSort5())
+	{
+		printf("Test 5 passed\n");
+	}
+	else
+	{
+		printf("Test 5 failed\n");
 	}
 	return 0;
 }
