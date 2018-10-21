@@ -11,17 +11,17 @@ void swap(int &firstElement, int &secondElement)
 
 int choosingPivot(int *array, int numOfFirstElement, int numOfLastElement)
 {
-	if (array[numOfFirstElement] <= array[numOfLastElement] &&
-		array[numOfFirstElement] >= array[(numOfLastElement - numOfFirstElement) / 2] || 
-		array[numOfFirstElement] >= array[numOfLastElement] &&
-		array[numOfFirstElement] <= array[(numOfLastElement - numOfFirstElement) / 2])
+	if (array[numOfFirstElement] < array[numOfLastElement] &&
+		array[numOfFirstElement] > array[(numOfLastElement - numOfFirstElement) / 2] || 
+		array[numOfFirstElement] > array[numOfLastElement] &&
+		array[numOfFirstElement] < array[(numOfLastElement - numOfFirstElement) / 2])
 	{
 		return array[numOfFirstElement];
 	}
-	else if (array[numOfLastElement] <= array[numOfFirstElement] &&
-		array[numOfLastElement] >= array[(numOfLastElement - numOfFirstElement) / 2] ||
-		array[numOfLastElement] >= array[numOfFirstElement] &&
-		array[numOfLastElement] <= array[(numOfLastElement - numOfFirstElement) / 2])
+	else if (array[numOfLastElement] < array[numOfFirstElement] &&
+		array[numOfLastElement] > array[(numOfLastElement - numOfFirstElement) / 2] ||
+		array[numOfLastElement] > array[numOfFirstElement] &&
+		array[numOfLastElement] < array[(numOfLastElement - numOfFirstElement) / 2])
 	{
 		return array[numOfLastElement];
 	}
@@ -71,7 +71,7 @@ void qSort(int *array, int numOfFirstElement, int numOfLastElement)
 {
 	int pivot = choosingPivot(array, numOfFirstElement, numOfLastElement);
 	arrayTransformation(array, numOfFirstElement, numOfLastElement);
-	int i = 0;
+	int i = numOfFirstElement;
 	int counter = 0;
 	while (array[i] < pivot)
 	{
@@ -80,19 +80,19 @@ void qSort(int *array, int numOfFirstElement, int numOfLastElement)
 	}
 	if (counter >= 10)
 	{
-		qSort(array, numOfFirstElement, counter - 1);
+		qSort(array, numOfFirstElement, numOfFirstElement + counter - 1);
 	}
 	else
 	{
-		insertionSort(array, numOfFirstElement, counter - 1);
+		insertionSort(array, numOfFirstElement, numOfFirstElement + counter - 1);
 	}
 	if (numOfLastElement - numOfFirstElement - counter + 1 >= 10)
 	{
-		qSort(array, counter, numOfLastElement);
+		qSort(array, numOfFirstElement + counter, numOfLastElement);
 	}
 	else
 	{
-		insertionSort(array, counter, numOfLastElement);
+		insertionSort(array, numOfFirstElement + counter, numOfLastElement);
 	}
 }
 
@@ -147,7 +147,7 @@ bool testQSort3()
 bool testQSort4()
 {
 	const int size = 20;
-	int array[size] = { 2, 9000, 2, 5, 2, 7, 7, 43, 5, 3, 32, 7, 9, 24, 35, 67, 19, 23, 24534, 4 };
+	int array[size] = { 2, 9000, 20, 5, 2, 10, 9, 43, 5, 3, 53, 45, 9, 24, 35, 67, 19, 23, 24534, 4 };
 	int counter = 0;
 	qSort(array, 0, size - 1);
 	for (int i = 0; i < size - 1; ++i)
