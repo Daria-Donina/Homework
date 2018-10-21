@@ -1,6 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctime>
 
 void swap(int &firstElement, int &secondElement)
 {
@@ -11,6 +12,7 @@ void swap(int &firstElement, int &secondElement)
 
 void arrayInitialization(int *array, int sizeOfArray)
 {
+	srand(time(0));
 	for (int i = 0; i < sizeOfArray; ++i)
 	{
 		array[i] = rand();
