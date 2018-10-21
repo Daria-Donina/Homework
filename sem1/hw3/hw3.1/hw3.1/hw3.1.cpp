@@ -71,7 +71,7 @@ void qSort(int *array, int numOfFirstElement, int numOfLastElement)
 {
 	int pivot = choosingPivot(array, numOfFirstElement, numOfLastElement);
 	arrayTransformation(array, numOfFirstElement, numOfLastElement);
-	int i = 1;
+	int i = 0;
 	int counter = 0;
 	while (array[i] < pivot)
 	{
@@ -80,19 +80,19 @@ void qSort(int *array, int numOfFirstElement, int numOfLastElement)
 	}
 	if (counter >= 10)
 	{
-		qSort(array, numOfFirstElement, counter);
+		qSort(array, numOfFirstElement, counter - 1);
 	}
 	else
 	{
-		insertionSort(array, numOfFirstElement, counter);
+		insertionSort(array, numOfFirstElement, counter - 1);
 	}
-	if (numOfLastElement - numOfFirstElement - counter >= 10)
+	if (numOfLastElement - numOfFirstElement - counter + 1 >= 10)
 	{
-		qSort(array, counter + 1, numOfLastElement);
+		qSort(array, counter, numOfLastElement);
 	}
 	else
 	{
-		insertionSort(array, counter + 1, numOfLastElement);
+		insertionSort(array, counter, numOfLastElement);
 	}
 }
 
