@@ -47,52 +47,43 @@ void insertionSort(int *array, int numOfFirstElement, int numOfLastElement)
 	}
 }
 
-void arrayTransformation(int *array, int left, int right)
+void qSort(int *array, int first, int last)
 {
+	int left = first;
+	int right = last;
 	int pivot = choosingPivot(array, left, right);
-	while (left < right)
+	while (left <= right)
 	{
-		while (array[left] < pivot && left < right)
+		while (array[left] < pivot)
 		{
 			left++;
 		}
-		while (array[right] >= pivot && left < right)
+		while (array[right] > pivot)
 		{
 			right--;
 		}
-		if (left != right)
+		if (left <= right)
 		{
 			swap(array[left], array[right]);
+			right--;
+			left++;
 		}
 	}
-}
-
-void qSort(int *array, int numOfFirstElement, int numOfLastElement)
-{
-	int pivot = choosingPivot(array, numOfFirstElement, numOfLastElement);
-	arrayTransformation(array, numOfFirstElement, numOfLastElement);
-	int i = numOfFirstElement;
-	int counter = 0;
-	while (array[i] < pivot)
+	if (right - first >= 10)
 	{
-		++counter;
-		++i;
+		qSort(array, first, right);
 	}
-	if (counter >= 10)
+	else if (right > first)
 	{
-		qSort(array, numOfFirstElement, numOfFirstElement + counter - 1);
+		insertionSort(array, first, right);
 	}
-	else
+	if (last - left >= 10)
 	{
-		insertionSort(array, numOfFirstElement, numOfFirstElement + counter - 1);
+		qSort(array, left, last);
 	}
-	if (numOfLastElement - numOfFirstElement - counter + 1 >= 10)
+	else if (last > left)
 	{
-		qSort(array, numOfFirstElement + counter, numOfLastElement);
-	}
-	else
-	{
-		insertionSort(array, numOfFirstElement + counter, numOfLastElement);
+		insertionSort(array, left, last);
 	}
 }
 
