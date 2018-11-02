@@ -22,9 +22,10 @@ void bubbleSorting(int *array, int length)
 	}
 }
 
-void quickSorting(int *array, int length)
+void countSorting(int *array, int length)
 {
-	int maxElement = array[0], minElement = array[0];
+	int maxElement = array[0];
+	int minElement = array[0];
 	for (int i = 1; i < length; ++i)
 	{
 		if (array[i] > maxElement)
@@ -68,25 +69,25 @@ bool testBubble()
 		{
 			return false;
 		}
-		return true;
 	}
+	return true;
 }
 
-bool testQuick()
+bool testCount()
 {
 	const int length = 10;
 	int array1[length] = { 9, 3, 6, 3, -1, -9, 7, 6, -10, 0 };
-	quickSorting(array1, length);
+	countSorting(array1, length);
 	int array2[length] = { 7, 8, 43, 6, -80, -90, 4, 0, 2, 1 };
-	quickSorting(array2, length);
+	countSorting(array2, length);
 	for (int i = 0; i < 9; ++i)
 	{
 		if (array1[i] > array1[i + 1] && array2[i] > array2[i + 1])
 		{
 			return false;
 		}
-		return true;
 	}
+	return true;
 }
 
 int main()
@@ -99,13 +100,13 @@ int main()
 	{
 		printf("Tests for bubble sorting failed\n");
 	}
-	if (testQuick())
+	if (testCount())
 	{
-		printf("Tests for quick sorting passed\n");
+		printf("Tests for count sorting passed\n");
 	}
 	else
 	{
-		printf("Tests for quick sorting failed\n");
+		printf("Tests for count sorting failed\n");
 	}
 	return 0;
 }
