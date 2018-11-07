@@ -66,7 +66,7 @@ void qSort(int *array, int first, int last)
 
 bool binSearch(int *array, int key, int numOfFirstEl, int numOfLastEl)
 {
-	int numOfMidEl = (numOfFirstEl + numOfLastEl) / 2;
+	const int numOfMidEl = (numOfFirstEl + numOfLastEl) / 2;
 	if (numOfFirstEl <= numOfLastEl) {
 		if (key == array[numOfMidEl])
 		{
@@ -92,14 +92,7 @@ bool testBinSearch()
 	const int key = 10;
 	qSort(array1, 0, size - 1);
 	qSort(array2, 0, size - 1);
-	if (binSearch(array1, key, 0, size - 1) && binSearch(array2, key, 0, size - 1) == false)
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+	return binSearch(array1, key, 0, size - 1) && !binSearch(array2, key, 0, size - 1);
 }
 
 int main()
@@ -116,20 +109,35 @@ int main()
 	int n = 0;
 	scanf("%d", &n);
 	int *array = new int[n] {};
-	srand(time(0));
+	srand(time(nullptr));
 	for (int i = 0; i < n; ++i)
 	{
-		array[i] = rand() % 1000000001;
+		array[i] = rand();
 	}
 	qSort(array, 0, n - 1);
 	printf("Enter the number less or equal 300000 and larger or equal 1\n");
 	int k = 0;
 	scanf("%d", &k);
+	printf("Array: ");
+	for (int i = 0; i < n; ++i)
+	{
+		printf("%d ", array[i]);
+	}
+	printf("\n"); 
 	for (int i = 0; i < k; ++i)
 	{
-		int key = rand() % 1000000001;
-		binSearch(array, key, 0, n - 1);
+		int key = rand();
+		printf("%d: ", key);
+		if (binSearch(array, key, 0, n - 1))
+		{
+			printf("in the array\n");
+		}
+		else
+		{
+			printf("not in the array\n");
+		}
 	}
+
 	delete[] array;
 	return 0;
 }
