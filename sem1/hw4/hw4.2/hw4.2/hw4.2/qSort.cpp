@@ -1,3 +1,5 @@
+#include "qSort.h"
+
 void swap(int &firstElement, int &secondElement)
 {
 	const int temp = firstElement;

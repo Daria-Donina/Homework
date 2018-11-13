@@ -2,12 +2,12 @@
 #include <stdio.h>
 #include "qSort.h"
 
-int SearchMostCommonEl(int *array, int size)
+int searchMostCommonElement(int *array, int size)
 {
 	qSort(array, 0, size - 1);
 	int counter = 1;
 	int maxCounter = 0;
-	int mostCommonEl = array[0];
+	int mostCommonElement = array[0];
 	for (int i = 1; i < size; ++i)
 	{
 		if (array[i] == array[i - 1])
@@ -16,7 +16,7 @@ int SearchMostCommonEl(int *array, int size)
 			if (counter > maxCounter)
 			{
 				maxCounter = counter;
-				mostCommonEl = array[i];
+				mostCommonElement = array[i];
 			}
 		}
 		else
@@ -24,20 +24,20 @@ int SearchMostCommonEl(int *array, int size)
 			counter = 1;
 		}
 	}
-	return mostCommonEl;
+	return mostCommonElement;
 }
 
-bool testSearchMostCommonEl()
+bool testSearchMostCommonElement()
 {
 	const int size = 10;
 	int array1[size] = { 2, 5, 6, 7, 2, 9, 2, 4, 9, 2 };
 	int array2[size] = { 4, 4, 7, 9, 9, 9, 1, 3, 3, 5 };
-	return SearchMostCommonEl(array1, size) == 2 && SearchMostCommonEl(array2, size) == 9;
+	return searchMostCommonElement(array1, size) == 2 && searchMostCommonElement(array2, size) == 9;
 }
 
 int main()
 {
-	if (testSearchMostCommonEl())
+	if (testSearchMostCommonElement())
 	{
 		printf("Tests for searching the most common element of array passed\n");
 	}
@@ -75,7 +75,7 @@ int main()
 	}
 
 	qSort(array, 0, size - 1);
-	printf("The most common element is %d", SearchMostCommonEl(array, size));
+	printf("The most common element is %d", searchMostCommonElement(array, size));
 	fclose(inputData);
 	delete[] array;
 	return 0;
