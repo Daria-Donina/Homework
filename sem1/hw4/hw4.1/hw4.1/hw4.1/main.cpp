@@ -14,6 +14,26 @@ bool* decimalToBinary(int decimalNumber, bool *binaryNumber)
 	return binaryNumber;
 }
 
+int binaryToDecimal(bool *sum)
+{
+	int decimalSum = 0;
+	int powerTwo = 1;
+	for (int i = 31; i >= 1; --i)
+	{
+		decimalSum += sum[i] * powerTwo;
+		powerTwo *= 2;
+	}
+	if (sum[0])
+	{
+		decimalSum = -decimalSum;
+		return decimalSum;
+	}
+	else
+	{
+		return decimalSum;
+	}
+}
+
 int lengthOfBinNumber(int number)
 {
 	int powerTwo = 1;
@@ -52,16 +72,36 @@ bool* sumOfNumbers(bool *firstBinaryNumber, bool *secondBinaryNumber, bool *resu
 	{
 		if (firstBinaryNumber[i] && secondBinaryNumber[i])
 		{
-			!result[i] + temp;
+			result[i] = temp;
 			temp = 1;
 		}
 		else
 		{
-			result[i] = firstBinaryNumber[i] + secondBinaryNumber[i] + temp;
-			temp = 0;
+			result[i] = (firstBinaryNumber[i] + secondBinaryNumber[i] + temp) % 2;
+			if ((firstBinaryNumber[i] + secondBinaryNumber[i] + temp) / 2 == 1)
+			{
+				temp = 1;
+			}
+			else
+			{
+				temp = 0;
+			}
 		}
 	}
 	return result;
+}
+
+bool* inversionOfAdditionalCode(bool *array)
+{
+	int number = -1;
+	bool binaryNumber[32]{};
+	*binaryNumber = *decimalToBinary(-1, binaryNumber);
+	*array = *sumOfNumbers(array, binaryNumber, array);
+	for (int i = 1; i < 32; ++i)
+	{
+		array[i] = !array[i];
+	}
+	return array;
 }
 
 int main()
@@ -88,14 +128,18 @@ int main()
 	printf("Второе число в двоичном представлении в дополнительном коде: ");
 	printNumber(secondNumber, secondBinaryNumber);
 
-	bool resultOfSum[32]{};
-	*resultOfSum = *sumOfNumbers(firstBinaryNumber, secondBinaryNumber, resultOfSum);
-	printf("Сумма чисел в двочином представлении: ");
+	bool sum[32]{};
+	*sum = *sumOfNumbers(firstBinaryNumber, secondBinaryNumber, sum);
+	printf("Сумма чисел в двоичном представлении: ");
 	for (int i = 0; i < 32; ++i)
 	{
-		printf("%d", resultOfSum[i]);
+		printf("%d", sum[i]);
 	}
 
-
+	if (sum[0])
+	{
+		*sum = *inversionOfAdditionalCode(sum);
+	}
+	printf("\nСумма чисел в десятичном представлении: %d", binaryToDecimal(sum));
 	return 0;
 }
