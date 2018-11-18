@@ -1,38 +1,8 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <locale.h>
-
-bool* decimalToBinary(int decimalNumber, bool *binaryNumber)
-{
-	binaryNumber[0] = (decimalNumber < 0);
-	unsigned int bit = 0b01000000000000000000000000000000;
-	for (int i = 1; i < 32; ++i)
-	{
-		binaryNumber[i] = (decimalNumber & bit);
-		bit = bit >> 1;
-	}
-	return binaryNumber;
-}
-
-int binaryToDecimal(bool *sum)
-{
-	int decimalSum = 0;
-	int powerTwo = 1;
-	for (int i = 31; i >= 1; --i)
-	{
-		decimalSum += sum[i] * powerTwo;
-		powerTwo *= 2;
-	}
-	if (sum[0])
-	{
-		decimalSum = -decimalSum;
-		return decimalSum;
-	}
-	else
-	{
-		return decimalSum;
-	}
-}
+#include "mathOperations.h"
+#include "test.h"
 
 int lengthOfBinNumber(int number)
 {
@@ -65,48 +35,17 @@ void printNumber(int number, bool *array)
 	printf("\n");
 }
 
-bool* sumOfNumbers(bool *firstBinaryNumber, bool *secondBinaryNumber, bool *result)
-{
-	int temp = 0;
-	for (int i = 31; i >= 0; --i)
-	{
-		if (firstBinaryNumber[i] && secondBinaryNumber[i])
-		{
-			result[i] = temp;
-			temp = 1;
-		}
-		else
-		{
-			result[i] = (firstBinaryNumber[i] + secondBinaryNumber[i] + temp) % 2;
-			if ((firstBinaryNumber[i] + secondBinaryNumber[i] + temp) / 2 == 1)
-			{
-				temp = 1;
-			}
-			else
-			{
-				temp = 0;
-			}
-		}
-	}
-	return result;
-}
-
-bool* inversionOfAdditionalCode(bool *array)
-{
-	int number = -1;
-	bool binaryNumber[32]{};
-	*binaryNumber = *decimalToBinary(-1, binaryNumber);
-	*array = *sumOfNumbers(array, binaryNumber, array);
-	for (int i = 1; i < 32; ++i)
-	{
-		array[i] = !array[i];
-	}
-	return array;
-}
-
 int main()
 {
 	//tests
+	if (test())
+	{
+		printf("Tests passed\n");
+	}
+	else
+	{
+		printf("Tests failed\n");
+	}
 	setlocale(LC_ALL, "Russian");
 
 	int firstNumber = 0;
@@ -136,10 +75,15 @@ int main()
 		printf("%d", sum[i]);
 	}
 
+	bool invSum[32]{};
 	if (sum[0])
 	{
-		*sum = *inversionOfAdditionalCode(sum);
+		*invSum = *inversionOfTwosComplement(sum, invSum);
+		printf("\nСумма чисел в десятичном представлении: %d", binaryToDecimal(invSum));
 	}
-	printf("\nСумма чисел в десятичном представлении: %d", binaryToDecimal(sum));
+	else
+	{
+		printf("\nСумма чисел в десятичном представлении: %d", binaryToDecimal(sum));
+	}
 	return 0;
 }
