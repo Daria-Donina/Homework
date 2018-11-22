@@ -4,12 +4,6 @@
 #include "commands.h"
 #include "interface.h"
 
-struct Record
-{
-	char name[100]{};
-	int phoneNumber = 0;
-};
-
 //Проверяет, есть ли вводимое имя в справочнике
 bool isName(Record *phonebook, char *name, const int size)
 {
@@ -57,18 +51,21 @@ void userInterface(int number, Record *phonebook)
 			scanf("%s", record.name);
 			printf("Enter phone number\n");
 			scanf("%d", &record.phoneNumber);
-			if (!isName(phonebook, record.name, size) && !isPhoneNumber(phonebook, record.phoneNumber, size))
+			if (!isName(phonebook, record.name, size))
 			{
-				addARecord(phonebook, record.name, record.phoneNumber, size);
-				printf("Record has been added!\n\n");
+				if (!isPhoneNumber(phonebook, record.phoneNumber, size))
+				{
+					addARecord(phonebook, record.name, record.phoneNumber, size);
+					printf("Record has been added!\n\n");
+				}
+				else 
+				{
+					printf("The phone number is already in a phonebook\n\n");
+				}
 			}
-			else if (isName(phonebook, record.name, size))
+			else
 			{
 				printf("The name is already in a phonebook\n\n");
-			}
-			else if (isPhoneNumber(phonebook, record.phoneNumber, size))
-			{
-				printf("The phone number is already in a phonebook\n\n");
 			}
 			break;
 		case 2:

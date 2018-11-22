@@ -5,12 +5,6 @@
 #include "interface.h"
 #include "commands.h"
 
-struct Record
-{
-	char name[100]{};
-	int phoneNumber = 0;
-};
-
 void addARecord(Record *phonebook, char *name, int phoneNumber, const int size)
 {
 	int numberOfRecord = numberOfRecords(phonebook, size) + 1;

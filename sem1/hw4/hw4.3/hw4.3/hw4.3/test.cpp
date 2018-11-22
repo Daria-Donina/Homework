@@ -5,12 +5,6 @@
 #include "auxiliary.h"
 #include "test.h"
 
-struct Record
-{
-	char name[100]{};
-	int phoneNumber = 0;
-};
-
 bool test()
 {
 	const int size = 3;
@@ -20,14 +14,17 @@ bool test()
 	addARecord(testPhonebook, testName3, 432, size);
 	if (strcmp(testPhonebook[3].name, "ccc") != 0 || testPhonebook[3].phoneNumber != 432)
 	{
+		fclose(test);
 		return false;
 	}
 	if (testPhonebook[findAPhoneNumber(testPhonebook, testPhonebook[1].name, size)].phoneNumber != 123)
 	{
+		fclose(test);
 		return false;
 	}
 	if (strcmp(testPhonebook[findAName(testPhonebook, testPhonebook[2].phoneNumber, size)].name, "bbb") != 0)
 	{
+		fclose(test);
 		return false;
 	}
 	saveCurrentDataToFile(test, testPhonebook, size);

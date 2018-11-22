@@ -1,12 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "auxiliary.h"
 
-struct Record
-{
-	char name[100]{};
-	int phoneNumber = 0;
-};
-
 int numberOfRecords(Record *phonebook, const int size)
 {
 	int numberOfRecords = 0;
