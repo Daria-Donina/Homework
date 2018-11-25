@@ -16,18 +16,18 @@ int lengthOfBinNumber(int number)
 	return i;
 }
 
-void printNumber(int number, bool *array)
+void printNumber(int number, bool *array, const int length)
 {
 	if (number > 0)
 	{
-		for (int i = 32 - lengthOfBinNumber(number); i < 32; ++i)
+		for (int i = length - lengthOfBinNumber(number); i < length; ++i)
 		{
 			printf("%d", array[i]);
 		}
 	}
 	else
 	{
-		for (int i = 0; i < 32; ++i)
+		for (int i = 0; i < length; ++i)
 		{
 			printf("%d", array[i]);
 		}
@@ -37,7 +37,6 @@ void printNumber(int number, bool *array)
 
 int main()
 {
-	//tests
 	if (test())
 	{
 		printf("Tests passed\n");
@@ -48,6 +47,8 @@ int main()
 	}
 	setlocale(LC_ALL, "Russian");
 
+	const int length = 32;
+
 	int firstNumber = 0;
 	printf("Введите первое число: ");
 	scanf("%d", &firstNumber);
@@ -56,34 +57,24 @@ int main()
 	printf("Введите второе число: ");
 	scanf("%d", &secondNumber);
 
-	bool firstBinaryNumber[32]{};
-	bool secondBinaryNumber[32]{};
+	bool firstBinaryNumber[length]{};
+	bool secondBinaryNumber[length]{};
 
-	*firstBinaryNumber = *decimalToBinary(firstNumber, firstBinaryNumber);
-	*secondBinaryNumber = *decimalToBinary(secondNumber, secondBinaryNumber);
+	decimalToBinary(firstNumber, firstBinaryNumber, length);
+	decimalToBinary(secondNumber, secondBinaryNumber, length);
 
 	printf("Первое число в двоичном представлении в дополнительном коде: ");
-	printNumber(firstNumber, firstBinaryNumber);
+	printNumber(firstNumber, firstBinaryNumber, length);
 	printf("Второе число в двоичном представлении в дополнительном коде: ");
-	printNumber(secondNumber, secondBinaryNumber);
+	printNumber(secondNumber, secondBinaryNumber, length);
 
-	bool sum[32]{};
-	*sum = *sumOfNumbers(firstBinaryNumber, secondBinaryNumber, sum);
+	bool sum[length]{};
+	sumOfNumbers(firstBinaryNumber, secondBinaryNumber, sum, length);
 	printf("Сумма чисел в двоичном представлении: ");
-	for (int i = 0; i < 32; ++i)
+	for (int i = 0; i < length; ++i)
 	{
 		printf("%d", sum[i]);
 	}
-
-	bool invSum[32]{};
-	if (sum[0])
-	{
-		*invSum = *inversionOfTwosComplement(sum, invSum);
-		printf("\nСумма чисел в десятичном представлении: %d", binaryToDecimal(invSum));
-	}
-	else
-	{
-		printf("\nСумма чисел в десятичном представлении: %d", binaryToDecimal(sum));
-	}
+	printf("\nСумма чисел в десятичном представлении: %d", binaryToDecimal(sum, length));
 	return 0;
 }
