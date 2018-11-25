@@ -14,6 +14,7 @@ void userInterface(List *list, int number)
 		printf("3 - print the list\n");
 		scanf("%d", &number);
 		int value = 0;
+		int codeOfMistake = 0;
 		switch (number)
 		{
 		case 1:
@@ -25,7 +26,19 @@ void userInterface(List *list, int number)
 		case 2:
 			printf("Enter value to be deleted\n");
 			scanf("%d", &value);
-			pop(list, value);
+			codeOfMistake = pop(list, value);
+			if (codeOfMistake == 1)
+			{
+				printf("List has no elements\n\n");
+			}
+			else if (codeOfMistake == 2)
+			{
+				printf("There is no such element in the list\n\n");
+			}
+			else if (codeOfMistake == 0)
+			{
+				printf("Value has been deleted\n\n");
+			}
 			break;
 		case 3:
 			print(list);

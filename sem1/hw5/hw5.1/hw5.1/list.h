@@ -19,10 +19,10 @@ List *createList();
 void push(List *list, int value);
 
 //Removes value from the list
-void pop(List *list, int value);
+int pop(List *list, int value);
 
 //Prints list
 void print(List *list);
 
-//Deletes list
+//Removes list
 void deleteList(List *list);

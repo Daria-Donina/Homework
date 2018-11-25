@@ -39,14 +39,13 @@ void push(List *list, int value)
 	}
 }
 
-void pop(List *list, int value)
+int pop(List *list, int value)
 {
 	ListElement *current = list->head;
 	ListElement *prev = current;
 	if (list->head == nullptr)
 	{
-		printf("List has no elements\n\n");
-		return;
+		return 1;
 	}
 	while (current->next && value != current->value)
 	{
@@ -59,12 +58,12 @@ void pop(List *list, int value)
 		{
 			delete current;
 			prev->next = nullptr;
+			return 0;
 		}
 		else
 		{
-			printf("There is no such element in the list\n\n");
+			return 2;
 		}
-		return;
 	}
 	ListElement *next = current->next;
 	if (prev != current)
@@ -76,8 +75,7 @@ void pop(List *list, int value)
 		list->head = next;
 	}
 	delete current;
-	printf("Value has been deleted\n\n");
-	return;
+	return 0;
 }
 
 void print(List *list)
