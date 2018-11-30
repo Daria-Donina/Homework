@@ -5,7 +5,7 @@
 
 using namespace std;
 
-bool isOneElement(Stack *stack)
+bool isNotOneElement(Stack *stack)
 {
 	return stack->head->next != nullptr;
 }
@@ -19,7 +19,7 @@ int result(Stack *stack, string expression)
 		{
 			push(stack, expression[i] - '0');
 		}
-		else if (isOneElement(stack))
+		else if (isNotOneElement(stack))
 		{
 			int tempResult = 0;
 			if (expression[i] == '+')
@@ -45,7 +45,7 @@ int result(Stack *stack, string expression)
 			}
 		}
 	}
-	if (!isOneElement(stack))
+	if (!isNotOneElement(stack))
 	{
 		return stack->head->data;
 	}
