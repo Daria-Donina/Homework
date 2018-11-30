@@ -22,7 +22,7 @@ int main()
 
 	if (!phonebookFile)
 	{
-		FILE * phonebookFile = fopen("phonebook.txt", "w+");
+		phonebookFile = fopen("phonebook.txt", "w+");
 	}
 
 	Record phonebook[101];
