@@ -2,7 +2,7 @@
 
 struct StackElement
 {
-	char data = 0;
+	int data = 0;
 	StackElement *next = nullptr;
 };
 
@@ -11,10 +11,14 @@ struct Stack
 	StackElement *head;
 };
 
+//Creates stack
 Stack *createStack();
 
-void push(Stack *stack, char element);
+//Adds element to stack
+void push(Stack *stack, int element);
 
-char pop(Stack *stack);
+//Removes element from stack
+int pop(Stack *stack);
 
+//Removes stack
 void deleteStack(Stack *stack);

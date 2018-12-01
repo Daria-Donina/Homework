@@ -5,17 +5,16 @@ Stack *createStack()
 	return new Stack{ nullptr };
 }
 
-
-void push(Stack *stack, char element)
+void push(Stack *stack, int element)
 {
 	auto newElement = new StackElement{ element, stack->head };
 	stack->head = newElement;
 }
 
-char pop(Stack *stack)
+int pop(Stack *stack)
 {
 	auto temp = stack->head;
-	char element = stack->head->data;
+	int element = stack->head->data;
 	stack->head = stack->head->next;
 	delete temp;
 	return element;
