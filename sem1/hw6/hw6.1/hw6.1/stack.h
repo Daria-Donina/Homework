@@ -11,10 +11,14 @@ struct Stack
 	StackElement *head;
 };
 
+//Creates stack
 Stack *createStack();
 
+//Adds element to stack
 void push(Stack *stack, int element);
 
-int getElement(Stack *stack);
+//Removes element from stack
+int pop(Stack *stack);
 
+//Removes stack
 void deleteStack(Stack *stack);

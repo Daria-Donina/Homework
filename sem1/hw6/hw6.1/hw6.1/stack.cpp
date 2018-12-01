@@ -11,7 +11,7 @@ void push(Stack *stack, int element)
 	stack->head = newElement;
 }
 
-int getElement(Stack *stack)
+int pop(Stack *stack)
 {
 	auto temp = stack->head;
 	int element = stack->head->data;

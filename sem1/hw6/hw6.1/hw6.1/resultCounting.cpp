@@ -24,23 +24,23 @@ int result(Stack *stack, string expression)
 			int tempResult = 0;
 			if (expression[i] == '+')
 			{
-				tempResult = getElement(stack) + getElement(stack);
+				tempResult = pop(stack) + pop(stack);
 				push(stack, tempResult);
 			}
 			else if (expression[i] == '-')
 			{
-				tempResult = (-getElement(stack) + getElement(stack));
+				tempResult = (-pop(stack) + pop(stack));
 				push(stack, tempResult);
 			}
 			else if (expression[i] == '*')
 			{
-				tempResult = getElement(stack) * getElement(stack);
+				tempResult = pop(stack) * pop(stack);
 				push(stack, tempResult);
 			}
 			else if (expression[i] == '/')
 			{
-				const int divider = getElement(stack);
-				tempResult = getElement(stack) / divider;
+				const int divider = pop(stack);
+				tempResult = pop(stack) / divider;
 				push(stack, tempResult);
 			}
 		}
