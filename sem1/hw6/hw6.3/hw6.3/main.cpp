@@ -1,11 +1,7 @@
-//#include <iostream>
-//#include <string>
-//#include "stack.h"
-
-//using namespace std;
+#include "test.h"
 
 int main()
 {
-	//tests
+	testPrintResults();
 	return 0;
 }

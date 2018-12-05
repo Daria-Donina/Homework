@@ -1,4 +1,4 @@
 #pragma once
 
-//Tests the program
-void test();
+//Prints the results of testing the program
+void testPrintResults();
