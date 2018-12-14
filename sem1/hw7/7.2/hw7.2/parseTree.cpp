@@ -154,7 +154,7 @@ void nlrPrintTheTree(ParseTree *tree, Node *current)
 
 		cout << " )";
 	}
-	else if (!isOpeningBracket(current->data) && !isClosingBracket(current->data))
+	else
 	{
 		cout << current->data << " ";
 	}
