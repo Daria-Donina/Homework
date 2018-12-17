@@ -5,18 +5,6 @@
 using namespace std;
 using namespace list;
 
-struct Node
-{
-	string data = 0;
-	int counter = 0;
-	Node *next{};
-};
-
-struct List
-{
-	Node *head{};
-};
-
 List *createList()
 {
 	return new List;
@@ -54,7 +42,9 @@ void list::add(List *list, string data)
 {
 	if (isEmpty(list))
 	{
-		list->head = new Node{ data };
+		list->head = new Node{ data, 1 };
+		++list->length;
+		return;
 	}
 
 	Node *sameNode = exists(list, data);
@@ -62,6 +52,7 @@ void list::add(List *list, string data)
 	if (!sameNode)
 	{
 		addNode(list->head, data);
+		++list->length;
 	}
 	else
 	{

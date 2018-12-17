@@ -1,9 +1,18 @@
 #pragma once
 #include <string>
 
-struct Node;
+struct Node
+{
+	std::string data = 0;
+	int counter = 0;
+	Node *next{};
+};
 
-struct List;
+struct List
+{
+	int length = 0;
+	Node *head{};
+};
 
 //Create new list
 List *createList();
@@ -19,3 +28,6 @@ void deleteList(List *list);
 
 //Print list
 void printList(List *list);
+
+//Check if data is already in the list
+Node* exists(List *list, std::string data);
