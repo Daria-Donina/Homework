@@ -1,25 +1,27 @@
 #pragma once
 #include <string>
 
-struct Node
-{
-	std::string key = "";
-	std::string value = "";
-	int height = 0;
-	Node *leftChild = nullptr;
-	Node *rightChild = nullptr;
-};
+struct Node;
 
-struct Map
-{
-	Node *root{};
-};
+struct Map;
 
 //Create new map
 Map *createMap();
 
 //Insert a value
 void insert(Map *&map, std::string key, std::string value);
+
+//Get the root of the map
+Node *root(Map *map);
+
+//Get the key of the node
+std::string key(Node *node);
+
+//Get left child og the node
+Node *leftChild(Node *node);
+
+//Get right child og the node
+Node *rightChild(Node *node);
 
 //Find a value by key
 std::string find(Map *map, std::string key);

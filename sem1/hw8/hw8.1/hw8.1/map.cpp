@@ -4,9 +4,43 @@
 
 using namespace std;
 
+struct Node
+{
+	std::string key = "";
+	std::string value = "";
+	int height = 0;
+	Node *leftChild = nullptr;
+	Node *rightChild = nullptr;
+};
+
+struct Map
+{
+	Node *root{};
+};
+
 Map *createMap()
 {
 	return new Map;
+}
+
+Node *root(Map *map)
+{
+	return map->root;
+}
+
+string key(Node *node)
+{
+	return node->key;
+}
+
+Node *leftChild(Node *node)
+{
+	return node->leftChild;
+}
+
+Node *rightChild(Node *node)
+{
+	return node->rightChild;
 }
 
 bool isEmpty(Map *map)

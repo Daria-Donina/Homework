@@ -16,26 +16,26 @@ bool programTest()
 	insert(testMap, "6", "f");
 	insert(testMap, "12", "g");
 
-	if (!isKey(testMap->root, "5") || !isKey(testMap->root, "4") || !isKey(testMap->root, "7") || !isKey(testMap->root, "9") ||
-		!isKey(testMap->root, "8") || !isKey(testMap->root, "6") || !isKey(testMap->root, "12") || isKey(testMap->root, "10"))
+	if (!isKey(root(testMap), "5") || !isKey(root(testMap), "4") || !isKey(root(testMap), "7") || !isKey(root(testMap), "9") ||
+		!isKey(root(testMap), "8") || !isKey(root(testMap), "6") || !isKey(root(testMap), "12") || isKey(root(testMap), "10"))
 	{
 		deleteMap(testMap);
 		return false;
 	}
 
-	Node *node = testMap->root;
+	Node *node = root(testMap);
 
-	if (node->key != "7" || node->leftChild->key != "5" || node->rightChild->key != "9")
+	if (key(node) != "7" || key(leftChild(node)) != "5" || key(rightChild(node)) != "9")
 	{
 		deleteMap(testMap);
 		return false;
 	}
 
-	auto nodeLeft = node->leftChild;
-	auto nodeRight = node->rightChild;
+	auto nodeLeft = leftChild(node);
+	auto nodeRight = rightChild(node);
 
-	if (nodeLeft->leftChild->key != "4" || nodeLeft->rightChild->key != "6" ||
-		nodeRight->leftChild->key != "8" || nodeRight->rightChild->key != "12")
+	if (key(leftChild(nodeLeft)) != "4" || key(rightChild(nodeLeft)) != "6" ||
+		key(leftChild(nodeRight)) != "8" || key(rightChild(nodeRight)) != "12")
 	{
 		deleteMap(testMap);
 		return false;
@@ -45,18 +45,18 @@ bool programTest()
 	remove(testMap, "6");
 	remove(testMap, "5");
 
-	node = testMap->root;
-	nodeLeft = node->leftChild;
-	nodeRight = node->rightChild;
+	node = root(testMap);
+	nodeLeft = leftChild(node);
+	nodeRight = rightChild(node);
 
-	if (isKey(testMap->root, "7") || isKey(testMap->root, "6") || isKey(testMap->root, "5"))
+	if (isKey(root(testMap), "7") || isKey(root(testMap), "6") || isKey(root(testMap), "5"))
 	{
 		deleteMap(testMap);
 		return false;
 	}
 
-	if (node->key != "8" || nodeLeft->key != "4" || nodeLeft->leftChild
-		|| nodeRight->key != "9" || nodeRight->rightChild->key != "12")
+	if (key(node) != "8" || key(nodeLeft) != "4" || leftChild(nodeLeft)
+		|| key(nodeRight) != "9" || key(rightChild(nodeRight)) != "12")
 	{
 		deleteMap(testMap);
 		return false;
@@ -64,11 +64,11 @@ bool programTest()
 
 	remove(testMap, "4");
 
-	node = testMap->root;
-	nodeLeft = node->leftChild;
-	nodeRight = node->rightChild;
+	node = root(testMap);
+	nodeLeft = leftChild(node);
+	nodeRight = rightChild(node);
 
-	if (node->key != "9" || node->leftChild->key != "8" || node->rightChild->key != "12")
+	if (key(node) != "9" || key(leftChild(node)) != "8" || key(rightChild(node)) != "12")
 	{
 		deleteMap(testMap);
 		return false;
