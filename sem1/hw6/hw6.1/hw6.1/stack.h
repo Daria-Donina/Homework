@@ -1,15 +1,8 @@
 #pragma once
 
-struct StackElement
-{
-	int data = 0;
-	StackElement *next = nullptr;
-};
+struct StackElement;
 
-struct Stack
-{
-	StackElement *head;
-};
+struct Stack;
 
 //Creates stack
 Stack *createStack();
@@ -19,6 +12,12 @@ void push(Stack *stack, int element);
 
 //Removes element from stack
 int pop(Stack *stack);
+
+//Check if stack has only one element
+bool isNotOneElement(Stack *stack);
+
+//Top of the stack
+int top(Stack *stack);
 
 //Removes stack
 void deleteStack(Stack *stack);

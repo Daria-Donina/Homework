@@ -5,11 +5,6 @@
 
 using namespace std;
 
-bool isNotOneElement(Stack *stack)
-{
-	return stack->head->next != nullptr;
-}
-
 int result(Stack *stack, string expression)
 {
 	for (int i = 0; i < expression.length(); ++i)
@@ -21,32 +16,33 @@ int result(Stack *stack, string expression)
 		}
 		else if (isNotOneElement(stack))
 		{
-			int tempResult = 0;
 			if (expression[i] == '+')
 			{
-				tempResult = pop(stack) + pop(stack);
+				int tempResult = pop(stack) + pop(stack);
 				push(stack, tempResult);
 			}
 			else if (expression[i] == '-')
 			{
-				tempResult = (-pop(stack) + pop(stack));
+				int tempResult = (-pop(stack) + pop(stack));
 				push(stack, tempResult);
 			}
 			else if (expression[i] == '*')
 			{
-				tempResult = pop(stack) * pop(stack);
+				int tempResult = pop(stack) * pop(stack);
 				push(stack, tempResult);
 			}
 			else if (expression[i] == '/')
 			{
 				const int divider = pop(stack);
-				tempResult = pop(stack) / divider;
+				int tempResult = pop(stack) / divider;
 				push(stack, tempResult);
 			}
 		}
 	}
 	if (!isNotOneElement(stack))
 	{
-		return stack->head->data;
+		return top(stack);
 	}
+	cout << "The expression is not correct" << endl;
+	return -1;
 }

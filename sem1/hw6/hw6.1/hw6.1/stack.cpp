@@ -1,8 +1,29 @@
 #include "stack.h"
 
+struct StackElement
+{
+	int data = 0;
+	StackElement *next = nullptr;
+};
+
+struct Stack
+{
+	StackElement *head;
+};
+
 Stack *createStack()
 {
 	return new Stack{ nullptr };
+}
+
+int top(Stack *stack)
+{
+	return stack->head->data;
+}
+
+bool isNotOneElement(Stack *stack)
+{
+	return stack->head->next != nullptr;
 }
 
 void push(Stack *stack, int element)
