@@ -6,12 +6,12 @@
 
 using namespace std;
 
-struct HashTable
+struct hashTable::HashTable
 {
-	vector<List*> buckets{};
+	vector<list::List*> buckets{};
 };
 
-HashTable *createHashtable()
+hashTable::HashTable *hashTable::createHashtable()
 {
 	const int size = 100;
 	auto hashTable = new HashTable;
@@ -19,7 +19,7 @@ HashTable *createHashtable()
 	return hashTable;
 }
 
-int hashFunction(HashTable *hashTable, string str)
+int hashFunction(hashTable::HashTable *hashTable, const std::string &str)
 {
 	int hash = 0;
 	for (int i = 0; i < str.length(); ++i)
@@ -29,12 +29,12 @@ int hashFunction(HashTable *hashTable, string str)
 	return hash % hashTable->buckets.size();
 }
 
-void addWord(HashTable *hashTable, string word)
+void addWord(hashTable::HashTable *hashTable, const std::string &word)
 {
 	int hash = hashFunction(hashTable, word);
 	if (hashTable->buckets[hash] == nullptr)
 	{
-		hashTable->buckets[hash] = createList();
+		hashTable->buckets[hash] = list::createList();
 	}
 	list::add(hashTable->buckets[hash], word);
 }
@@ -49,7 +49,7 @@ void hashTable::add(ifstream &inputData, HashTable *hashTable)
 	}
 }
 
-void printHashTable(HashTable *hashTable)
+void hashTable::printHashTable(HashTable *hashTable)
 {
 	for (int i = 0; i < hashTable->buckets.size(); ++i)
 	{
@@ -60,27 +60,27 @@ void printHashTable(HashTable *hashTable)
 	}
 }
 
-int numberOfElements(HashTable *hashTable)
+int numberOfElements(hashTable::HashTable *hashTable)
 {
 	int numberOfWords = 0;
 	for (int i = 0; i < hashTable->buckets.size(); ++i)
 	{
-		numberOfWords += hashTable->buckets[i] ? hashTable->buckets[i]->length : 0;
+		numberOfWords += hashTable->buckets[i] ? list::length(hashTable->buckets[i]) : 0;
 	}
 	return numberOfWords;
 }
 
-float loadFactor(HashTable *hashTable)
+float hashTable::loadFactor(HashTable *hashTable)
 {
 	return (float)numberOfElements(hashTable) / (float)hashTable->buckets.size();
 }
 
-int maxListLength(HashTable *hashTable)
+int hashTable::maxListLength(HashTable *hashTable)
 {
-	int max = hashTable->buckets[0]->length;
+	int max = length(hashTable->buckets[0]);
 	for (int i = 1; i < hashTable->buckets.size(); ++i)
 	{
-		int length = hashTable->buckets[i] ? hashTable->buckets[i]->length : 0;
+		int length = hashTable->buckets[i] ? list::length(hashTable->buckets[i]) : 0;
 		if (length > max)
 		{
 			max = length;
@@ -89,7 +89,7 @@ int maxListLength(HashTable *hashTable)
 	return max;
 }
 
-float averageListLength(HashTable *hashTable)
+float hashTable::averageListLength(HashTable *hashTable)
 {
 	int sumOfListlengths = 0;
 	int numberOfLists = 0;
@@ -97,14 +97,14 @@ float averageListLength(HashTable *hashTable)
 	{
 		if (hashTable->buckets[i])
 		{
-			sumOfListlengths += hashTable->buckets[i]->length;
+			sumOfListlengths += list::length(hashTable->buckets[i]);
 			++numberOfLists;
 		}
 	}
 	return (float)sumOfListlengths / (float)numberOfLists;
 }
 
-void deleteHashTable(HashTable *hashTable)
+void hashTable::deleteHashTable(HashTable *hashTable)
 {
 	for (int i = 0; i < hashTable->buckets.size(); ++i)
 	{
@@ -118,7 +118,7 @@ void deleteHashTable(HashTable *hashTable)
 
 bool programTest()
 {
-	auto testHashTable = createHashtable();
+	auto testHashTable = hashTable::createHashtable();
 
 	ifstream testFile("test.txt");
 	if (!testFile)
@@ -129,13 +129,18 @@ bool programTest()
 	hashTable::add(testFile, testHashTable);
 	testFile.close();
 
-	int hash1 = hashFunction(testHashTable, "feel");
-	int hash2 = hashFunction(testHashTable, "mind");
-	int hash3 = hashFunction(testHashTable, "the");
+	string string1 = "feel";
+	int hash1 = hashFunction(testHashTable, string1);
+
+	string string2 = "mind";
+	int hash2 = hashFunction(testHashTable, string2);
+
+	string string3 = "the";
+	int hash3 = hashFunction(testHashTable, string3);
 	
-	Node *node1 = exists(testHashTable->buckets[hash1], "feel");
-	Node *node2 = exists(testHashTable->buckets[hash2], "mind");
-	Node *node3 = testHashTable->buckets[hash3] ? exists(testHashTable->buckets[hash3], "the") : nullptr;
+	list::Node *node1 = exists(testHashTable->buckets[hash1], string1);
+	list::Node *node2 = exists(testHashTable->buckets[hash2], string2);
+	list::Node *node3 = testHashTable->buckets[hash3] ? exists(testHashTable->buckets[hash3], string3) : nullptr;
 
 
 	if (!node1 || !node2 || node3)
@@ -144,7 +149,7 @@ bool programTest()
 		return false;
 	}
 
-	if (node1->counter != 1 || node2->counter != 2)
+	if (list::counter(node1) != 1 || list::counter(node2) != 2)
 	{
 		deleteHashTable(testHashTable);
 		return false;

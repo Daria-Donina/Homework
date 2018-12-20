@@ -5,7 +5,20 @@
 using namespace std;
 using namespace list;
 
-List *createList()
+struct list::Node
+{
+	std::string data = 0;
+	int counter = 0;
+	Node *next{};
+};
+
+struct list::List
+{
+	int length = 0;
+	list::Node *head{};
+};
+
+list::List *list::createList()
 {
 	return new List;
 }
@@ -24,7 +37,7 @@ void addNode(Node *node, string data)
 	node->next = new Node{ data, 1 };
 }
 
-Node* exists(List *list, string data)
+Node* list::exists(List *list, const string &data)
 {
 	Node *node = list->head;
 	while (node)
@@ -38,7 +51,17 @@ Node* exists(List *list, string data)
 	return nullptr;
 }
 
-void list::add(List *list, string data)
+int list::length(List *list)
+{
+	return list->length;
+}
+
+int list::counter(Node *node)
+{
+	return node->counter;
+}
+
+void list::add(List *list, const string &data)
 {
 	if (isEmpty(list))
 	{
@@ -60,7 +83,7 @@ void list::add(List *list, string data)
 	}
 }
 
-void deleteList(List *list)
+void list::deleteList(List *list)
 {
 	Node *node = list->head;
 
@@ -74,7 +97,7 @@ void deleteList(List *list)
 	delete list;
 }
 
-void printList(List *list)
+void list::printList(List *list)
 {
 	Node *node = list->head;
 	while (node)
