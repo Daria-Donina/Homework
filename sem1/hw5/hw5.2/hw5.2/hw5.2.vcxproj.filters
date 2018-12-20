@@ -21,9 +21,15 @@
     <ClCompile Include="count.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="cyclicList.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="count.h">
+      <Filter>Файлы ресурсов</Filter>
+    </ClInclude>
+    <ClInclude Include="cyclicList.h">
       <Filter>Файлы ресурсов</Filter>
     </ClInclude>
   </ItemGroup>

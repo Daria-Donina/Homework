@@ -119,10 +119,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="count.cpp" />
+    <ClCompile Include="cyclicList.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="count.h" />
+    <ClInclude Include="cyclicList.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

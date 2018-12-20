@@ -1,11 +1,6 @@
 #include <stdio.h>
 #include "count.h"
 
-CyclicList *createCyclicList()
-{
-	return new CyclicList{ nullptr };
-}
-
 void addWarriors(CyclicList *cyclicList, int n)
 {
 	Node *current = new Node{ 1, cyclicList->head };
