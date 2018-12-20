@@ -1,3 +1,4 @@
 #pragma once
 
-bool test();
+//Print result of the tests
+void testPrint();

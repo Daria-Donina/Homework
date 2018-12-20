@@ -3,8 +3,9 @@
 #include "list.h"
 #include "interface.h"
 
-void userInterface(List *list, int number)
+void userInterface(List *list)
 {
+	int number = -1;
 	while (number != 0)
 	{
 		printf("Input number:\n");
@@ -14,28 +15,28 @@ void userInterface(List *list, int number)
 		printf("3 - print the list\n");
 		scanf("%d", &number);
 		int value = 0;
-		int codeOfMistake = 0;
+		int errorCode = 0;
 		switch (number)
 		{
 		case 1:
 			printf("Enter value to be added\n");
 			scanf("%d", &value);
-			push(list, value);
+			add(list, value);
 			printf("Value has been added\n\n");
 			break;
 		case 2:
 			printf("Enter value to be deleted\n");
 			scanf("%d", &value);
-			codeOfMistake = pop(list, value);
-			if (codeOfMistake == 1)
+			errorCode = remove(list, value);
+			if (errorCode == 1)
 			{
 				printf("List has no elements\n\n");
 			}
-			else if (codeOfMistake == 2)
+			else if (errorCode == 2)
 			{
 				printf("There is no such element in the list\n\n");
 			}
-			else if (codeOfMistake == 0)
+			else if (errorCode == 0)
 			{
 				printf("Value has been deleted\n\n");
 			}

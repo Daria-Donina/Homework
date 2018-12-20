@@ -6,17 +6,9 @@
 
 int main()
 {
-	if (test())
-	{
-		printf("Tests passed\n\n");
-	}
-	else
-	{
-		printf("Tests failed\n\n");
-	}
+	testPrint();
 	List *list = createList();
-	int number = -1;
-	userInterface(list, number);
+	userInterface(list);
 	deleteList(list);
 	return 0;
 }

@@ -2,27 +2,21 @@
 
 struct ListElement;
 
-struct List
-{
-	ListElement *head;
-};
-
-struct ListElement
-{
-	int value = 0;
-	ListElement *next = { nullptr };
-};
+struct List;
 
 List *createList();
 
 //Adds value to the list
-void push(List *list, int value);
+void add(List *list, int value);
 
 //Removes value from the list
-int pop(List *list, int value);
+int remove(List *list, int value);
 
 //Prints list
 void print(List *list);
 
 //Removes list
 void deleteList(List *list);
+
+//Testing the program
+bool test();
