@@ -18,9 +18,9 @@ int main()
 	inputData.close();
 
 	cout << "Parse tree:" << endl;
-	nlrPrintTheTree(tree, tree->root);
+	nlrPrintTheTree(tree, root(tree));
 
-	cout << endl << "The value of the parse tree: " << calculatingValueOfTheTree(tree->root) << endl;
+	cout << endl << "The value of the parse tree: " << calculatingValueOfTheTree(root(tree)) << endl;
 
 	deleteParseTree(tree);
 

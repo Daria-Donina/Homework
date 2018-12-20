@@ -4,9 +4,26 @@
 
 using namespace std;
 
+struct Node
+{
+	int data = 0;
+	Node *leftChild = nullptr;
+	Node *rightChild = nullptr;
+};
+
+struct ParseTree
+{
+	Node *root = nullptr;
+};
+
 ParseTree *createParseTree()
 {
 	return new ParseTree{ nullptr };
+}
+
+Node *root(ParseTree *tree)
+{
+	return tree->root;
 }
 
 bool isEmpty(ParseTree *tree)

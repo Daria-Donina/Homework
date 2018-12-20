@@ -17,7 +17,7 @@ bool programTest()
 
 	inputTest.close();
 
-	if (calculatingValueOfTheTree(testTreeFirst->root) != 4 || calculatingValueOfTheTree(testTreeSecond->root) != 92)
+	if (calculatingValueOfTheTree(root(testTreeFirst)) != 4 || calculatingValueOfTheTree(root(testTreeSecond)) != 92)
 	{
 		deleteParseTree(testTreeFirst);
 		deleteParseTree(testTreeSecond);

@@ -2,23 +2,18 @@
 #include <vector>
 #include <fstream>
 
-struct Node
-{
-	int data = 0;
-	Node *leftChild = nullptr;
-	Node *rightChild = nullptr;
-};
+struct Node;
 
-struct ParseTree
-{
-	Node *root = nullptr;
-};
+struct ParseTree;
 
 //Fills the parse tree
 void fillParseTree(std::ifstream &inputData, ParseTree *tree);
 
 //Creates new parse tree
 ParseTree *createParseTree();
+
+//Get root of the tree
+Node *root(ParseTree *tree);
 
 //Calculates value of a parse tree
 int calculatingValueOfTheTree(Node *node);
