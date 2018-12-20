@@ -6,11 +6,11 @@ std::string typeOfSort (ListElement *node, int number)
 {
 	if (number == 1)
 	{
-		return node->record.name;
+		return getName(node);
 	}
 	else
 	{
-		return node->record.phoneNumber;
+		return getNumber(node);
 	}
 }
 
@@ -35,26 +35,26 @@ void swap(Record &record1, Record &record2)
 
 void split(List *list, List *leftList, List *rightList)
 {
-	const int middleNumber = list->length / 2;
-	ListElement *current = list->head;
-	for (int i = 1; i <= list->length; ++i)
+	const int middleNumber = getLength(list) / 2;
+	ListElement *current = getHead(list);
+	for (int i = 1; i <= getLength(list); ++i)
 	{
 		if (i <= middleNumber)
 		{
-			push(leftList, current->record);
+			push(leftList, getRecord(current));
 		}
 		else
 		{
-			push(rightList, current->record);
+			push(rightList, getRecord(current));
 		}
-		current = current->next;
+		current = getNext(current);
 	}
 }
 
 void merge(List *list, List *leftList, List *rightList, int number)
 {
-	ListElement *currentLeft = leftList->head;
-	ListElement *currentRight = rightList->head;
+	ListElement *currentLeft = getHead(leftList);
+	ListElement *currentRight = getHead(rightList);
 
 	deleteElements(list);
 	
@@ -69,14 +69,14 @@ void merge(List *list, List *leftList, List *rightList, int number)
 		{
 			if (typeLeft[i] > typeRight[i])
 			{
-				push(list, currentRight->record);
-				currentRight = currentRight->next;
+				push(list, getRecord(currentRight));
+				currentRight = getNext(currentRight);
 				break;
 			}
 			else if (typeLeft[i] < typeRight[i])
 			{
-				push(list, currentLeft->record);
-				currentLeft = currentLeft->next;
+				push(list, getRecord(currentLeft));
+				currentLeft = getNext(currentLeft);
 				break;
 			}
 		}
@@ -85,13 +85,13 @@ void merge(List *list, List *leftList, List *rightList, int number)
 		{
 			if (typeLeft.length() < typeRight.length())
 			{
-				push(list, currentLeft->record);
-				currentLeft = currentLeft->next;
+				push(list, getRecord(currentLeft));
+				currentLeft = getNext(currentLeft);
 			}
 			else
 			{
-				push(list, currentRight->record);
-				currentRight = currentRight->next;
+				push(list, getRecord(currentRight));
+				currentRight = getNext(currentRight);
 			}
 		}
 	}
@@ -100,8 +100,8 @@ void merge(List *list, List *leftList, List *rightList, int number)
 	{
 		while (currentLeft != nullptr)
 		{
-			push(list, currentLeft->record);
-			currentLeft = currentLeft->next;
+			push(list, getRecord(currentLeft));
+			currentLeft = getNext(currentLeft);
 		}
 	}
 
@@ -109,15 +109,15 @@ void merge(List *list, List *leftList, List *rightList, int number)
 	{
 		while (currentRight != nullptr)
 		{
-			push(list, currentRight->record);
-			currentRight = currentRight->next;
+			push(list, getRecord(currentRight));
+			currentRight = getNext(currentRight);
 		}
 	}
 }
 
 void mergeSort(List *list, int number)
 {
-	if (list->length == 1)
+	if (getLength(list) == 1)
 	{
 		return;
 	}

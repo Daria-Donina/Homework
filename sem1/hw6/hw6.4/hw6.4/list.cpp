@@ -2,9 +2,56 @@
 #include <string>
 #include "list.h"
 
+struct ListElement
+{
+	Record record;
+	ListElement *next;
+};
+
+struct List
+{
+	int length = 0;
+	ListElement *head;
+};
+
 List *createList()
 {
 	return new List{ 0, nullptr };
+}
+
+std::string getName(ListElement *node)
+{
+	return node->record.name;
+}
+
+std::string getNumber(ListElement *node)
+{
+	return node->record.phoneNumber;
+}
+
+Record getRecord(ListElement *node)
+{
+	return node->record;
+}
+
+int getLength(List *list)
+{
+	return list->length;
+}
+
+ListElement *getCurrent(ListElement *node)
+{
+	return node;
+}
+
+ListElement *getHead(List *list)
+{
+	return list->head;
+}
+
+ListElement *getNext(ListElement *node)
+{
+	return node->next;
 }
 
 void pushFromFile(List *list, std::ifstream &phonebook)

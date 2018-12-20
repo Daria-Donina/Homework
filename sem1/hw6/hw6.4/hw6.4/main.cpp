@@ -8,11 +8,11 @@ using namespace std;
 
 void printPhonebook(List *list)
 {
-	ListElement *current = list->head;
+	ListElement *current = getHead(list);
 	while (current != nullptr)
 	{
-		cout << current->record.name << " - " << current->record.phoneNumber << endl;
-		current = current->next;
+		cout << getName(current) << " - " << getNumber(current) << endl;
+		current = getNext(current);
 	}
 }
 

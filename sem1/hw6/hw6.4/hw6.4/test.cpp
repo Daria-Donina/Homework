@@ -7,9 +7,9 @@
 
 bool searchOfMistake(List *testList, int number)
 {
-	ListElement *prev = testList->head;
-	ListElement *current = prev->next;
-	for (int i = 1; i < testList->length; ++i)
+	ListElement *prev = getHead(testList);
+	ListElement *current = getNext(prev);
+	for (int i = 1; i < getLength(testList); ++i)
 	{
 		std::string typePrev = typeOfSort(prev, number);
 		std::string typeCurrent = typeOfSort(current, number);
@@ -25,7 +25,7 @@ bool searchOfMistake(List *testList, int number)
 			}
 		}
 		prev = current;
-		current = current->next;
+		current = getNext(current);
 	}
 	return true;
 }
