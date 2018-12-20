@@ -15,29 +15,25 @@ int main()
 		cout << "Tests failed" << endl << endl;
 	}
 
-	CyclicList *cyclicList = createCyclicList();
-
 	int n = 0;
 	cout << "Enter the number of warriors: ";
 	cin >> n;
-	addWarriors(cyclicList, n);
+	auto cyclicList = addWarriors(n);
 	int m = 0;
 	cout << "Enter the number of warrior to be killed each time: ";
 	cin >> m;
 	cout << "The number of the last alive warrior: " << killing(cyclicList, m) << endl;
 
-	delete cyclicList->head;
-	delete cyclicList;
+	
+	deleteCyclicList(cyclicList);
 
 	return 0;
 }
 
 int test(int n, int m)
 {
-	CyclicList *cyclicList = createCyclicList();
-	addWarriors(cyclicList, n);
-	int position = killing(cyclicList, m);
-	delete cyclicList->head;
-	delete cyclicList;
+	auto testList = addWarriors(n);
+	int position = killing(testList, m);
+	deleteCyclicList(testList);
 	return position;
 }
