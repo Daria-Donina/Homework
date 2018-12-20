@@ -41,7 +41,7 @@ bool test(std::vector<int> array)
 		remove(testTree, array[i]);
 	}
 
-	if (testTree->root)
+	if (root(testTree))
 	{
 		deleteSet(testTree);
 		return false;

@@ -1,6 +1,23 @@
 #include <vector>
 #include "set.h"
 
+struct Node
+{
+	int data = 0;
+	Node *leftChild = nullptr;
+	Node *rightChild = nullptr;
+};
+
+struct Set
+{
+	Node *root = nullptr;
+};
+
+Node *root(Set *tree)
+{
+	return tree->root;
+}
+
 Set *createSet()
 {
 	return new Set{ nullptr };

@@ -1,20 +1,15 @@
 #pragma once
 #include <vector>
 
-struct Node
-{
-	int data = 0;
-	Node *leftChild = nullptr;
-	Node *rightChild = nullptr;
-};
+struct Node;
 
-struct Set
-{
-	Node *root = nullptr;
-};
+struct Set;
 
 //Adds value to the set
 void add(Set *tree, int value);
+
+//Get tree root
+Node *root(Set *tree);
 
 //Creates new set
 Set *createSet();
