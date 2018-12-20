@@ -1,6 +1,6 @@
 #pragma once
-#include <vector>
+#include <string>
 #include "stack.h"
 
 //Converts expression from infix to postfix form
-std::vector<char> infixToPostfix(Stack *stack, std::string expression);
+std::string infixToPostfix(Stack *stack, const std::string &expression);

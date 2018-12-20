@@ -7,14 +7,14 @@
 bool test(std::string infixTest, const char *postfixTest, int lengthOfPostfix)
 {
 	Stack *stack = createStack();
-	char testArray[50]{};
-	for (int i = 0; i <= lengthOfPostfix; ++i)
-	{
-		testArray[i] = postfixTest[i];
-	}
-	std::vector <char> testVector;
-	testVector.assign(&testArray[0], &testArray[0] + lengthOfPostfix);
-	if (infixToPostfix(stack, infixTest) == testVector)
+	//char testArray[50]{};
+	//for (int i = 0; i <= lengthOfPostfix; ++i)
+	//{
+	//	testArray[i] = postfixTest[i];
+	//}
+	//std::string testVector = postfixTest;
+	//testVector.assign(&testArray[0], &testArray[0] + lengthOfPostfix);
+	if (infixToPostfix(stack, infixTest) == postfixTest)
 	{
 		deleteStack(stack);
 		return true;
