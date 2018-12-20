@@ -12,7 +12,7 @@ bool checkCorrectness(Stack *stack, char opening)
 	return true;
 }
 
-bool isBalanced(std::string str)
+bool isBalanced(const std::string &str)
 {
 	Stack *stack = createStack();
 	for (int i = 0; i < str.length(); ++i)
@@ -43,6 +43,9 @@ bool isBalanced(std::string str)
 			}
 		}
 	}
+
+	const auto result = isEmpty(stack);
 	deleteStack(stack);
-	return true;
+	return result;
+
 }

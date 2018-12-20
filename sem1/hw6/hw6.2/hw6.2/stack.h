@@ -20,5 +20,8 @@ void push(Stack *stack, int element);
 //Removes element from stack
 int pop(Stack *stack);
 
+// Check if stack is empty
+bool isEmpty(Stack *stack);
+
 //Removes stack
 void deleteStack(Stack *stack);

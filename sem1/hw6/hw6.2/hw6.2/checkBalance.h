@@ -2,4 +2,4 @@
 #include <string>
 
 //Checks the balance of brackets in the string
-bool isBalanced(std::string sequence);
+bool isBalanced(const std::string &sequence);
