@@ -31,7 +31,7 @@ int hashFunction(hashTable::HashTable *hashTable, const std::string &str)
 
 void addWord(hashTable::HashTable *hashTable, const std::string &word)
 {
-	int hash = hashFunction(hashTable, word);
+	int hash = abs(hashFunction(hashTable, word));
 	if (hashTable->buckets[hash] == nullptr)
 	{
 		hashTable->buckets[hash] = list::createList();
