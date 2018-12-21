@@ -1,7 +1,10 @@
 #pragma once
+#include <fstream>
 
 struct Node;
 
 struct Graph;
 
-void add(ifstream &file);
+void add(std::ifstream &file);
+
+bool searchAvailibleFromEverywhere(Graph *graph, Node *node, int nodeNumber);

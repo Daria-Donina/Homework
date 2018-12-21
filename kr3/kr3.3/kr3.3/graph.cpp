@@ -25,7 +25,7 @@ Graph *createGraph(int numberOfNodes, int numberOfEdges)
 	return graph;
 }
 
-void add(ifstream &file)
+Graph *add(ifstream &file)
 {
 	int numberOfNodes = 0;
 	file >> numberOfNodes;
@@ -44,9 +44,10 @@ void add(ifstream &file)
 			graph->nodes[i]->edges[j] = number;
 		}
 	}
+	return graph;
 }
 
-Node *searchAvailibleFromEverywhere(Graph *graph, Node *node, int nodeNumber)
+bool searchAvailibleFromEverywhere(Graph *graph, Node *node, int nodeNumber)
 {
 	for (int i = 0; i < graph->nodes.size(); ++i)
 	{
@@ -54,10 +55,15 @@ Node *searchAvailibleFromEverywhere(Graph *graph, Node *node, int nodeNumber)
 		{
 			if (graph->nodes[i]->edges[j] == 1)
 			{
-
+				i = j;
+			}
+			if (i == nodeNumber)
+			{
+				break;
 			}
 		}
 	}
+	return true;
 }
 
 void deleteGraph(Graph *graph)
