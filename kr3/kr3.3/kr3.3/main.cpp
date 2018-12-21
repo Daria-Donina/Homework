@@ -10,7 +10,7 @@ int main()
 
 	auto graph = add(input);
 
-	searchAvailibleFromEverywhere(graph, 1);
+	searchOne(graph, 3, 0);
 
 	input.close();
 

@@ -7,4 +7,4 @@ struct Graph;
 
 Graph *add(std::ifstream &file);
 
-bool searchAvailibleFromEverywhere(Graph *graph, int nodeNumber);
+bool searchOne(Graph *graph, int nodeNumber, int nodeCheckNumber);

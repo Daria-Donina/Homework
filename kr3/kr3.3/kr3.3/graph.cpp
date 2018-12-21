@@ -62,24 +62,49 @@ int linkedNode(Graph *graph, int numberOfNode, int numberOfEdge, int direction)
 	}
 }
 
-bool searchAvailibleFromEverywhere(Graph *graph, int nodeNumber)
+bool searchAll(Graph *graph, int nodeNumber)
 {
 	for (int i = 0; i < graph->nodes.size(); ++i)
 	{
-		for (int j = 0; j < graph->nodes[i]->edges.size(); ++j)
+		if (!searchOne(graph, nodeNumber, i))
 		{
-			if (i == nodeNumber - 1)
-			{
-				continue;
-			}
-			if (graph->nodes[i]->edges[j] == 1)
-			{
-				i = linkedNode(graph, i, j, 1) - 1;
-				break;
-			}
+			return false;
 		}
 	}
 	return true;
+}
+
+int numberOfRoads(Graph *graph, int nodeNumber)
+{
+	int counter = 0;
+	for (int j = 0; j < graph->nodes[nodeNumber]->edges.size(); ++j)
+	{
+		if (graph->nodes[nodeNumber]->edges[j] == 1)
+		{
+			++counter;
+		}
+	}
+	return counter;
+}
+
+bool searchOne(Graph *graph, int nodeNumber, int nodeCheckNumber)
+{
+	if (nodeNumber == nodeCheckNumber)
+	{
+		return true;
+	}
+	for (int j = 0; j < graph->nodes[nodeCheckNumber]->edges.size(); ++j)
+	{
+		for (int i = 0; i < graph->nodes[nodeCheckNumber]->edges.size(); ++i)
+		{
+			if (graph->nodes[nodeCheckNumber]->edges[j] == 1 && i == nodeNumber)
+			{
+				return true;
+			}
+		}
+		return searchOne(graph, nodeNumber, linkedNode(graph, nodeCheckNumber, j, 1));
+	}
+	return false;
 }
 
 void deleteGraph(Graph *graph)
