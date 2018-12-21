@@ -8,7 +8,9 @@ int main()
 {
 	ifstream input("input.txt");
 
-	add(input);
+	auto graph = add(input);
+
+	searchAvailibleFromEverywhere(graph, 1);
 
 	input.close();
 

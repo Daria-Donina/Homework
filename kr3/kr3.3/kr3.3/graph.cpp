@@ -6,7 +6,7 @@ using namespace std;
 
 struct Node
 {
-	vector<int> edges;
+	vector<int> edges{};
 };
 
 struct Graph
@@ -20,6 +20,7 @@ Graph *createGraph(int numberOfNodes, int numberOfEdges)
 	graph->nodes.resize(numberOfNodes);
 	for (int i = 0; i < numberOfNodes; ++i)
 	{
+		graph->nodes[i] = new Node{};
 		graph->nodes[i]->edges.resize(numberOfEdges);
 	}
 	return graph;
@@ -47,7 +48,7 @@ Graph *add(ifstream &file)
 	return graph;
 }
 
-bool searchAvailibleFromEverywhere(Graph *graph, Node *node, int nodeNumber)
+bool searchAvailibleFromEverywhere(Graph *graph, int nodeNumber)
 {
 	for (int i = 0; i < graph->nodes.size(); ++i)
 	{
@@ -56,6 +57,7 @@ bool searchAvailibleFromEverywhere(Graph *graph, Node *node, int nodeNumber)
 			if (graph->nodes[i]->edges[j] == 1)
 			{
 				i = j;
+				break;
 			}
 			if (i == nodeNumber)
 			{

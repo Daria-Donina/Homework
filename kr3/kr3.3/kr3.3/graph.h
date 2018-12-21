@@ -5,6 +5,6 @@ struct Node;
 
 struct Graph;
 
-void add(std::ifstream &file);
+Graph *add(std::ifstream &file);
 
-bool searchAvailibleFromEverywhere(Graph *graph, Node *node, int nodeNumber);
+bool searchAvailibleFromEverywhere(Graph *graph, int nodeNumber);
