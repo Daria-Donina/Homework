@@ -14,5 +14,7 @@ int main()
 
 	input.close();
 
+	deleteGraph(graph);
+
 	return 0;
 }

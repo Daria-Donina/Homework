@@ -109,5 +109,9 @@ bool searchOne(Graph *graph, int nodeNumber, int nodeCheckNumber)
 
 void deleteGraph(Graph *graph)
 {
+	for (int i = 0; i < graph->nodes.size(); ++i)
+	{
+		delete graph->nodes[i];
+	}
 	delete graph;
 }
