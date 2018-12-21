@@ -48,6 +48,20 @@ Graph *add(ifstream &file)
 	return graph;
 }
 
+int linkedNode(Graph *graph, int numberOfNode, int numberOfEdge, int direction)
+{
+	for (int i = 0; i < graph->nodes.size(); ++i)
+	{
+		for (int j = 0; j < graph->nodes[i]->edges[j]; ++j)
+		{
+			if (j == numberOfNode && j == -direction)
+			{
+				return i;
+			}
+		}
+	}
+}
+
 bool searchAvailibleFromEverywhere(Graph *graph, int nodeNumber)
 {
 	for (int i = 0; i < graph->nodes.size(); ++i)
@@ -56,10 +70,10 @@ bool searchAvailibleFromEverywhere(Graph *graph, int nodeNumber)
 		{
 			if (graph->nodes[i]->edges[j] == 1)
 			{
-				i = j;
+//				i = j;
 				break;
 			}
-			if (i == nodeNumber)
+			if (i == nodeNumber - 1)
 			{
 				break;
 			}
