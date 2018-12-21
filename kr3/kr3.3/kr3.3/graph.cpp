@@ -52,9 +52,9 @@ int linkedNode(Graph *graph, int numberOfNode, int numberOfEdge, int direction)
 {
 	for (int i = 0; i < graph->nodes.size(); ++i)
 	{
-		for (int j = 0; j < graph->nodes[i]->edges[j]; ++j)
+		for (int j = 0; j < graph->nodes[i]->edges.size(); ++j)
 		{
-			if (j == numberOfNode && j == -direction)
+			if (j == numberOfEdge && graph->nodes[i]->edges[j] == -direction)
 			{
 				return i;
 			}
@@ -68,13 +68,13 @@ bool searchAvailibleFromEverywhere(Graph *graph, int nodeNumber)
 	{
 		for (int j = 0; j < graph->nodes[i]->edges.size(); ++j)
 		{
-			if (graph->nodes[i]->edges[j] == 1)
-			{
-//				i = j;
-				break;
-			}
 			if (i == nodeNumber - 1)
 			{
+				continue;
+			}
+			if (graph->nodes[i]->edges[j] == 1)
+			{
+				i = linkedNode(graph, i, j, 1) - 1;
 				break;
 			}
 		}
