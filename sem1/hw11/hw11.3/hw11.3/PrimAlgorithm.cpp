@@ -103,6 +103,7 @@ Graph* createSpanningTree(Graph *graph, int startVertex)
 
 		if (isEmpty(queue))
 		{
+			deleteQueue(queue);
 			return spanningTree;
 		}
 
