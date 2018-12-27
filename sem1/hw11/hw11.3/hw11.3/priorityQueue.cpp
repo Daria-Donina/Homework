@@ -115,7 +115,7 @@ int vertex(Node *node)
 	return node->vertex;
 }
 
-int	edgeWeight(Node *node)
+int edgeWeight(Node *node)
 {
 	return node->key;
 }
@@ -123,6 +123,11 @@ int	edgeWeight(Node *node)
 int newVertex(Node *node)
 {
 	return node->adjacentVertex;
+}
+
+void simplyDeleteNode(Node *node)
+{
+	delete node;
 }
 
 void deleteQueue(PriorityQueue *queue)

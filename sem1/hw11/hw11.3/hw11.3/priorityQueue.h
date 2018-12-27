@@ -19,6 +19,9 @@ int	edgeWeight(Node *node);
 // Get vertex to be added in spanning tree
 int newVertex(Node *node);
 
+// Delete node
+void simplyDeleteNode(Node *node);
+
 // Add vertex to the queue
 void enqueue(PriorityQueue *queue, int vertex, int key, int adjacentVertex);
 

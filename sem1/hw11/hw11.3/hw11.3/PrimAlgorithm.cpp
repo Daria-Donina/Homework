@@ -53,7 +53,7 @@ Graph *createEmptyGraph(Graph *graph)
 	return newGraph;
 }
 
-void deleteEdgesThatNotNeededFromQueue(Graph *graph, PriorityQueue *queue, int vertex, vector<bool> visited)
+void deleteEdgesThatNotNeededFromQueue(Graph *graph, PriorityQueue *queue, int vertex, const vector<bool> &visited)
 {
 	for (int j = 0; j < graph->vertices[vertex]->adjacentVertices.size(); ++j)
 	{
@@ -64,7 +64,7 @@ void deleteEdgesThatNotNeededFromQueue(Graph *graph, PriorityQueue *queue, int v
 	}
 }
 
-void addAdjacentVertices(Graph *graph, Graph *spanningTree, PriorityQueue *queue, int vertex, vector<bool> visited)
+void addAdjacentVertices(Graph *graph, Graph *spanningTree, PriorityQueue *queue, int vertex, const vector<bool> &visited)
 {
 	for (int j = 0; j < graph->vertices[vertex]->adjacentVertices.size(); ++j)
 	{
@@ -111,7 +111,7 @@ Graph* createSpanningTree(Graph *graph, int startVertex)
 
 		int newVertexToAdd = newVertex(node);
 		addEdge(spanningTree, vertex(node), newVertexToAdd, edgeWeight(node));
-		delete node;
+		simplyDeleteNode(node);
 
 		visited[vertexToAdd] = true;
 		vertexToAdd = newVertexToAdd;
