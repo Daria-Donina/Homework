@@ -6,8 +6,9 @@
 
 using namespace std;
 
-vector<int> prefixFunction(vector<int>prefix, const string &str)
+vector<int> prefixFunction(const string &str)
 {
+	vector<int> prefix(str.length());
 	prefix[0] = 0;
 	for (int i = 1; i < str.length(); ++i)
 	{
@@ -31,7 +32,7 @@ vector<int> prefixFunction(vector<int>prefix, const string &str)
 int countFirstOccurenceOfAPattern(const string &str, const string &pattern)
 {
 	vector<int> prefixPattern(pattern.length());
-	prefixPattern = prefixFunction(prefixPattern, pattern);
+	prefixPattern = prefixFunction(pattern);
 	int counter = 0;
 	for (int i = 0; i < str.length(); ++i)
 	{
@@ -69,13 +70,8 @@ bool programTest()
 
 	inputData.close();
 
-	if (countFirstOccurenceOfAPattern(str1, pattern1) != 1 || countFirstOccurenceOfAPattern(str2, pattern2) != 9 ||
-		countFirstOccurenceOfAPattern(str3, pattern3) != 14)
-	{
-		return false;
-	}
-
-	return true;
+	return countFirstOccurenceOfAPattern(str1, pattern1) == 1 && countFirstOccurenceOfAPattern(str2, pattern2) == 9 &&
+		countFirstOccurenceOfAPattern(str3, pattern3) == 14;
 }
 
 void test()
