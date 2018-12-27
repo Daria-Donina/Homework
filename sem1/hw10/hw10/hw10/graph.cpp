@@ -9,7 +9,7 @@ using namespace std;
 
 struct Node
 {
-	int NumberOfState = 0;
+	int numberOfState = 0;
 	List* roads{};
 };
 
@@ -33,7 +33,7 @@ Graph *createGraph(const int numberOfCities)
 
 bool isFree(Graph *graph, int numberOfCity)
 {
-	return !graph->cities[numberOfCity]->NumberOfState;
+	return graph->cities[numberOfCity]->numberOfState == 0;
 }
 
 bool areFreeNeighbours(Graph *graph, Node *city)
@@ -41,7 +41,7 @@ bool areFreeNeighbours(Graph *graph, Node *city)
 	auto node = head(city->roads);
 	while (node)
 	{
-		if (!graph->cities[numberOfCity(node)]->NumberOfState)
+		if (graph->cities[numberOfCity(node)]->numberOfState == 0)
 		{
 			return true;
 		}
@@ -54,7 +54,7 @@ bool areFreeCities(Graph *graph)
 {
 	for (int i = 1; i < graph->cities.size(); ++i)
 	{
-		if (!graph->cities[i]->NumberOfState)
+		if (graph->cities[i]->numberOfState == 0)
 		{
 			return true;
 		}
@@ -68,7 +68,7 @@ int choosingClosest(Graph *graph, int numberOfState)
 	auto temp = minimum;
 	for (int i = 1; i < graph->cities.size(); ++i)
 	{
-		if (graph->cities[i]->NumberOfState == numberOfState && areFreeNeighbours(graph, graph->cities[i]))
+		if (graph->cities[i]->numberOfState == numberOfState && areFreeNeighbours(graph, graph->cities[i]))
 		{
 			auto node = head(graph->cities[i]->roads);
 			while (node)
@@ -86,10 +86,10 @@ int choosingClosest(Graph *graph, int numberOfState)
 	}
 	if (length(minimum) == 10000000)
 	{
-		delete temp;
+		deleteNode(temp);
 		return 0;
 	}
-	delete temp;
+	deleteNode(temp);
 	return numberOfCity(minimum);
 }
 
@@ -127,29 +127,17 @@ Graph *addCitiesAndRoads(ifstream &inputData)
 	{
 		int numberOfCapital = 0;
 		inputData >> numberOfCapital;
-		graph->cities[numberOfCapital]->NumberOfState = i;
+		graph->cities[numberOfCapital]->numberOfState = i;
 	}
 	return graph;
 }
 
-int numberOfCapital(Graph *graph, int numberOfState)
-{
-	for (int i = 1; i < graph->cities.size(); ++i)
-	{
-		auto city = graph->cities[i];
-		if (city->NumberOfState == numberOfState)
-		{
-			return i;
-		}
-	}
-}
-
 void takeOverACity(Graph *graph, int numberOfState)
 {
-	int numberOfCityToTakeOver = choosingClosest(graph, numberOfState);
-	if (numberOfCityToTakeOver)
+	const int numberOfCityToTakeOver = choosingClosest(graph, numberOfState);
+	if (numberOfCityToTakeOver != 0)
 	{
-		graph->cities[numberOfCityToTakeOver]->NumberOfState = numberOfState;
+		graph->cities[numberOfCityToTakeOver]->numberOfState = numberOfState;
 	}
 }
 
@@ -171,7 +159,7 @@ void printGraph(Graph *graph)
 		cout << "State " << i << ": ";
 		for (int j = 1; j < graph->cities.size(); ++j)
 		{
-			if (graph->cities[j]->NumberOfState == i)
+			if (graph->cities[j]->numberOfState == i)
 			{
 				cout << j << " ";
 			}
@@ -210,15 +198,15 @@ bool programTest()
 
 	stateFormation(testGraph);
 
-	if (testGraph->cities[3]->NumberOfState != 2 || testGraph->cities[1]->NumberOfState != 2 ||
-		testGraph->cities[5]->NumberOfState != 2 || testGraph->cities[4]->NumberOfState != 2)
+	if (testGraph->cities[3]->numberOfState != 2 || testGraph->cities[1]->numberOfState != 2 ||
+		testGraph->cities[5]->numberOfState != 2 || testGraph->cities[4]->numberOfState != 2)
 	{
 		deleteGraph(testGraph);
 		return false;
 	}
 
-	if (testGraph->cities[2]->NumberOfState != 1 || testGraph->cities[6]->NumberOfState != 1 ||
-		testGraph->cities[8]->NumberOfState != 1 || testGraph->cities[7]->NumberOfState != 1)
+	if (testGraph->cities[2]->numberOfState != 1 || testGraph->cities[6]->numberOfState != 1 ||
+		testGraph->cities[8]->numberOfState != 1 || testGraph->cities[7]->numberOfState != 1)
 	{
 		deleteGraph(testGraph);
 		return false;

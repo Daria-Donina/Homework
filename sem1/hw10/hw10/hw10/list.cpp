@@ -49,6 +49,11 @@ ListNode *next(ListNode *node)
 	return node->next;
 }
 
+void deleteNode(ListNode *node)
+{
+	delete node;
+}
+
 void add(List *list, int numberOfCity, int length)
 {
 	if (isEmpty(list))

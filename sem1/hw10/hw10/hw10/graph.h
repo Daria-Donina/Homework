@@ -1,8 +1,6 @@
 #pragma once
 #include <fstream>
 
-struct Node;
-
 struct Graph;
 
 //Create new graph

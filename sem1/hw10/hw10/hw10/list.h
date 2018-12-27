@@ -25,6 +25,9 @@ int length(ListNode *node);
 // Create list node to become minimum
 ListNode *createMinimum();
 
+// Delete node
+void deleteNode(ListNode *node);
+
 // Get number of city of the node
 int numberOfCity(ListNode *node);
 
