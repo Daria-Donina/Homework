@@ -1,16 +1,8 @@
 #pragma once
 
-struct ListNode
-{
-	int numberOfCity = 0;
-	int length = 0;
-	ListNode *next{};
-};
+struct ListNode;
 
-struct List
-{
-	ListNode *head{};
-};
+struct List;
 
 //Create new list
 List *createList();
@@ -23,3 +15,18 @@ bool find(List *list, int numberOfCity);
 
 //Remove list
 void deleteList(List *list);
+
+// Get head of the list
+ListNode *head(List *list);
+
+// Get length of the road to the city
+int length(ListNode *node);
+
+// Create list node to become minimum
+ListNode *createMinimum();
+
+// Get number of city of the node
+int numberOfCity(ListNode *node);
+
+// Get next node
+ListNode *next(ListNode *node);

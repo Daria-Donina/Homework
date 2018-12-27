@@ -1,5 +1,17 @@
 #include "list.h"
 
+struct ListNode
+{
+	int numberOfCity = 0;
+	int length = 0;
+	ListNode *next{};
+};
+
+struct List
+{
+	ListNode *head{};
+};
+
 List *createList()
 {
 	return new List{};
@@ -8,6 +20,33 @@ List *createList()
 bool isEmpty(List *list)
 {
 	return !list->head;
+}
+
+ListNode *head(List *list)
+{
+	return list->head;
+}
+
+int length(ListNode *node)
+{
+	return node->length;
+}
+
+ListNode *createMinimum()
+{
+	auto minimum = new ListNode{};
+	minimum->length = 10000000;
+	return minimum;
+}
+
+int numberOfCity(ListNode *node)
+{
+	return node->numberOfCity;
+}
+
+ListNode *next(ListNode *node)
+{
+	return node->next;
 }
 
 void add(List *list, int numberOfCity, int length)

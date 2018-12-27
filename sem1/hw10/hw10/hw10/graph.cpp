@@ -38,14 +38,14 @@ bool isFree(Graph *graph, int numberOfCity)
 
 bool areFreeNeighbours(Graph *graph, Node *city)
 {
-	auto node = city->roads->head;
+	auto node = head(city->roads);
 	while (node)
 	{
-		if (!graph->cities[node->numberOfCity]->NumberOfState)
+		if (!graph->cities[numberOfCity(node)]->NumberOfState)
 		{
 			return true;
 		}
-		node = node->next;
+		node = next(node);
 	}
 	return false;
 }
@@ -64,34 +64,33 @@ bool areFreeCities(Graph *graph)
 
 int choosingClosest(Graph *graph, int numberOfState)
 {
-	ListNode *minimum = new ListNode{};
+	ListNode *minimum = createMinimum();
 	auto temp = minimum;
-	minimum->length = 10000000;
 	for (int i = 1; i < graph->cities.size(); ++i)
 	{
 		if (graph->cities[i]->NumberOfState == numberOfState && areFreeNeighbours(graph, graph->cities[i]))
 		{
-			auto node = graph->cities[i]->roads->head;;
+			auto node = head(graph->cities[i]->roads);
 			while (node)
 			{
-				if (isFree(graph, node->numberOfCity))
+				if (isFree(graph, numberOfCity(node)))
 				{
-					if (node->length < minimum->length)
+					if (length(node) < length(minimum))
 					{
 						minimum = node;
 					}
 				}
-				node = node->next;
+				node = next(node);
 			}
 		}
 	}
-	if (minimum->length == 10000000)
+	if (length(minimum) == 10000000)
 	{
 		delete temp;
 		return 0;
 	}
 	delete temp;
-	return minimum->numberOfCity;
+	return numberOfCity(minimum);
 }
 
 Graph *addCitiesAndRoads(ifstream &inputData)
