@@ -169,10 +169,7 @@ string getValue(Node *node, string key)
 		return getValue(node->leftChild, key);
 	}
 
-	if (stoi(key) > stoi(node->key))
-	{
-		return getValue(node->rightChild, key);
-	}
+	return getValue(node->rightChild, key);
 }
 
 bool isKey(Node *node, const string key)
@@ -194,10 +191,7 @@ bool isKey(Node *node, const string key)
 			return isKey(node->rightChild, key);
 		}
 	}
-	else
-	{
-		return false;
-	}
+	return false;
 }
 
 void keyAvailability(Map *map, string key)
