@@ -16,7 +16,13 @@ namespace _1._5
             int m = Int32.Parse(Console.ReadLine());
             Console.WriteLine();
 
-            Random rand = new Random();
+            if (n <= 0 || m <= 0)
+            {
+                Console.WriteLine("Input data is incorrect");
+                return;
+            }
+
+            var rand = new Random();
 
             Console.WriteLine("The matrix:");
             int[,] matrix = new int[n, m];
