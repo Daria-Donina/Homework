@@ -2,7 +2,10 @@
 
 namespace SinglyLinkedList
 {
-    public class UserInterface
+    /// <summary>
+    /// An interaction between the program and the user.
+    /// </summary>
+    class UserInterface
     {
         private static void PrintCommands()
         {
@@ -87,6 +90,9 @@ namespace SinglyLinkedList
             }
         }
 
+        /// <summary>
+        /// Combines all the methods to provide interaction with the user.
+        /// </summary>
         public void FullInteraction()
         {
             PrintCommands();

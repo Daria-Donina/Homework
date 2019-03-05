@@ -2,8 +2,14 @@
 
 namespace SinglyLinkedList
 {
+    /// <summary>
+    /// List, a container of integer values.
+    /// </summary>
     class List : IList
     {
+        /// <summary>
+        /// An element of list.
+        /// </summary>
         private class Node
         {
             public int Data { get; set; }
@@ -19,9 +25,13 @@ namespace SinglyLinkedList
         public int Length { get; private set; }
         private Node head = null;
 
+        /// <summary>
+        /// Checks if the list is empty.
+        /// </summary>
+        /// <returns>True if the list is empty and false if it's not.</returns>
         public bool IsEmpty() => head == null;
 
-        public bool IsPositionCorrect(int position) => position > 0 && position <= Length;
+        private bool IsPositionCorrect(int position) => position > 0 && position <= Length;
 
         private void AddFirst(int data)
         {
@@ -55,6 +65,11 @@ namespace SinglyLinkedList
             ++Length;
         }
 
+        /// <summary>
+        /// Adds value at the given position of the list.
+        /// </summary>
+        /// <param name="position">A number of position in the list to add a value.</param>
+        /// <param name="data">An integer number to add.</param>
         public void Add(int position, int data)
         {
             if (!IsPositionCorrect(position) && position != Length + 1)
@@ -93,6 +108,10 @@ namespace SinglyLinkedList
             --Length;
         }
 
+        /// <summary>
+        /// Removes value from the given position of the list.
+        /// </summary>
+        /// <param name="position">A number of position in the list to remove a value.</param>
         public void Remove(int position)
         {
             if (IsEmpty() || !IsPositionCorrect(position))
@@ -112,6 +131,11 @@ namespace SinglyLinkedList
             RemoveNotFirst(node);
         }
 
+        /// <summary>
+        /// Returns value at the given position of the list.
+        /// </summary>
+        /// <param name="position">A number of position in the list to get a value.</param>
+        /// <returns>A value at the given position.</returns>
         public int GetValue(int position)
         {
             if (IsEmpty() || !IsPositionCorrect(position))
@@ -125,6 +149,11 @@ namespace SinglyLinkedList
             return node.Data;
         }
 
+        /// <summary>
+        /// Sets value at the given position of the list.
+        /// </summary>
+        /// <param name="position">A number of position in the list to set a value.</param>
+        /// <param name="value">An integer number to add.</param>
         public void SetValue(int position, int value)
         {
             if (IsEmpty() || !IsPositionCorrect(position))
@@ -138,6 +167,9 @@ namespace SinglyLinkedList
             node.Data = value;
         }
 
+        /// <summary>
+        /// Prints all the elements of the list.
+        /// </summary>
         public void Print()
         {
             Node node = head;
