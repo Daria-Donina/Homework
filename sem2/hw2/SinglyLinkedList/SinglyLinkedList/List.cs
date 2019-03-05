@@ -8,7 +8,7 @@ namespace SinglyLinkedList
     class List : IList
     {
         /// <summary>
-        /// An element of list.
+        /// An element of the list.
         /// </summary>
         private class Node
         {
