@@ -16,6 +16,7 @@ namespace SinglyLinkedList
             Console.WriteLine("5 - get value by position");
             Console.WriteLine("6 - set value by position");
             Console.WriteLine("7 - print list");
+            Console.WriteLine("8 - clear the list");
             Console.WriteLine("0 - exit");
             Console.WriteLine();
             Console.Write("Input number: ");
@@ -82,6 +83,9 @@ namespace SinglyLinkedList
                         break;
                     case 7:
                         list.Print();
+                        break;
+                    case 8:
+                        list.Clear();
                         break;
                 }
 
