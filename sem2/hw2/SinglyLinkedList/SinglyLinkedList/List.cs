@@ -172,6 +172,11 @@ namespace SinglyLinkedList
         /// </summary>
         public void Print()
         {
+            if (IsEmpty())
+            {
+                Console.WriteLine("List is empty");
+                return;
+            }
             Node node = head;
 
             Console.WriteLine($"The List:");
