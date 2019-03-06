@@ -9,5 +9,6 @@ namespace SinglyLinkedList
         int GetValue(int position);
         void SetValue(int position, int value);
         void Print();
+        void Clear();
     }
 }

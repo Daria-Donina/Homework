@@ -5,7 +5,7 @@ namespace SinglyLinkedList
     /// <summary>
     /// List, a container of integer values.
     /// </summary>
-    class List : IList
+    public class List : IList
     {
         /// <summary>
         /// An element of the list.
@@ -182,6 +182,17 @@ namespace SinglyLinkedList
             }
 
             Console.WriteLine();
+        }
+
+        /// <summary>
+        /// Removes all the elements from list.
+        /// </summary>
+        public void Clear()
+        {
+            while (!IsEmpty())
+            {
+                Remove(1);
+            }
         }
     }
 }
