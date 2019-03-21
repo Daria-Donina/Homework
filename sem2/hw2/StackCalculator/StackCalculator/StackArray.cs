@@ -1,22 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace StackCalculator
 {
-    class StackList : IStack
+    class StackArray : IStack
     {
-        private class StackElement
-        {
-            public int Value { get; set; }
-            public StackElement Next { get; set; }
-
-            public StackElement(int newValue, StackElement newNext)
-            {
-                Value = newValue;
-                Next = newNext;
-            }
-        }
-
-        private StackElement head;
+        private const int size = 100;
+        private int[] stack = new int[size];
+        private int topIndex = 0;
 
         public bool Push(char value)
         {
@@ -25,11 +19,15 @@ namespace StackCalculator
                 return false;
             }
 
-            head = new StackElement(value, null);
+            if (topIndex >= size)
+            {
+                Array.Resize(ref stack, size * 2);
+            }
+
+            stack[topIndex] = value;
+            ++topIndex;
             return true;
         }
-
-        public bool IsEmpty() => head == null;
 
         public int Pop()
         {
@@ -39,7 +37,7 @@ namespace StackCalculator
             }
 
             var temp = Peek();
-            head = head.Next;
+            --topIndex;
             return temp;
         }
 
@@ -50,7 +48,9 @@ namespace StackCalculator
                 throw new InvalidOperationException("Peek from the empty stack");
             }
 
-            return head.Value;
+            return stack[topIndex];
         }
+
+        public bool IsEmpty() => topIndex == 0;
     }
 }
