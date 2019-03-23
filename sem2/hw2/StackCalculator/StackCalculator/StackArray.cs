@@ -12,13 +12,8 @@ namespace StackCalculator
         private int[] stack = new int[size];
         private int topIndex = 0;
 
-        public bool Push(char value)
+        public void Push(int value)
         {
-            if (!char.IsDigit(value))
-            {
-                return false;
-            }
-
             if (topIndex >= size)
             {
                 Array.Resize(ref stack, size * 2);
@@ -26,7 +21,6 @@ namespace StackCalculator
 
             stack[topIndex] = value;
             ++topIndex;
-            return true;
         }
 
         public int Pop()

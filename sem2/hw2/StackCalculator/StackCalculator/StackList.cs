@@ -18,15 +18,9 @@ namespace StackCalculator
 
         private StackElement head;
 
-        public bool Push(char value)
+        public void Push(int value)
         {
-            if (!char.IsDigit(value))
-            {
-                return false;
-            }
-
-            head = new StackElement(value, null);
-            return true;
+            head = new StackElement(value, head);
         }
 
         public bool IsEmpty() => head == null;
