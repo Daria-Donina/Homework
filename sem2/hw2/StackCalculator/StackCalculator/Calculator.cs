@@ -52,13 +52,13 @@ namespace StackCalculator
                     stack.Push(firstOperand + secondOperand);
                     break;
                 case '-':
-                    stack.Push(firstOperand - secondOperand);
+                    stack.Push(secondOperand - firstOperand);
                     break;
                 case '*':
                     stack.Push(firstOperand * secondOperand);
                     break;
                 case '/':
-                    stack.Push(firstOperand / secondOperand);
+                    stack.Push(secondOperand / firstOperand);
                     break;
                 default:
                     ThrowingFormatException();

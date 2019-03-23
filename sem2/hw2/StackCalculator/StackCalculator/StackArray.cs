@@ -31,6 +31,7 @@ namespace StackCalculator
             }
 
             var temp = Peek();
+            stack[topIndex] = 0;
             --topIndex;
             return temp;
         }
@@ -42,7 +43,7 @@ namespace StackCalculator
                 throw new InvalidOperationException("Peek from the empty stack");
             }
 
-            return stack[topIndex];
+            return stack[topIndex - 1];
         }
 
         public bool IsEmpty() => topIndex == 0;
