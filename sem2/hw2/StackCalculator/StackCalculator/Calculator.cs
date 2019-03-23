@@ -6,6 +6,11 @@ namespace StackCalculator
     {
         private IStack stack;
 
+        public Calculator(IStack stack)
+        {
+            this.stack = stack;
+        }
+
         public int Calculate(string expression)
         {
             var splitedExpression = expression.Split(' ');
