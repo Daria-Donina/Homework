@@ -2,6 +2,9 @@
 
 namespace StackCalculator
 {
+    /// <summary>
+    /// An object that calculate postfix expressions of basic operations and integer numbers.
+    /// </summary>
     class Calculator : ICalculator
     {
         private IStack stack;
@@ -11,6 +14,11 @@ namespace StackCalculator
             this.stack = stack;
         }
 
+        /// <summary>
+        /// Calculates postfix expression.
+        /// </summary>
+        /// <param name="expression">An expression to calculate.</param>
+        /// <returns>The result of calculation.</returns>
         public int Calculate(string expression)
         {
             var splitedExpression = expression.Split(' ');
