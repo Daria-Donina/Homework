@@ -4,12 +4,4 @@ before_build:
   - nuget restore sem2/hw2/StackCalculator/StackCalculator.sln
 
 build:
-<<<<<<< HEAD
   project: sem2/hw2/StackCalculator/StackCalculator.sln
-
-test_script:
-  - nunit3-console sem2/hw2/StackCalculator/StackCalculator.Tests/StackCalculator.Tests.csproj
-    --result=testResults.xml;format=AppVeyor
-=======
-  project: sem2/hw2/StackCalculator/StackCalculator.sln
->>>>>>> master
