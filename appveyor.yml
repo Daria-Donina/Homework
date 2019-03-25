@@ -5,6 +5,3 @@ before_build:
 
 build:
   project: sem2/hw2/StackCalculator/StackCalculator.sln
-
-test_script:
-  - dotnet test sem2/hw2/StackCalculator/StackCalculator.sln
