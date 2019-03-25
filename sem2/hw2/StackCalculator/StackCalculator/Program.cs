@@ -17,8 +17,24 @@ namespace StackCalculator
             var calculatorArray = new Calculator(new ArrayStack());
             var calculatorList = new Calculator(new ListStack());
 
-            var resultArray = calculatorArray.Calculate(expression);
-            var resultList = calculatorList.Calculate(expression);
+            var resultArray = 0;
+            var resultList = 0;
+
+            try
+            {
+                resultArray = calculatorArray.Calculate(expression);
+                resultList = calculatorList.Calculate(expression);
+            }
+            catch (DivideByZeroException)
+            {
+                Console.WriteLine("Dividing by zero is forbidden");
+                return;
+            }
+            catch
+            {
+                Console.WriteLine("The expression is incorrect");
+                return;
+            }
 
             if (resultArray != resultList)
             {
