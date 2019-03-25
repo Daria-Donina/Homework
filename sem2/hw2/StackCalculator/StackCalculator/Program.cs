@@ -27,7 +27,7 @@ namespace StackCalculator
             }
             catch (DivideByZeroException)
             {
-                Console.WriteLine("Dividing by zero is forbidden");
+                Console.WriteLine("Division by zero is forbidden");
                 return;
             }
             catch
