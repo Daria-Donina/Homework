@@ -14,11 +14,8 @@ namespace StackCalculator
 
             var expression = Console.ReadLine();
 
-            var arrayStack = new StackArray();
-            var listStack = new StackList();
-
-            var calculatorArray = new Calculator(arrayStack);
-            var calculatorList = new Calculator(listStack);
+            var calculatorArray = new Calculator(new ArrayStack());
+            var calculatorList = new Calculator(new ListStack());
 
             var resultArray = calculatorArray.Calculate(expression);
             var resultList = calculatorList.Calculate(expression);

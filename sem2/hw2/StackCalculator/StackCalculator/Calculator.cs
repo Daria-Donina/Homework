@@ -5,7 +5,7 @@ namespace StackCalculator
     /// <summary>
     /// An object that calculate postfix expressions of basic operations and integer numbers.
     /// </summary>
-    class Calculator : ICalculator
+    public class Calculator : ICalculator
     {
         private IStack stack;
 
@@ -18,7 +18,7 @@ namespace StackCalculator
         /// Calculates postfix expression.
         /// </summary>
         /// <param name="expression">An expression to calculate.</param>
-        /// <returns>The result of calculation.</returns>
+        /// <returns>Result of the calculation.</returns>
         public int Calculate(string expression)
         {
             var splitedExpression = expression.Split(' ');
@@ -51,8 +51,26 @@ namespace StackCalculator
                 ThrowingFormatException();
             }
 
-            var firstOperand = stack.Pop();
-            var secondOperand = stack.Pop();
+            var firstOperand = 0;
+            var secondOperand = 0;
+
+            if (!stack.IsEmpty())
+            {
+                firstOperand = stack.Pop();
+
+                if (!stack.IsEmpty())
+                {
+                    secondOperand = stack.Pop();
+                }
+                else
+                {
+                    ThrowingFormatException();
+                }
+            }
+            else
+            {
+                ThrowingFormatException();
+            }
 
             switch (operation)
             {
