@@ -7,4 +7,5 @@ build:
   project: sem2/hw2/StackCalculator/StackCalculator.sln
 
 test_script:
-  - dotnet test sem2/hw2/StackCalculator/StackCalculator.sln
+  - nunit3-console sem2/hw2/StackCalculator/StackCalculator.sln \
+    --result=myresults.xml;format=AppVeyor
