@@ -20,9 +20,9 @@ namespace SinglyLinkedList.Tests
         public void AddFirstTest()
         {
             list.Add(1, 3);
-            Assert.AreEqual(list.GetValue(1), 3);
+            Assert.AreEqual(3, list.GetValue(1));
             list.Add(1, 5);
-            Assert.AreEqual(list.GetValue(1), 5);
+            Assert.AreEqual(5, list.GetValue(1));
         }
 
         [TestMethod]

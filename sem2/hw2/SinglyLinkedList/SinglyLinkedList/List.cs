@@ -35,7 +35,7 @@ namespace SinglyLinkedList
 
         private void AddFirst(int data)
         {
-            head = new Node(data, null);
+            head = new Node(data, head);
             ++Length;
         }
 
@@ -51,14 +51,7 @@ namespace SinglyLinkedList
             return node;
         }
 
-        private void AddToHead(int data)
-        {
-            var temp = head;
-            head = new Node(data, temp);
-            ++Length;
-        }
-
-        private void AddNotToHead(int data, Node node)
+        private void AddNotFirst(int data, Node node)
         {
             var temp = node.Next;
             node.Next = new Node(data, temp);
@@ -78,21 +71,15 @@ namespace SinglyLinkedList
                 return;
             }
 
-            if (IsEmpty())
+            if (IsEmpty() || position == 1)
             {
                 AddFirst(data);
                 return;
             }
 
-            if (position == 1)
-            {
-                AddToHead(data);
-                return;
-            }
-
             var node = FindNodeByPosition(position - 1);
 
-            AddNotToHead(data, node);
+            AddNotFirst(data, node);
         }
 
         private void RemoveFirst()
@@ -194,10 +181,8 @@ namespace SinglyLinkedList
         /// </summary>
         public void Clear()
         {
-            while (!IsEmpty())
-            {
-                Remove(1);
-            }
+            head = null;
+            Length = 0;
         }
     }
 }

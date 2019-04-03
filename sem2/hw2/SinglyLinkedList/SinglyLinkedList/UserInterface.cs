@@ -38,25 +38,26 @@ namespace SinglyLinkedList
 
         private void CommandExecution(List list)
         {
-            int number = 0;
-            number = int.Parse(Console.ReadLine());
+            int number = int.Parse(Console.ReadLine());
 
             while (number != 0)
             {
-                int position = 0;
-                int data = 0;
                 switch (number)
                 {
                     case 1:
-                        position = PositionEntryRequest();
-                        data = ValueEntryRequest();
+                        {
+                            int position = PositionEntryRequest();
+                            int data = ValueEntryRequest();
 
-                        list.Add(position, data);
+                            list.Add(position, data);
+                        }
                         break;
                     case 2:
-                        position = PositionEntryRequest();
+                        {
+                            int position = PositionEntryRequest();
 
-                        list.Remove(position);
+                            list.Remove(position);
+                        }
                         break;
                     case 3:
                         Console.WriteLine($"Size of the list: {list.Length}");
@@ -72,14 +73,18 @@ namespace SinglyLinkedList
                         }
                         break;
                     case 5:
-                        position = PositionEntryRequest();
-                        Console.WriteLine($"Value in this position: {list.GetValue(position)}");
+                        {
+                            int position = PositionEntryRequest();
+                            Console.WriteLine($"Value in this position: {list.GetValue(position)}");
+                        }
                         break;
                     case 6:
-                        position = PositionEntryRequest();
-                        data = ValueEntryRequest();
+                        {
+                            int position = PositionEntryRequest();
+                            int data = ValueEntryRequest();
 
-                        list.SetValue(position, data);
+                            list.SetValue(position, data);
+                        }
                         break;
                     case 7:
                         list.Print();
