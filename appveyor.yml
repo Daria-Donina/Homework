@@ -4,4 +4,4 @@ before_build:
   - nuget restore sem2/hw2/SinglyLinkedList/SinglyLinkedList.sln
 
 build:
-  project: sem2/hw2/SinglyLinkedList/SinglyLinkedList.sln\
+  project: sem2/hw2/SinglyLinkedList/SinglyLinkedList.sln
