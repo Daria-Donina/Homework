@@ -17,234 +17,324 @@
             listStackCalculator = new Calculator(new ListStack());
         }
 
+        public void OnlyAdditionTest(ICalculator calculator)
+        {
+            Assert.AreEqual(8, calculator.Calculate("3 5 +"));
+        }
+
         [TestMethod]
         public void OnlyAdditionArrayTest()
         {
-            Assert.AreEqual(8, arrayStackCalculator.Calculate("3 5 +"));
+            OnlyAdditionTest(arrayStackCalculator);
         }
 
         [TestMethod]
         public void OnlyAdditionListTest()
         {
-            Assert.AreEqual(8, listStackCalculator.Calculate("3 5 +"));
+            OnlyAdditionTest(listStackCalculator);
+        }
+
+        public void OnlySubtractionTest(ICalculator calculator)
+        {
+            Assert.AreEqual(2, calculator.Calculate("5 3 -"));
         }
 
         [TestMethod]
         public void OnlySubtractionArrayTest()
         {
-            Assert.AreEqual(2, arrayStackCalculator.Calculate("5 3 -"));
+            OnlySubtractionTest(arrayStackCalculator);
         }
 
         [TestMethod]
         public void OnlySubtractionListTest()
         {
-            Assert.AreEqual(2, listStackCalculator.Calculate("5 3 -"));
+            OnlySubtractionTest(listStackCalculator);
+        }
+
+        public void OnlyMultiplicationTest(ICalculator calculator)
+        {
+            Assert.AreEqual(64, calculator.Calculate("4 16 *"));
         }
 
         [TestMethod]
         public void OnlyMultiplicationArrayTest()
         {
-            Assert.AreEqual(64, arrayStackCalculator.Calculate("4 16 *"));
+            OnlyMultiplicationTest(arrayStackCalculator);
         }
 
         [TestMethod]
         public void OnlyMultiplicationListTest()
         {
-            Assert.AreEqual(64, listStackCalculator.Calculate("4 16 *"));
+            OnlyMultiplicationTest(listStackCalculator);
+        }
+
+        public void OnlyDivisionTest(ICalculator calculator)
+        {
+            Assert.AreEqual(3, calculator.Calculate("45 15 /"));
         }
 
         [TestMethod]
         public void OnlyDivisionArrayTest()
         {
-            Assert.AreEqual(3, arrayStackCalculator.Calculate("45 15 /"));
+            OnlyDivisionTest(arrayStackCalculator);
         }
 
         [TestMethod]
         public void OnlyDivisionListTest()
         {
-            Assert.AreEqual(3, listStackCalculator.Calculate("45 15 /"));
+            OnlyDivisionTest(listStackCalculator);
+        }
+
+        public void DivisionWhenResultIsNotIntegerTest(ICalculator calculator)
+        {
+            Assert.AreEqual(7, calculator.Calculate("77 10 /"));
         }
 
         [TestMethod]
         public void DivisionWhenResultIsNotIntegerArrayTest()
         {
-            Assert.AreEqual(7, arrayStackCalculator.Calculate("77 10 /"));
+            DivisionWhenResultIsNotIntegerTest(arrayStackCalculator);
         }
 
         [TestMethod]
         public void DivisionWhenResultIsNotIntegerListTest()
         {
-            Assert.AreEqual(7, listStackCalculator.Calculate("77 10 /"));
+            DivisionWhenResultIsNotIntegerTest(listStackCalculator);
+        }
+
+        public void NegativeResultTest(ICalculator calculator)
+        {
+            Assert.AreEqual(-10, calculator.Calculate("1 -10 *"));
         }
 
         [TestMethod]
         public void NegativeResultArrayTest()
         {
-            Assert.AreEqual(-10, listStackCalculator.Calculate("1 -10 *"));
+            NegativeResultTest(arrayStackCalculator);
         }
 
         [TestMethod]
         public void NegativeResultListTest()
         {
-            Assert.AreEqual(-10, listStackCalculator.Calculate("1 -10 *"));
+            NegativeResultTest(listStackCalculator);
+        }
+
+        public void ZeroResultTest(ICalculator calculator)
+        {
+            Assert.AreEqual(0, calculator.Calculate("9 -9 +"));
         }
 
         [TestMethod]
         public void ZeroResultArrayTest()
         {
-            Assert.AreEqual(0, arrayStackCalculator.Calculate("9 -9 +"));
+            ZeroResultTest(arrayStackCalculator);
         }
 
         [TestMethod]
         public void ZeroResultListTest()
         {
-            Assert.AreEqual(0, arrayStackCalculator.Calculate("9 -9 +"));
+            ZeroResultTest(listStackCalculator);
+        }
+
+        public void DivideByZeroTest(ICalculator calculator)
+        {
+            _ = calculator.Calculate("5 0 /");
         }
 
         [TestMethod]
         [ExpectedException(typeof(DivideByZeroException))]
-        public void DiviByZeroArrayTest()
+        public void DivideByZeroArrayTest()
         {
-            _ = arrayStackCalculator.Calculate("5 0 /");
+            DivideByZeroTest(arrayStackCalculator);
         }
 
         [TestMethod]
         [ExpectedException(typeof(DivideByZeroException))]
-        public void DiviByZeroListTest()
+        public void DivideByZeroListTest()
         {
-            _ = listStackCalculator.Calculate("5 0 /");
+            DivideByZeroTest(listStackCalculator);
+        }
+
+        public void CorrectComplexExpressionTest(ICalculator calculator)
+        {
+            Assert.AreEqual(6, calculator.Calculate("8 2 5 * + 1 3 2 * + 4 - /"));
         }
 
         [TestMethod]
         public void CorrectComplexExpressionArrayTest()
         {
-            Assert.AreEqual(6, arrayStackCalculator.Calculate("8 2 5 * + 1 3 2 * + 4 - /"));
+            CorrectComplexExpressionTest(arrayStackCalculator);
         }
 
         [TestMethod]
         public void CorrectComplexExpressionListTest()
         {
-            Assert.AreEqual(6, listStackCalculator.Calculate("8 2 5 * + 1 3 2 * + 4 - /"));
+            CorrectComplexExpressionTest(listStackCalculator);
+        }
+
+        public void WrongExpressionExtraLastNumbersTest(ICalculator calculator)
+        {
+            _ = calculator.Calculate("8 6 5 + * 3 5");
         }
 
         [TestMethod]
         [ExpectedException(typeof(FormatException))]
         public void WrongExpressionExtraLastNumbersArrayTest()
         {
-            _ = arrayStackCalculator.Calculate("8 6 5 + * 3 5");
+            WrongExpressionExtraLastNumbersTest(arrayStackCalculator);
         }
 
         [TestMethod]
         [ExpectedException(typeof(FormatException))]
         public void WrongExpressionExtraLastNumbersListTest()
         {
-            _ = listStackCalculator.Calculate("8 6 5 + * 3 5");
+            WrongExpressionExtraLastNumbersTest(listStackCalculator);
+        }
+
+        public void NoSpaceBetweenTwoOperationsTest(ICalculator calculator)
+        {
+            _ = calculator.Calculate("7 3 6 5 - +*");
         }
 
         [TestMethod]
         [ExpectedException(typeof(FormatException))]
         public void NoSpaceBetweenTwoOperationsArrayTest()
         {
-            _ = arrayStackCalculator.Calculate("7 3 6 5 - +*");
+            NoSpaceBetweenTwoOperationsTest(arrayStackCalculator);
         }
 
         [TestMethod]
         [ExpectedException(typeof(FormatException))]
         public void NoSpaceBetweenTwoOperationsListTest()
         {
-            _ = listStackCalculator.Calculate("7 3 6 5 - +*");
+            NoSpaceBetweenTwoOperationsTest(listStackCalculator);
+        }
+
+        public void ExpressionWithWeirdSymbolsTest(ICalculator calculator)
+        {
+            _ = calculator.Calculate("a a +");
         }
 
         [TestMethod]
         [ExpectedException(typeof(FormatException))]
         public void ExpressionWithWeirdSymbolsArrayTest()
         {
-            _ = arrayStackCalculator.Calculate("a a +");
+            ExpressionWithWeirdSymbolsTest(arrayStackCalculator);
         }
 
         [TestMethod]
         [ExpectedException(typeof(FormatException))]
         public void ExpressionWithWeirdSymbolsListTest()
         {
-            _ = listStackCalculator.Calculate("a a +");
+            ExpressionWithWeirdSymbolsTest(listStackCalculator);
         }
 
-        [TestMethod]
-        public void NoOperationsArrayTest()
+        public void NoOperationsTest(ICalculator calculator)
         {
             Assert.AreEqual(456, arrayStackCalculator.Calculate("456"));
         }
 
         [TestMethod]
+        public void NoOperationsArrayTest()
+        {
+            NoOperationsTest(arrayStackCalculator);
+        }
+
+        [TestMethod]
         public void NoOperationsListTest()
         {
-            Assert.AreEqual(456, listStackCalculator.Calculate("456"));
+            NoOperationsTest(listStackCalculator);
+        }
+
+        public void NoNumbersTest(ICalculator calculator)
+        {
+            _ = calculator.Calculate("+ - * /");
         }
 
         [TestMethod]
         [ExpectedException(typeof(FormatException))]
         public void NoNumbersArrayTest()
         {
-            _ = arrayStackCalculator.Calculate("+ - * /");
+            NoNumbersTest(arrayStackCalculator);
         }
 
         [TestMethod]
         [ExpectedException(typeof(FormatException))]
         public void NoNumbersListTest()
         {
-            _ = listStackCalculator.Calculate("+ - * /");
+            NoNumbersTest(listStackCalculator);
+        }
+
+        public void ExpressionWithZerosOnlyTest(ICalculator calculator)
+        {
+            Assert.AreEqual(0, calculator.Calculate("0 0 + 0 0 - * 0 0 - +"));
         }
 
         [TestMethod]
         public void ExpressionWithZerosOnlyArrayTest()
         {
-            Assert.AreEqual(0, arrayStackCalculator.Calculate("0 0 + 0 0 - * 0 0 - +"));
+            ExpressionWithZerosOnlyTest(arrayStackCalculator);
         }
 
         [TestMethod]
         public void ExpressionWithZerosOnlyListTest()
         {
-            Assert.AreEqual(0, listStackCalculator.Calculate("0 0 + 0 0 - * 0 0 - +"));
+            ExpressionWithZerosOnlyTest(listStackCalculator);
+        }
+
+        public void LongNumberAndZeroTest(ICalculator calculator)
+        {
+            Assert.AreEqual(123456789, calculator.Calculate("123456789 0 +"));
         }
 
         [TestMethod]
         public void LongNumberAndZeroArrayTest()
         {
-            Assert.AreEqual(123456789, arrayStackCalculator.Calculate("123456789 0 +"));
+            LongNumberAndZeroTest(arrayStackCalculator);
         }
 
         [TestMethod]
         public void LongNumberAndZeroListTest()
         {
-            Assert.AreEqual(123456789, listStackCalculator.Calculate("123456789 0 +"));
+            LongNumberAndZeroTest(listStackCalculator);
+        }
+
+        public void ExpressionWithFloatNumbersTest(ICalculator calculator)
+        {
+            Assert.AreEqual(0, calculator.Calculate("1.23 5 -"));
         }
 
         [TestMethod]
         [ExpectedException(typeof(FormatException))]
         public void ExpressionWithFloatNumbersArrayTest()
         {
-            Assert.AreEqual(0, arrayStackCalculator.Calculate("1.23 5 -"));
+            ExpressionWithFloatNumbersTest(arrayStackCalculator);
         }
 
         [TestMethod]
         [ExpectedException(typeof(FormatException))]
         public void ExpressionWithFloatNumbersListTest()
         {
-            Assert.AreEqual(0, listStackCalculator.Calculate("1.23 5 -"));
+            ExpressionWithFloatNumbersTest(listStackCalculator);
+        }
+
+        public void InfixExpressionTest(ICalculator calculator)
+        {
+            Assert.AreEqual(0, calculator.Calculate("1 * 5 - 2"));
         }
 
         [TestMethod]
         [ExpectedException(typeof(FormatException))]
         public void InfixExpressionArrayTest()
         {
-            Assert.AreEqual(0, arrayStackCalculator.Calculate("1 * 5 - 2"));
+            InfixExpressionTest(arrayStackCalculator);
         }
 
         [TestMethod]
         [ExpectedException(typeof(FormatException))]
         public void InfixExpressionListTest()
         {
-            Assert.AreEqual(0, listStackCalculator.Calculate("1 * 5 - 2"));
+            InfixExpressionTest(listStackCalculator);
         }
     }
 }

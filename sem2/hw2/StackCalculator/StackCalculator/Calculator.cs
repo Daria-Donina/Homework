@@ -38,7 +38,7 @@ namespace StackCalculator
             var answer = stack.Pop();
             if (!stack.IsEmpty())
             {
-                ThrowingFormatException();
+                throw new FormatException("The expression is incorrect");
             }
 
             return answer;
@@ -48,7 +48,7 @@ namespace StackCalculator
         {
             if (!char.TryParse(symbol, out char operation))
             {
-                ThrowingFormatException();
+                throw new FormatException("The expression is incorrect");
             }
 
             var firstOperand = 0;
@@ -64,12 +64,12 @@ namespace StackCalculator
                 }
                 else
                 {
-                    ThrowingFormatException();
+                    throw new FormatException("The expression is incorrect");
                 }
             }
             else
             {
-                ThrowingFormatException();
+                throw new FormatException("The expression is incorrect");
             }
 
             switch (operation)
@@ -87,14 +87,8 @@ namespace StackCalculator
                     stack.Push(secondOperand / firstOperand);
                     break;
                 default:
-                    ThrowingFormatException();
-                    break;
+                    throw new FormatException("The expression is incorrect");
             }
-        }
-
-        private void ThrowingFormatException()
-        {
-            throw new FormatException("The expression is incorrect");
         }
     }
 }

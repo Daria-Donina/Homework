@@ -38,6 +38,7 @@ namespace StackCalculator
 
             if (resultArray != resultList)
             {
+                Console.WriteLine("Calculator does not work correctly");
                 return;
             }
 
