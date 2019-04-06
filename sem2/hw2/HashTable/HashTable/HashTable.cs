@@ -49,8 +49,8 @@ namespace Hash_Table
 
         private void Expand()
         {
-            size = size * 2;
-            List[] newBuckets = new List[size];
+            size *= 2;
+            var newBuckets = new List[size];
 
             for (int i = 0; i < newBuckets.Length; ++i)
             {
@@ -99,7 +99,7 @@ namespace Hash_Table
             int hash = HashFunction(value);
             int position = buckets[hash].FindPositionByValue(value);
 
-            return !Equals(position, -1);
+            return position != -1;
         }
 
         private float LoadFactor() => (float)numberOfElements / size;

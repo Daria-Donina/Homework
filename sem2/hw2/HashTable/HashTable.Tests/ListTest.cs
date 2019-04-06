@@ -18,9 +18,9 @@
         public void AddFirstTest()
         {
             list.Add(1, 3);
-            Assert.AreEqual(list.GetValue(1), 3);
+            Assert.AreEqual(3, list.GetValue(1));
             list.Add(1, 5);
-            Assert.AreEqual(list.GetValue(1), 5);
+            Assert.AreEqual(5, list.GetValue(1));
         }
 
         [TestMethod]
@@ -38,7 +38,6 @@
         [TestMethod]
         public void AddAtWrongPositionTest()
         {
-            list.Clear();
             list.Add(56, 1);
             list.Add(-5, 1);
             Assert.IsTrue(list.IsEmpty());
@@ -78,8 +77,6 @@
         [TestMethod]
         public void GetValueFromWrongPositionTest()
         {
-            list.Clear();
-
             Assert.AreEqual(-1, list.GetValue(9));
             Assert.AreEqual(-1, list.GetValue(-6));
         }
@@ -98,8 +95,6 @@
         [TestMethod]
         public void LengthTest()
         {
-            list.Clear();
-
             for (int i = 0; i < 5; ++i)
             {
                 list.Add(1, i);
@@ -113,8 +108,6 @@
         [TestMethod]
         public void EmptyListLengthTest()
         {
-            list.Clear();
-
             Assert.AreEqual(0, list.Length);
         }
 
@@ -133,8 +126,6 @@
         [TestMethod]
         public void FindPositionByValueThatDoesNotExist()
         {
-            list.Clear();
-
             list.Add(1, 9);
 
             Assert.AreEqual(-1, list.FindPositionByValue(59));

@@ -51,8 +51,6 @@
         [TestMethod]
         public void ClearTest()
         {
-            hashTable.Clear();
-
             hashTable.Add(10);
             hashTable.Add(15);
             hashTable.Add(23);
@@ -67,8 +65,6 @@
         [TestMethod]
         public void RemoveFromEmptyHashTable()
         {
-            hashTable.Clear();
-
             hashTable.Remove(7);
         }
 
@@ -85,8 +81,6 @@
         [TestMethod]
         public void AddingTheSameElementIsNotPossibleTest()
         {
-            hashTable.Clear();
-
             hashTable.Add(10);
             hashTable.Add(10);
 

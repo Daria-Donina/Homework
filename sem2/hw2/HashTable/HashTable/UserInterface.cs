@@ -23,33 +23,37 @@ namespace Hash_Table
             return value = int.Parse(Console.ReadLine());
         }
 
-        private void CommandExecution(HashTable hashTable)
+        private void CommandExecution(IHashTable hashTable)
         {
-            int number = 0;
-            number = int.Parse(Console.ReadLine());
+            int number = int.Parse(Console.ReadLine());
 
             while (number != 0)
             {
-                int value = 0;
                 switch (number)
                 {
                     case 1:
-                        value = ValueEntryRequest();
-                        hashTable.Add(value);
+                        {
+                            int value = ValueEntryRequest();
+                            hashTable.Add(value);
+                        }
                         break;
                     case 2:
-                        value = ValueEntryRequest();
-                        hashTable.Remove(value);
+                        {
+                            int value = ValueEntryRequest();
+                            hashTable.Remove(value);
+                        }
                         break;
                     case 3:
-                        value = ValueEntryRequest();
-                        if (hashTable.Exists(value))
                         {
-                            Console.WriteLine("Value is in the hash table");
-                        }
-                        else
-                        {
-                            Console.WriteLine("Value is not in the hash table");
+                            int value = ValueEntryRequest();
+                            if (hashTable.Exists(value))
+                            {
+                                Console.WriteLine("Value is in the hash table");
+                            }
+                            else
+                            {
+                                Console.WriteLine("Value is not in the hash table");
+                            }
                         }
                         break;
                     case 4:
