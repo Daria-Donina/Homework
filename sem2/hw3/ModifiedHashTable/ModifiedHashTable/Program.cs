@@ -1,4 +1,6 @@
-﻿namespace Modified_Hash_Table
+﻿using System;
+
+namespace Modified_Hash_Table
 {
     class Program
     {
@@ -6,7 +8,14 @@
         {
             var interaction = new UserInterface();
 
-            interaction.FullInteraction();
+            try
+            {
+                interaction.FullInteraction();
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Incorrect input");
+            }
         }
     }
 }

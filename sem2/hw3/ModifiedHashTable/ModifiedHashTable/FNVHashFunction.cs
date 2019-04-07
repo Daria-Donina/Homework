@@ -1,4 +1,4 @@
-﻿namespace ModifiedHashTable
+﻿namespace Modified_Hash_Table
 {
     class FNVHashFunction : IHashFunction
     {

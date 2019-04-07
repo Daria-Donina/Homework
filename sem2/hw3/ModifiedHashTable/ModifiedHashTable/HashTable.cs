@@ -8,12 +8,13 @@ namespace Modified_Hash_Table
     /// </summary>
     public class HashTable : IHashTable
     {
-        private const int initialSize = 5;
-        private int size = initialSize;
+        private const uint initialSize = 5;
+        private uint size = initialSize;
         private List[] buckets;
         private int numberOfElements;
+        private readonly IHashFunction hashFunction;
 
-        public HashTable()
+        public HashTable(IHashFunction definedHashFunction)
         {
             buckets = new List[size];
 
@@ -21,24 +22,26 @@ namespace Modified_Hash_Table
             {
                 buckets[i] = new List();
             }
+
+            hashFunction = definedHashFunction;
         }
 
         /// <summary>
-        /// Adds value to the hash table.
+        /// Adds string value to the hash table.
         /// </summary>
-        /// <param name="value">An integer number to add.</param>
-        public void Add(int value)
+        /// <param name="data">A string to add.</param>
+        public void Add(string data)
         {
-            if (Exists(value))
+            if (Exists(data))
             {
                 Console.WriteLine("Value is already in the hash table");
                 return;
             }
 
-            int hash = HashFunction(value);
+            var hash = HashFunction(data);
             const int position = 1;
 
-            buckets[hash].Add(position, value);
+            buckets[hash].Add(position, data);
             ++numberOfElements;
 
             if (LoadFactor() > 1)
@@ -49,7 +52,7 @@ namespace Modified_Hash_Table
 
         private void Expand()
         {
-            size = size * 2;
+            size *= 2;
             var newBuckets = new List[size];
 
             for (int i = 0; i < newBuckets.Length; ++i)
@@ -62,10 +65,10 @@ namespace Modified_Hash_Table
                 const int position = 1;
                 for (int i = 1; i <= list.Length; ++i)
                 {
-                    int value = list.GetValue(i);
-                    int hash = HashFunction(value);
+                    string data = list.GetData(i);
+                    var hash = HashFunction(data);
 
-                    newBuckets[hash].Add(position, value);
+                    newBuckets[hash].Add(position, data);
                 }
             }
 
@@ -73,38 +76,38 @@ namespace Modified_Hash_Table
         }
 
         /// <summary>
-        /// Removes value from the hash table.
+        /// Removes string value from the hash table.
         /// </summary>
-        /// <param name="value">An integer number to remove.</param>
-        public void Remove(int value)
+        /// <param name="data">A string to remove.</param>
+        public void Remove(string data)
         {
-            if (!Exists(value))
+            if (!Exists(data))
             {
-                Console.Write("There's no such value in the hash table");
+                Console.Write("There's no such data in the hash table");
                 return;
             }
 
-            int hash = HashFunction(value);
-            int position = buckets[hash].FindPositionByValue(value);
+            var hash = HashFunction(data);
+            int position = buckets[hash].FindPositionByData(data);
             buckets[hash].Remove(position);
         }
 
         /// <summary>
         /// Checks if value is in the hash table.
         /// </summary>
-        /// <param name="value">An integer number to check if it's in the hash table.</param>
-        /// <returns>True if value is in the hash table and false if it is not.</returns>
-        public bool Exists(int value)
+        /// <param name="data">A string to check if it's in the hash table.</param>
+        /// <returns>True if string is in the hash table and false if it is not.</returns>
+        public bool Exists(string data)
         {
-            int hash = HashFunction(value);
-            int position = buckets[hash].FindPositionByValue(value);
+            var hash = HashFunction(data);
+            int position = buckets[hash].FindPositionByData(data);
 
             return position != 1;
         }
 
         private float LoadFactor() => (float)numberOfElements / size;
 
-        private int HashFunction(int value) => Math.Abs(value) % size;
+        private ulong HashFunction(string data) => hashFunction.Hash(data) % size;
 
         /// <summary>
         /// Prints hash table.

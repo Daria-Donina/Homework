@@ -3,7 +3,7 @@
 namespace SinglyLinkedList
 {
     /// <summary>
-    /// List, a container of integer values.
+    /// List, a container of string values.
     /// </summary>
     public class List : IList
     {
@@ -12,10 +12,10 @@ namespace SinglyLinkedList
         /// </summary>
         private class Node
         {
-            public int Data { get; set; }
+            public string Data { get; set; }
             public Node Next { get; set; }
 
-            public Node(int newData, Node newNext)
+            public Node(string newData, Node newNext)
             {
                 Data = newData;
                 Next = newNext;
@@ -45,13 +45,13 @@ namespace SinglyLinkedList
             return node;
         }
 
-        private int ValueNotInLastPosition(int value)
+        private int DataNotInLastPosition(string data)
         {
             Node node = head;
 
             for (int i = 1; i < Length; ++i)
             {
-                if (Equals(node.Data, value))
+                if (Equals(node.Data, data))
                 {
                     return i;
                 }
@@ -61,30 +61,30 @@ namespace SinglyLinkedList
             return -1;
         }
 
-        private bool IfValueInLastPosition(int value)
+        private bool IfDataInLastPosition(string data)
         {
             var node = FindNodeByPosition(Length);
 
-            return Equals(value, node.Data);
+            return Equals(data, node.Data);
         }
 
         /// <summary>
-        /// Finds a serial number of value in the list and returns that number.
+        /// Finds a serial number of a string in the list and returns that number.
         /// </summary>
-        /// <param name="value">An integer number which position to be returned.</param>
-        /// <returns>A serial number of value in the list or -1 if value is not in the list.</returns>
-        public int FindPositionByValue(int value)
+        /// <param name="data">A string which position to be returned.</param>
+        /// <returns>A serial number of string in the list or -1 if string is not in the list.</returns>
+        public int FindPositionByData(string data)
         {
             if (IsEmpty())
             {
                 return -1;
 
             }
-            int notLastPosition = ValueNotInLastPosition(value);
+            int notLastPosition = DataNotInLastPosition(data);
 
             if (notLastPosition == -1)
             {
-                if (IfValueInLastPosition(value))
+                if (IfDataInLastPosition(data))
                 {
                     return Length;
                 }
@@ -99,13 +99,13 @@ namespace SinglyLinkedList
             }
         }
 
-        private void AddFirst(int data)
+        private void AddFirst(string data)
         {
             head = new Node(data, head);
             ++Length;
         }
 
-        private void AddNotFirst(int data, Node node)
+        private void AddNotFirst(string data, Node node)
         {
             var temp = node.Next;
             node.Next = new Node(data, temp);
@@ -113,11 +113,11 @@ namespace SinglyLinkedList
         }
 
         /// <summary>
-        /// Adds value at the given position of the list.
+        /// Adds data at the given position of the list.
         /// </summary>
-        /// <param name="position">A number of position in the list to add a value.</param>
-        /// <param name="data">An integer number to add.</param>
-        public void Add(int position, int data)
+        /// <param name="position">A number of position in the list to add a string.</param>
+        /// <param name="data">A string to add.</param>
+        public void Add(int position, string data)
         {
             if (!IsPositionCorrect(position) && position != Length + 1)
             {
@@ -150,9 +150,9 @@ namespace SinglyLinkedList
         }
 
         /// <summary>
-        /// Removes value from the given position of the list.
+        /// Removes data from the given position of the list.
         /// </summary>
-        /// <param name="position">A number of position in the list to remove a value.</param>
+        /// <param name="position">A number of position in the list to remove a string.</param>
         public void Remove(int position)
         {
             if (IsEmpty() || !IsPositionCorrect(position))
@@ -172,16 +172,16 @@ namespace SinglyLinkedList
         }
 
         /// <summary>
-        /// Returns value at the given position of the list.
+        /// Returns data at the given position of the list.
         /// </summary>
-        /// <param name="position">A number of position in the list to get a value.</param>
-        /// <returns>A value at the given position.</returns>
-        public int GetValue(int position)
+        /// <param name="position">A number of position in the list to get data.</param>
+        /// <returns>Data at the given position.</returns>
+        public string GetData(int position)
         {
             if (IsEmpty() || !IsPositionCorrect(position))
             {
                 Console.WriteLine("Position is incorrect");
-                return -1;
+                return "";
             }
 
             var node = FindNodeByPosition(position);
@@ -190,11 +190,11 @@ namespace SinglyLinkedList
         }
 
         /// <summary>
-        /// Sets value at the given position of the list.
+        /// Sets new data at the given position of the list.
         /// </summary>
-        /// <param name="position">A number of position in the list to set a value.</param>
-        /// <param name="value">An integer number to add.</param>
-        public void SetValue(int position, int value)
+        /// <param name="position">A number of position in the list to set new data.</param>
+        /// <param name="data">A string to add.</param>
+        public void SetData(int position, string data)
         {
             if (IsEmpty() || !IsPositionCorrect(position))
             {
@@ -204,7 +204,7 @@ namespace SinglyLinkedList
 
             var node = FindNodeByPosition(position);
 
-            node.Data = value;
+            node.Data = data;
         }
 
         /// <summary>

@@ -6,23 +6,23 @@
     interface IHashTable
     {
         /// <summary>
-        /// Adds value to the hash table.
+        /// Adds string value to the hash table.
         /// </summary>
-        /// <param name="value">An integer number to add.</param>
-        void Add(int value);
+        /// <param name="data">A string to add.</param>
+        void Add(string data);
 
         /// <summary>
-        /// Removes value from the hash table.
+        /// Removes string value from the hash table.
         /// </summary>
-        /// <param name="value">An integer number to remove.</param>
-        void Remove(int value);
+        /// <param name="data">A string to remove.</param>
+        void Remove(string data);
 
         /// <summary>
         /// Checks if value is in the hash table.
         /// </summary>
-        /// <param name="value">An integer number to check if it's in the hash table.</param>
-        /// <returns>True if value is in the hash table and false if it is not.</returns>
-        bool Exists(int value);
+        /// <param name="data">A string to check if it's in the hash table.</param>
+        /// <returns>True if string is in the hash table and false if it is not.</returns>
+        bool Exists(string data);
 
         /// <summary>
         /// Prints hash table.

@@ -1,13 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ModifiedHashTable
+﻿namespace Modified_Hash_Table
 {
-    interface IHashFunction
+    /// <summary>
+    /// An interface for hash function working with string values.
+    /// </summary>
+    public interface IHashFunction
     {
+        /// <summary>
+        /// Returns hash code of a string.
+        /// </summary>
+        /// <param name="data">A string to get the hash code.</param>
+        /// <returns>An unsigned integer hash code.</returns>
         ulong Hash(string data);
     }
 }
