@@ -157,7 +157,7 @@ namespace SinglyLinkedList
         {
             if (IsEmpty() || !IsPositionCorrect(position))
             {
-                Console.WriteLine("Position is incorrect");
+                throw new InvalidOperationException();
             }
 
             if (position == 1)
@@ -180,8 +180,7 @@ namespace SinglyLinkedList
         {
             if (IsEmpty() || !IsPositionCorrect(position))
             {
-                Console.WriteLine("Position is incorrect");
-                return "";
+                throw new InvalidOperationException();
             }
 
             var node = FindNodeByPosition(position);

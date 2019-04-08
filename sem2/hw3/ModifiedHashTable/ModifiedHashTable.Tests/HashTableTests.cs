@@ -1,91 +1,159 @@
-﻿namespace ModifiedHashTable.Tests
+﻿namespace Modified_Hash_Table.Tests
 {
+    using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Modified_Hash_Table;
 
     [TestClass]
     public class HashTableTest
     {
-        private HashTable hashTable;
+        private HashTable fNVHashTable;
+        private HashTable jenkinsHashTable;
+        private HashTable pJWHashTable;
 
         [TestInitialize]
         public void Initialize()
         {
-            hashTable = new HashTable();
+            fNVHashTable = new HashTable(new FNVHashFunction());
+            jenkinsHashTable = new HashTable(new JenkinsHashFunction());
+            pJWHashTable = new HashTable(new PJWHashFunction());
+        }
+
+        private void AddOneTest(HashTable hashTable)
+        {
+            var test = "Test string";
+            hashTable.Add(test);
+
+            Assert.IsTrue(hashTable.Exists(test));
         }
 
         [TestMethod]
-        public void AddTest()
+        public void FNVAddOneTest() => AddOneTest(fNVHashTable);
+
+        [TestMethod]
+        public void JenkinsAddOneTest() => AddOneTest(jenkinsHashTable);
+
+        [TestMethod]
+        public void PJWAddOneTest() => AddOneTest(pJWHashTable);
+
+        private void ExpandTest(HashTable hashTable)
         {
-            for (int i = -2; i < 4; ++i)
+            var size = hashTable.Size;
+            if (size > 6)
             {
-                hashTable.Add(i);
+                return;
             }
 
-            for (int i = -2; i < 4; ++i)
-            {
-                Assert.IsTrue(hashTable.Exists(i));
-            }
+            hashTable.Add("Baby, I'm dancing in the dark with you between my arms");
+            hashTable.Add("Barefoot on the grass, listening to our favorite song");
+            hashTable.Add("When you said you looked a mess, I whispered underneath my breath");
+            hashTable.Add("But you heard it, darling, you look perfect tonight");
+            hashTable.Add("Well I found a woman, stronger than anyone I know");
+            hashTable.Add("She shares my dreams, I hope that someday I'll share her home");
+            hashTable.Add("I found a love, to carry more than just my secrets");
 
-            Assert.IsFalse(hashTable.Exists(9));
-            Assert.IsFalse(hashTable.Exists(-15));
+            var newSize = hashTable.Size;
+
+            Assert.IsTrue(newSize == size * 2);
         }
 
         [TestMethod]
-        public void RemoveTest()
+        public void FNVExpandTest() => ExpandTest(fNVHashTable);
+
+        [TestMethod]
+        public void JenkinsExpandTest() => ExpandTest(jenkinsHashTable);
+
+        [TestMethod]
+        public void PJWExpandTest() => ExpandTest(pJWHashTable);
+
+        private void RemoveOneTest(HashTable hashTable)
         {
-            hashTable.Add(9);
-            hashTable.Add(7);
-            hashTable.Add(-6);
-
-            hashTable.Remove(7);
-            Assert.IsFalse(hashTable.Exists(7));
-
-            hashTable.Remove(9);
-            Assert.IsFalse(hashTable.Exists(9));
-
-            hashTable.Remove(-6);
-            Assert.IsFalse(hashTable.Exists(-6));
+            var test = "No, it's much better to face these kinds of things with a sense of poise and rationality";
+            hashTable.Add(test);
+            hashTable.Remove(test);
+            Assert.IsFalse(hashTable.Exists(test));
         }
 
         [TestMethod]
-        public void ClearTest()
-        {
-            hashTable.Add(10);
-            hashTable.Add(15);
-            hashTable.Add(23);
+        public void FNVRemoveOneTest() => RemoveOneTest(fNVHashTable);
 
+        [TestMethod]
+        public void JenkinsRemoveOneTest() => RemoveOneTest(jenkinsHashTable);
+
+        [TestMethod]
+        public void PJWRemoveOneTest() => RemoveOneTest(pJWHashTable);
+
+        private void RemoveFromTheEmptyHashTable(HashTable hashTable) => hashTable.Remove("Something");
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void FNVRemoveFromTheEmptyHashTable() => RemoveFromTheEmptyHashTable(fNVHashTable);
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void JenkinsRemoveFromTheEmptyHashTable() => RemoveFromTheEmptyHashTable(jenkinsHashTable);
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void PJWRemoveFromTheEmptyHashTable() => RemoveFromTheEmptyHashTable(pJWHashTable);
+
+        private void ClearTest(HashTable hashTable)
+        {
+            var test1 = "Lolly, lolly, lolly bomb, lolly, lolly, lolly";
+            var test2 = "Lolly, lolly, lolly bomb, lolly, lolly, lolly bomb";
+            hashTable.Add(test1);
+            hashTable.Add(test2);
             hashTable.Clear();
-
-            Assert.IsFalse(hashTable.Exists(10));
-            Assert.IsFalse(hashTable.Exists(15));
-            Assert.IsFalse(hashTable.Exists(23));
+            Assert.IsFalse(hashTable.Exists(test1) && hashTable.Exists(test2));
         }
 
         [TestMethod]
-        public void RemoveFromEmptyHashTable()
+        public void FNVClearTest() => ClearTest(fNVHashTable);
+
+        [TestMethod]
+        public void JenkinsClearTest() => ClearTest(jenkinsHashTable);
+
+        [TestMethod]
+        public void PJWClearTest() => ClearTest(pJWHashTable);
+
+        private void RemoveWhenStringDoesNotExist(HashTable hashTable)
         {
-            hashTable.Remove(7);
+            hashTable.Add("fjksfl");
+            hashTable.Add("jshfl");
+            hashTable.Add("tioep");
+
+            hashTable.Remove("lksjflk");
         }
 
         [TestMethod]
-        public void RemoveElementThatIsNotInTheHashTableTest()
-        {
-            hashTable.Add(65);
-            hashTable.Add(74);
-            hashTable.Add(38);
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void FNVRemoveWhenStringDoesNotExist() => RemoveWhenStringDoesNotExist(fNVHashTable);
 
-            hashTable.Remove(5);
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void JenkinsRemoveWhenStringDoesNotExist() => RemoveWhenStringDoesNotExist(jenkinsHashTable);
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void PJWRemoveWhenStringDoesNotExist() => RemoveWhenStringDoesNotExist(pJWHashTable);
+
+        private void AddingTheSameElementIsNotPossibleTest(HashTable hashTable)
+        {
+            var test = "The same";
+            hashTable.Add(test);
+            hashTable.Add(test);
+
+            hashTable.Remove(test);
+            Assert.IsFalse(hashTable.Exists(test));
         }
 
         [TestMethod]
-        public void AddingTheSameElementIsNotPossibleTest()
-        {
-            hashTable.Add(10);
-            hashTable.Add(10);
+        public void FNVAddingTheSameElementIsNotPossibleTest() => AddingTheSameElementIsNotPossibleTest(fNVHashTable);
 
-            hashTable.Remove(10);
-            Assert.IsFalse(hashTable.Exists(10));
-        }
+        [TestMethod]
+        public void JenkinsAddingTheSameElementIsNotPossibleTest() => AddingTheSameElementIsNotPossibleTest(jenkinsHashTable);
+
+        [TestMethod]
+        public void PJWAddingTheSameElementIsNotPossibleTest() => AddingTheSameElementIsNotPossibleTest(pJWHashTable);
     }
 }

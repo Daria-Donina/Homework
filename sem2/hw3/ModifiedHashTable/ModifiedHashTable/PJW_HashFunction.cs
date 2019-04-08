@@ -1,6 +1,6 @@
 ﻿namespace Modified_Hash_Table
 {
-    class PJWHashFunction : IHashFunction
+    public class PJWHashFunction : IHashFunction
     {
         private const int bitsInULong = sizeof(ulong) * 8;
         private const ulong highBits = (ulong)(0xFFFFFFFF) << (bitsInULong - bitsInULong / 8);

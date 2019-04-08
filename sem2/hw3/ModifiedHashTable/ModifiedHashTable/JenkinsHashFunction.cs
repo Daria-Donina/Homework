@@ -1,6 +1,6 @@
 ﻿namespace Modified_Hash_Table
 {
-    class JenkinsHashFunction : IHashFunction
+    public class JenkinsHashFunction : IHashFunction
     {
         public ulong Hash(string data)
         {

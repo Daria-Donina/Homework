@@ -1,7 +1,7 @@
 image: Visual Studio 2017
 
 before_build:
-  - nuget restore sem2/hw2/StackCalculator/StackCalculator.sln
+  - nuget restore sem2/hw3/ModifiedHashTable/ModifiedHashTable.sln
 
 build:
-  project: sem2/hw2/StackCalculator/StackCalculator.sln
+  project: sem2/hw2/ModifiedHashTable/ModifiedHashTable.sln

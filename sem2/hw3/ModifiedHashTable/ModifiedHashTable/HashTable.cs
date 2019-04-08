@@ -9,16 +9,19 @@ namespace Modified_Hash_Table
     public class HashTable : IHashTable
     {
         private const uint initialSize = 5;
-        private uint size = initialSize;
+
+        public uint Size { get; private set; }
+
         private List[] buckets;
         private int numberOfElements;
         private readonly IHashFunction hashFunction;
 
         public HashTable(IHashFunction definedHashFunction)
         {
-            buckets = new List[size];
+            buckets = new List[initialSize];
+            Size = initialSize;
 
-            for (int i = 0; i < size; ++i)
+            for (int i = 0; i < initialSize; ++i)
             {
                 buckets[i] = new List();
             }
@@ -52,8 +55,8 @@ namespace Modified_Hash_Table
 
         private void Expand()
         {
-            size *= 2;
-            var newBuckets = new List[size];
+            Size *= 2;
+            var newBuckets = new List[Size];
 
             for (int i = 0; i < newBuckets.Length; ++i)
             {
@@ -83,8 +86,7 @@ namespace Modified_Hash_Table
         {
             if (!Exists(data))
             {
-                Console.Write("There's no such data in the hash table");
-                return;
+                throw new InvalidOperationException();
             }
 
             var hash = HashFunction(data);
@@ -102,12 +104,12 @@ namespace Modified_Hash_Table
             var hash = HashFunction(data);
             int position = buckets[hash].FindPositionByData(data);
 
-            return position != 1;
+            return position != -1;
         }
 
-        private float LoadFactor() => (float)numberOfElements / size;
+        private float LoadFactor() => (float)numberOfElements / Size;
 
-        private ulong HashFunction(string data) => hashFunction.Hash(data) % size;
+        private ulong HashFunction(string data) => hashFunction.Hash(data) % Size;
 
         /// <summary>
         /// Prints hash table.
@@ -115,7 +117,7 @@ namespace Modified_Hash_Table
         public void Print()
         {
             Console.WriteLine("The hash table:");
-            for (int i = 0; i < size; ++i)
+            for (int i = 0; i < Size; ++i)
             {
                 var list = buckets[i];
                 Console.Write($"[{i}]: ");
@@ -128,12 +130,12 @@ namespace Modified_Hash_Table
         /// </summary>
         public void Clear()
         {
-            for (int i = 0; i < size; ++i)
+            for (int i = 0; i < Size; ++i)
             {
                 buckets[i].Clear();
             }
 
-            size = initialSize;
+            Size = initialSize;
         }
     }
 }
