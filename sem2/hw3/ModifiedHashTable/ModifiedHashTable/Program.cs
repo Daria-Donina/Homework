@@ -16,6 +16,10 @@ namespace Modified_Hash_Table
             {
                 Console.WriteLine("Incorrect input");
             }
+            catch (InvalidOperationException)
+            {
+                Console.WriteLine("The action is incorrect");
+            }
         }
     }
 }
