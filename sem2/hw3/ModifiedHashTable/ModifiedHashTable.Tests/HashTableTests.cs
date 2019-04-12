@@ -2,7 +2,7 @@
 {
     using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Modified_Hash_Table;
+    using ModifiedHashTable;
 
     [TestClass]
     public class HashTableTest
@@ -41,7 +41,7 @@
             var size = hashTable.Size;
             if (size > 6)
             {
-                return;
+                Assert.IsFalse(false);
             }
 
             hashTable.Add("Baby, I'm dancing in the dark with you between my arms");
@@ -104,7 +104,8 @@
             hashTable.Add(test1);
             hashTable.Add(test2);
             hashTable.Clear();
-            Assert.IsFalse(hashTable.Exists(test1) && hashTable.Exists(test2));
+            Assert.IsFalse(hashTable.Exists(test1));
+            Assert.IsFalse(hashTable.Exists(test2));
         }
 
         [TestMethod]

@@ -1,4 +1,4 @@
-﻿namespace Modified_Hash_Table
+﻿namespace ModifiedHashTable
 {
     /// <summary>
     /// Interface for hash table, a data structure that is used to store (key, value) pairs.

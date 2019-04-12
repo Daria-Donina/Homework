@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Modified_Hash_Table
+namespace ModifiedHashTable
 {
     class Program
     {

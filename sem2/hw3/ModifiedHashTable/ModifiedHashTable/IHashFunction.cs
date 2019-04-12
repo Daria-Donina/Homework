@@ -1,4 +1,4 @@
-﻿namespace Modified_Hash_Table
+﻿namespace ModifiedHashTable
 {
     /// <summary>
     /// An interface for hash function working with string values.

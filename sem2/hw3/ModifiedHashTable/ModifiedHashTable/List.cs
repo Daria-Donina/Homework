@@ -12,7 +12,14 @@ namespace SinglyLinkedList
         /// </summary>
         private class Node
         {
+            /// <summary>
+            /// A string data that contains in the node.
+            /// </summary>
             public string Data { get; set; }
+
+            /// <summary>
+            /// A link to the next node.
+            /// </summary>
             public Node Next { get; set; }
 
             public Node(string newData, Node newNext)
@@ -22,6 +29,9 @@ namespace SinglyLinkedList
             }
         }
 
+        /// <summary>
+        /// Number of elements of the hash table.
+        /// </summary>
         public int Length { get; private set; }
         private Node head = null;
 

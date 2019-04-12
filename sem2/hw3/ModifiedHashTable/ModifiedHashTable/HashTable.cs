@@ -1,7 +1,7 @@
 ﻿using System;
 using SinglyLinkedList;
 
-namespace Modified_Hash_Table
+namespace ModifiedHashTable
 {
     /// <summary>
     /// Hash table, a data structure that is used to store (key, value) pairs.
@@ -10,13 +10,16 @@ namespace Modified_Hash_Table
     {
         private const uint initialSize = 5;
 
+        /// <summary>
+        /// Size of the buckets of the hash table.
+        /// </summary>
         public uint Size { get; private set; }
 
         private List[] buckets;
         private int numberOfElements;
         private readonly IHashFunction hashFunction;
 
-        public HashTable(IHashFunction definedHashFunction)
+        public HashTable(IHashFunction hashFunction)
         {
             buckets = new List[initialSize];
             Size = initialSize;
@@ -26,7 +29,7 @@ namespace Modified_Hash_Table
                 buckets[i] = new List();
             }
 
-            hashFunction = definedHashFunction;
+            this.hashFunction = hashFunction;
         }
 
         /// <summary>
