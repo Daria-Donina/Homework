@@ -5,3 +5,4 @@ before_build:
 
 build:
   project: sem2/kr1/kr1/kr1.sln
+
