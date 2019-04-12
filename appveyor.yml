@@ -4,4 +4,5 @@ before_build:
   - nuget restore sem2/kr1/kr1/kr1.sln
 
 build:
-  project: sem2/hw2/kr1/kr1/kr1.sln
+  project: sem2/kr1/kr1/kr1.sln
+
