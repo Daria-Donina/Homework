@@ -1,7 +1,7 @@
 image: Visual Studio 2017
 
 before_build:
-  - nuget restore sem2/kr1/kr1/kr1.sln
+  - nuget restore sem2/hw4/UniqueList/UniqueList.sln
 
 build:
-  project: sem2/hw2/kr1/kr1/kr1.sln
+  project: sem2/hw4/UniqueList/UniqueList.sln
