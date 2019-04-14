@@ -22,18 +22,16 @@ namespace SinglyLinkedList
             Console.Write("Input number: ");
         }
 
-        private int PositionEntryRequest()
+        private static int PositionEntryRequest()
         {
-            int position = 0;
             Console.WriteLine("Enter position");
-            return position = int.Parse(Console.ReadLine());
+            return int.Parse(Console.ReadLine());
         }
 
-        private int ValueEntryRequest()
+        private static int ValueEntryRequest()
         {
-            int value = 0;
             Console.WriteLine("Enter value");
-            return value = int.Parse(Console.ReadLine());
+            return int.Parse(Console.ReadLine());
         }
 
         private void CommandExecution(List list)
@@ -91,6 +89,9 @@ namespace SinglyLinkedList
                         break;
                     case 8:
                         list.Clear();
+                        break;
+                    default:
+                        Console.WriteLine("Enter correct number");
                         break;
                 }
 

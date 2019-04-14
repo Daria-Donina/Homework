@@ -80,8 +80,6 @@ namespace SinglyLinkedList.Tests
         [TestMethod]
         public void GetValueFromWrongPositionTest()
         {
-            list.Clear();
-
             Assert.AreEqual(-1, list.GetValue(9));
             Assert.AreEqual(-1, list.GetValue(-6));
         }
