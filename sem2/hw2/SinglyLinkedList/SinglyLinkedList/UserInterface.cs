@@ -34,7 +34,7 @@ namespace SinglyLinkedList
             return int.Parse(Console.ReadLine());
         }
 
-        private void CommandExecution(List list)
+        private static void CommandExecution(List list)
         {
             int number = int.Parse(Console.ReadLine());
 
