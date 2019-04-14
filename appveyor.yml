@@ -1,8 +1,7 @@
 image: Visual Studio 2017
 
 before_build:
-  - nuget restore sem2/hw2/SinglyLinkedList/SinglyLinkedList.sln
+  - nuget restore sem2/hw2/HashTable/HashTable.sln
 
 build:
-  project: sem2/hw2/SinglyLinkedList/SinglyLinkedList.sln
-
+  project: sem2/hw2/HashTable/HashTable.sln
