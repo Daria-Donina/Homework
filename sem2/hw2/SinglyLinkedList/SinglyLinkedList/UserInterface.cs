@@ -103,7 +103,7 @@ namespace SinglyLinkedList
         /// <summary>
         /// Combines all the methods to provide interaction with the user.
         /// </summary>
-        public static void FullInteraction()
+        public void FullInteraction()
         {
             PrintCommands();
 
