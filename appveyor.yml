@@ -5,3 +5,4 @@ before_build:
 
 build:
   project: sem2/hw2/SinglyLinkedList/SinglyLinkedList.sln
+
