@@ -16,14 +16,13 @@ namespace Hash_Table
             Console.Write("Input number: ");
         }
 
-        private int ValueEntryRequest()
+        private static int ValueEntryRequest()
         {
-            int value = 0;
             Console.WriteLine("Enter value");
-            return value = int.Parse(Console.ReadLine());
+            return int.Parse(Console.ReadLine());
         }
 
-        private void CommandExecution(IHashTable hashTable)
+        private static void CommandExecution(IHashTable hashTable)
         {
             int number = int.Parse(Console.ReadLine());
 
@@ -61,6 +60,9 @@ namespace Hash_Table
                         break;
                     case 5:
                         hashTable.Clear();
+                        break;
+                    default:
+                        Console.WriteLine("Enter correct number");
                         break;
                 }
 
