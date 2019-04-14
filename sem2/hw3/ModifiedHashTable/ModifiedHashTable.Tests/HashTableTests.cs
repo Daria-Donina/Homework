@@ -19,7 +19,7 @@
             pJWHashTable = new HashTable(new PJWHashFunction());
         }
 
-        private void AddOneTest(HashTable hashTable)
+        private static void AddOneTest(HashTable hashTable)
         {
             var test = "Test string";
             hashTable.Add(test);
@@ -36,7 +36,7 @@
         [TestMethod]
         public void PJWAddOneTest() => AddOneTest(pJWHashTable);
 
-        private void ExpandTest(HashTable hashTable)
+        private static void ExpandTest(HashTable hashTable)
         {
             var size = hashTable.Size;
             if (size > 6)
@@ -66,7 +66,7 @@
         [TestMethod]
         public void PJWExpandTest() => ExpandTest(pJWHashTable);
 
-        private void RemoveOneTest(HashTable hashTable)
+        private static void RemoveOneTest(HashTable hashTable)
         {
             var test = "No, it's much better to face these kinds of things with a sense of poise and rationality";
             hashTable.Add(test);
@@ -83,7 +83,7 @@
         [TestMethod]
         public void PJWRemoveOneTest() => RemoveOneTest(pJWHashTable);
 
-        private void RemoveFromTheEmptyHashTable(HashTable hashTable) => hashTable.Remove("Something");
+        private static void RemoveFromTheEmptyHashTable(HashTable hashTable) => hashTable.Remove("Something");
 
         [TestMethod]
         [ExpectedException(typeof(InvalidOperationException))]
@@ -97,7 +97,7 @@
         [ExpectedException(typeof(InvalidOperationException))]
         public void PJWRemoveFromTheEmptyHashTable() => RemoveFromTheEmptyHashTable(pJWHashTable);
 
-        private void ClearTest(HashTable hashTable)
+        private static void ClearTest(HashTable hashTable)
         {
             var test1 = "Lolly, lolly, lolly bomb, lolly, lolly, lolly";
             var test2 = "Lolly, lolly, lolly bomb, lolly, lolly, lolly bomb";
@@ -117,7 +117,7 @@
         [TestMethod]
         public void PJWClearTest() => ClearTest(pJWHashTable);
 
-        private void RemoveWhenStringDoesNotExist(HashTable hashTable)
+        private static void RemoveWhenStringDoesNotExist(HashTable hashTable)
         {
             hashTable.Add("fjksfl");
             hashTable.Add("jshfl");
@@ -138,7 +138,7 @@
         [ExpectedException(typeof(InvalidOperationException))]
         public void PJWRemoveWhenStringDoesNotExist() => RemoveWhenStringDoesNotExist(pJWHashTable);
 
-        private void AddingTheSameElementIsNotPossibleTest(HashTable hashTable)
+        private static void AddingTheSameElementIsNotPossibleTest(HashTable hashTable)
         {
             var test = "The same";
             hashTable.Add(test);

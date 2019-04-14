@@ -42,14 +42,14 @@ namespace ModifiedHashTable
             Console.Write("Input number: ");
         }
 
-        private string DataEntryRequest()
+        private static string DataEntryRequest()
         {
             Console.WriteLine("Enter data");
             string data = Console.ReadLine();
             return data;
         }
 
-        private void CommandExecution(IHashTable hashTable)
+        private static void CommandExecution(IHashTable hashTable)
         {
             int number = int.Parse(Console.ReadLine());
 
@@ -88,6 +88,8 @@ namespace ModifiedHashTable
                     case 5:
                         hashTable.Clear();
                         break;
+                    default:
+                        throw new FormatException();
                 }
 
                 Console.Write("Input number: ");
