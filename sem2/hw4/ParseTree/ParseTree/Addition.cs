@@ -9,9 +9,6 @@
             set => data = "+";
         }
 
-        public int Calculate()
-        {
-            return int.Parse(LeftChild.Data) + int.Parse(RightChild.Data);
-        }
+        public override int Calculate() => int.Parse(LeftChild.Data) + int.Parse(RightChild.Data);
     }
 }

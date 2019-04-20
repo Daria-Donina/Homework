@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace ParseTree
 {
-    abstract class Node
+    public abstract class Node
     {
-        public abstract string Data { get; set; }
+        public virtual string Data { get; set; }
 
         public abstract void Print();
+
+        public abstract int Calculate();
     }
 }

@@ -34,9 +34,8 @@ namespace ParseTree
             }
         }
 
-        public override void Print()
-        {
-            Console.WriteLine(Data);
-        }
+        public override void Print() => Console.WriteLine(Data);
+
+        public override int Calculate() => Number;
     }
 }
