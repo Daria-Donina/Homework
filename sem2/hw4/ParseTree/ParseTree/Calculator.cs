@@ -8,7 +8,7 @@ namespace ParseTree
     public class Calculator
     {
         private readonly string[] expression;
-        private ParseTree tree;
+        private readonly ParseTree tree;
 
         public Calculator(string expression)
         {
