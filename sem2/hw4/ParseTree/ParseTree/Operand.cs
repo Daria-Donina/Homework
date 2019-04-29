@@ -1,41 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ParseTree
 {
+    /// <summary>
+    /// Class implementing operand and containing an integer number.
+    /// </summary>
     class Operand : Node
     {
-        private int number;
+        public Operand(string data) => Data = data;
 
-        public int Number
-        {
-            get
-            {
-                return number;
-            }
-            set
-            {
-                number = TransferToNumber();
-            }
-        }
+        /// <summary>
+        /// Prints an integer number of the operand.
+        /// </summary>
+        public override void Print() => Console.Write(Data);
 
-        private int TransferToNumber()
-        {
-            if (int.TryParse(Data, out int result))
-            {
-                return result;
-            }
-            else
-            {
-                throw new InvalidOperationException();
-            }
-        }
-
-        public override void Print() => Console.WriteLine(Data);
-
-        public override int Calculate() => Number;
+        /// <summary>
+        /// Transfers string data of the operand into an integer number.
+        /// </summary>
+        /// <returns> An integer number of the operand.</returns>
+        public override int Calculate() => int.Parse(Data);
     }
 }

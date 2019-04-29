@@ -1,17 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ParseTree
+﻿namespace ParseTree
 {
+    /// <summary>
+    /// An element of the tree.
+    /// </summary>
     public abstract class Node
     {
+        /// <summary>
+        /// String data of the node.
+        /// </summary>
         public virtual string Data { get; set; }
 
+        /// <summary>
+        /// Prints data of the node and its left and right subtrees.
+        /// </summary>
         public abstract void Print();
 
+        /// <summary>
+        /// Calculates value of the node.
+        /// </summary>
+        /// <returns> A value of the node.</returns>
         public abstract int Calculate();
     }
 }

@@ -1,20 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ParseTree
+﻿namespace ParseTree
 {
+    /// <summary>
+    /// Class implementing division operation.
+    /// </summary>
     class Division : Operation
     {
-        private string data;
-        public override string Data
-        {
-            get => data;
-            set => data = "/";
-        }
+        /// <summary>
+        /// Symbol of the division operation.
+        /// </summary>
+        public override string Data => "/";
 
-        public override int Calculate() => int.Parse(LeftChild.Data) / int.Parse(RightChild.Data);
+        /// <summary>
+        /// Divides left subtree and right subtree of the node.
+        /// </summary>
+        /// <returns> An integer resut of the division of left and right subtrees.</returns>
+        public override int Calculate() => LeftChild.Calculate() / RightChild.Calculate();
     }
 }

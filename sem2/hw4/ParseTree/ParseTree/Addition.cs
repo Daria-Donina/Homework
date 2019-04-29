@@ -1,14 +1,19 @@
 ﻿namespace ParseTree
 {
+    /// <summary>
+    /// Class implementing addition operation.
+    /// </summary>
     class Addition : Operation
     {
-        private string data;
-        public override string Data
-        {
-            get => data;
-            set => data = "+";
-        }
+        /// <summary>
+        /// Symbol of the addition operation.
+        /// </summary>
+        public override string Data => "+";
 
-        public override int Calculate() => int.Parse(LeftChild.Data) + int.Parse(RightChild.Data);
+        /// <summary>
+        /// Adds left subtree and right subtree of the node.
+        /// </summary>
+        /// <returns> An integer resut of the addition of left and right subtrees.</returns>
+        public override int Calculate() => LeftChild.Calculate() + RightChild.Calculate();
     }
 }

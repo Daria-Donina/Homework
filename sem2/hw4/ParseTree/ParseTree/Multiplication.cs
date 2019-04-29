@@ -1,20 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ParseTree
+﻿namespace ParseTree
 {
+    /// <summary>
+    /// Class implementing multiplication operation.
+    /// </summary>
     class Multiplication : Operation
     {
-        private string data;
-        public override string Data
-        {
-            get => data;
-            set => data = "*";
-        }
+        /// <summary>
+        /// Symbol of the multiplication operation.
+        /// </summary>
+        public override string Data => "*";
 
-        public override int Calculate() => int.Parse(LeftChild.Data) * int.Parse(RightChild.Data);
+        /// <summary>
+        /// Multiplies left subtree and right subtree of the node.
+        /// </summary>
+        /// <returns> An integer resut of the multiplication of left and right subtrees.</returns>
+        public override int Calculate() => LeftChild.Calculate() * RightChild.Calculate();
     }
 }

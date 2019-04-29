@@ -1,23 +1,32 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ParseTree
 {
+    /// <summary>
+    /// Class implementing operation.
+    /// </summary>
     abstract class Operation : Node
     {
-        public Node LeftChild { get; private set; }
-        public Node RightChild { get; private set; }
+        /// <summary>
+        /// First operand of the operation.
+        /// </summary>
+        public Node LeftChild { get; set; }
 
+        /// <summary>
+        /// Second operand of the operation.
+        /// </summary>
+        public Node RightChild { get; set; }
+
+        /// <summary>
+        /// Prints left operand, operation itself and right operand.
+        /// </summary>
         public override void Print()
         {
-            Console.WriteLine('(');
+            Console.Write("(");
             LeftChild.Print();
-            Console.WriteLine(Data);
+            Console.Write($" {Data} ");
             RightChild.Print();
-            Console.WriteLine(')');
+            Console.Write(")");
         }
     }
 }

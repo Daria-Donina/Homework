@@ -1,24 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ParseTree
+﻿namespace ParseTree
 {
-    public class ParseTree
+    /// <summary>
+    /// Class implementing parse tree.
+    /// </summary>
+    class ParseTree
     {
-        private Node root;
+        /// <summary>
+        /// The root node of the tree.
+        /// </summary>
+        public Node Root { get; set; }
+        
+        /// <summary>
+        /// Calculates value of the tree.
+        /// </summary>
+        /// <returns> An integer value of the tree.</returns>
+        public int Calculate() => Root.Calculate();
 
-        public ParseTree(Node root)
-        {
-            this.root = root;
-        }
-
-        public bool IsEmpty() => root == null;
-
-        public int Calculate() => root.Calculate();
-
-        public void Print() => root.Print();
+        /// <summary>
+        /// Prints parse tree.
+        /// </summary>
+        public void Print() => Root.Print();
     }
 }
