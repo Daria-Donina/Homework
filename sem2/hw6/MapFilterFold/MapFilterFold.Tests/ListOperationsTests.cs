@@ -50,7 +50,7 @@ namespace MapFilterFold.Tests
             return list;
         }
 
-        private void MapTest(List<int> list)
+        private static void MapTest(List<int> list)
         {
             var transformedList = ListOperations.Map(list, x => x * 3);
             for (int i = 0; i < transformedList.Count; ++i)
@@ -71,7 +71,7 @@ namespace MapFilterFold.Tests
         [TestMethod]
         public void MapNegativeTest() => MapTest(negativeList);
 
-        private void FilterEvenNumbersTest(List<int> list)
+        private static void FilterEvenNumbersTest(List<int> list)
         {
             var transformedList = ListOperations.Filter(list, x => x % 2 == 0);
             for (int i = 0; i < transformedList.Count; ++i)
@@ -92,7 +92,7 @@ namespace MapFilterFold.Tests
         [TestMethod]
         public void FilterEvenNumbersNegativeTest() => FilterEvenNumbersTest(negativeList);
 
-        private int FoldMultiplicationTest(List<int> list) => ListOperations.Fold(list, 1, (result, x) => x * result);
+        private static int FoldMultiplicationTest(List<int> list) => ListOperations.Fold(list, 1, (result, x) => x * result);
 
         [TestMethod]
         public void FoldMultiplicationDigitTest() => Assert.AreEqual(0, FoldMultiplicationTest(digitList));
@@ -103,7 +103,7 @@ namespace MapFilterFold.Tests
         [TestMethod]
         public void FoldMultiplicationNegativeTest() => Assert.AreEqual(3628800, FoldMultiplicationTest(negativeList));
 
-        private int FoldAdditionTest(List<int> list) => ListOperations.Fold(list, 5, (result, x) => x + result);
+        private static int FoldAdditionTest(List<int> list) => ListOperations.Fold(list, 5, (result, x) => x + result);
 
         [TestMethod]
         public void FoldAdditionDigitTest() => Assert.AreEqual(50, FoldAdditionTest(digitList));
@@ -114,7 +114,7 @@ namespace MapFilterFold.Tests
         [TestMethod]
         public void FoldAdditionNegativeTest() => Assert.AreEqual(-50, FoldAdditionTest(negativeList));
 
-        private void FilterNoAppropriateElementsTest(List<int> list)
+        private static void FilterNoAppropriateElementsTest(List<int> list)
         {
             var transformedList = ListOperations.Filter(list, x => x == 1000);
             Assert.AreEqual(0, transformedList.Count);
