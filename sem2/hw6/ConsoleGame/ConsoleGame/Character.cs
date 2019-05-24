@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConsoleGame
 {
@@ -37,6 +33,11 @@ namespace ConsoleGame
         {
             ++coordinates.x;
             map.CharacterCoordinates = coordinates;
+        }
+
+        public void Print()
+        {
+            Console.Write('@');
         }
     }
 }

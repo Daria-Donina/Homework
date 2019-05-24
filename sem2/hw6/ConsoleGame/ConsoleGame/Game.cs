@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 
 namespace ConsoleGame
@@ -20,11 +16,11 @@ namespace ConsoleGame
             map.Print();
             Console.CursorTop = welcomeMessageHigh + map.CharacterCoordinates.x;
             Console.CursorLeft = map.CharacterCoordinates.y;
+            Console.CursorVisible = false;
 
             var initialCoordinates = map.CharacterCoordinates;
 
             character = new Character(initialCoordinates);
-            Console.CursorVisible = false;
         }
 
         public void OnLeft(object sender, EventArgs args)
@@ -32,12 +28,16 @@ namespace ConsoleGame
             if (!map.IsWall(map.CharacterCoordinates.x, map.CharacterCoordinates.y - 1))
             {
                 map.CharacterLeft();
+
                 Console.Write(' ');
                 Console.CursorLeft -= 1;
+
                 Console.CursorLeft -= 1;
+
                 character.MoveLeft(map);
                 map.CharacterCame();
-                Console.Write('@');
+
+                character.Print();
                 Console.CursorLeft -= 1;
             }
             else
@@ -51,12 +51,16 @@ namespace ConsoleGame
             if (!map.IsWall(map.CharacterCoordinates.x, map.CharacterCoordinates.y + 1))
             {
                 map.CharacterLeft();
+
                 Console.Write(' ');
                 Console.CursorLeft -= 1;
+
                 Console.CursorLeft += 1;
+
                 character.MoveRight(map);
                 map.CharacterCame();
-                Console.Write('@');
+
+                character.Print();
                 Console.CursorLeft -= 1;
             }
             else
@@ -70,12 +74,16 @@ namespace ConsoleGame
             if (!map.IsWall(map.CharacterCoordinates.x - 1, map.CharacterCoordinates.y))
             {
                 map.CharacterLeft();
+
                 Console.Write(' ');
                 Console.CursorLeft -= 1;
+
                 Console.CursorTop -= 1;
+
                 character.MoveUp(map);
                 map.CharacterCame();
-                Console.Write('@');
+
+                character.Print();
                 Console.CursorLeft -= 1;
             }
             else
@@ -89,12 +97,16 @@ namespace ConsoleGame
             if (!map.IsWall(map.CharacterCoordinates.x + 1, map.CharacterCoordinates.y))
             {
                 map.CharacterLeft();
+
                 Console.Write(' ');
                 Console.CursorLeft -= 1;
+
                 Console.CursorTop += 1;
+
                 character.MoveDown(map);
                 map.CharacterCame();
-                Console.Write('@');
+
+                character.Print();
                 Console.CursorLeft -= 1;
             }
             else

@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 
 namespace ConsoleGame
@@ -25,6 +22,10 @@ namespace ConsoleGame
                     {
                         CharacterCoordinates = (x, y);
 						++characterCounter;
+                    }
+                    else if (line[y] != '#' && line[y] != ' ')
+                    {
+                        throw new WrongMapException();
                     }
 
                     innerList.Add(line[y]);
