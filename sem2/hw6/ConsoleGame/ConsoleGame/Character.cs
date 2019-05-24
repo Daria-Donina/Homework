@@ -14,7 +14,6 @@ namespace ConsoleGame
         }
 
         private (int x, int y) coordinates;
-   //     public (int x, int y) Coordinates { get => coordinates; }
 
         public void MoveLeft(Map map)
         {

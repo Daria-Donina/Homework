@@ -31,6 +31,17 @@ namespace ConsoleGame
                 Console.WriteLine("You lost :(");
                 Console.WriteLine("Try again next time!");
             }
+			catch (WrongMapException)
+			{
+				Console.Clear();
+				Console.WriteLine("The map is wrong");
+			}
+			catch (OutsideTheMapException)
+			{
+				Console.Clear();
+				Console.WriteLine("You've gone outside the map :(");
+				Console.WriteLine("Try again next time!");
+			}
         }
     }
 }

@@ -12,6 +12,7 @@ namespace ConsoleGame
         private List<List<char>> gameMap;
         public Map(StreamReader data)
         {
+			int characterCounter = 0;
             gameMap = new List<List<char>>();
             for (int x = 0; data.EndOfStream != true; ++x)
             {
@@ -23,6 +24,7 @@ namespace ConsoleGame
                     if (line[y] == '@')
                     {
                         CharacterCoordinates = (x, y);
+						++characterCounter;
                     }
 
                     innerList.Add(line[y]);
@@ -30,6 +32,11 @@ namespace ConsoleGame
 
                 gameMap.Add(innerList);
             }
+
+			if (characterCounter != 1)
+			{
+				throw new WrongMapException();
+			}
         }
 
         public void Print()
@@ -55,12 +62,19 @@ namespace ConsoleGame
         }
 
         public void CharacterLeft()
-        {
+		{
             int x = CharacterCoordinates.x;
             int y = CharacterCoordinates.y;
             gameMap[x][y] = ' ';
         }
 
-        public bool IsWall(int x, int y) => gameMap[x][y] == '#';
+        public bool IsWall(int x, int y)
+		{
+			if (x >= gameMap.Count || y >= gameMap[x].Count)
+			{
+				throw new OutsideTheMapException();
+			}
+			return gameMap[x][y] == '#';
+		}
     }
 }
