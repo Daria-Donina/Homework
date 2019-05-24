@@ -31,6 +31,10 @@ namespace ConsoleGame
                     case ConsoleKey.DownArrow:
                         DownHandler(this, EventArgs.Empty);
                         break;
+                    case ConsoleKey.Escape:
+                        Console.Clear();
+                        Console.WriteLine("Thank you for playing!");
+                        return;
                 }
             }
         }

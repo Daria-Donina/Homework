@@ -11,17 +11,26 @@ namespace ConsoleGame
     {
         static void Main(string[] args)
         {
-            var data = new StreamReader("..\\..\\data.txt");
+            try
+            {
+                var data = new StreamReader("..\\..\\data.txt");
 
-            var eventLoop = new EventLoop();
-            var game = new Game();
+                var eventLoop = new EventLoop();
+                var game = new Game(data);
 
-            eventLoop.LeftHandler += game.OnLeft;
-            eventLoop.RightHandler += game.OnRight;
-            eventLoop.UpHandler += game.OnUp;
-            eventLoop.DownHandler += game.OnDown;
+                eventLoop.LeftHandler += game.OnLeft;
+                eventLoop.RightHandler += game.OnRight;
+                eventLoop.UpHandler += game.OnUp;
+                eventLoop.DownHandler += game.OnDown;
 
-            eventLoop.Run();
+                eventLoop.Run();
+            }
+            catch (WallCrushException)
+            {
+                Console.Clear();
+                Console.WriteLine("You lost :(");
+                Console.WriteLine("Try again next time!");
+            }
         }
     }
 }
