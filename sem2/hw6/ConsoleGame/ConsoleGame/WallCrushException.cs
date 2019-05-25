@@ -2,6 +2,9 @@
 
 namespace ConsoleGame
 {
+    /// <summary>
+    /// Exception that is thrown when character has crushed into the wall.
+    /// </summary>
     [Serializable]
     public class WallCrushException : InvalidOperationException
     {

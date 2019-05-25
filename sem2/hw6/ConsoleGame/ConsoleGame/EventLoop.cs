@@ -2,12 +2,19 @@
 
 namespace ConsoleGame
 {
+    /// <summary>
+    /// Class handling keyboard buttons press events.
+    /// </summary>
     public class EventLoop
     {
         public event EventHandler<EventArgs> LeftHandler = (sender, args) => { };
         public event EventHandler<EventArgs> RightHandler = (sender, args) => { };
         public event EventHandler<EventArgs> UpHandler = (sender, args) => { };
         public event EventHandler<EventArgs> DownHandler = (sender, args) => { };
+
+        /// <summary>
+        /// Starts waiting for keyboard buttons press.
+        /// </summary>
         public void Run()
         {
             while (true)

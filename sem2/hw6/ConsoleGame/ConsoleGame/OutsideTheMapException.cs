@@ -2,7 +2,9 @@
 
 namespace ConsoleGame
 {
-
+    /// <summary>
+    /// Exception that is thrown when character is outside the map.
+    /// </summary>
 	[Serializable]
 	public class OutsideTheMapException : ArgumentOutOfRangeException
 	{

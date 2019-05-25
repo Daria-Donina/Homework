@@ -2,7 +2,9 @@
 
 namespace ConsoleGame
 {
-
+    /// <summary>
+    /// Exception that is thrown when the map is wrong.
+    /// </summary>
 	[Serializable]
 	public class WrongMapException : FormatException
 	{

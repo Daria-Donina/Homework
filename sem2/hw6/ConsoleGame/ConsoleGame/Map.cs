@@ -4,8 +4,14 @@ using System.IO;
 
 namespace ConsoleGame
 {
+    /// <summary>
+    /// Class representing the map of the game.
+    /// </summary>
     public class Map
     {
+        /// <summary>
+        /// Size of the map.
+        /// </summary>
         public (int x, int y) Size { get; private set; }
         private readonly List<List<char>> gameMap;
 
@@ -54,6 +60,9 @@ namespace ConsoleGame
 			}
         }
 
+        /// <summary>
+        /// Prints the map.
+        /// </summary>
         public void Print()
         {
             foreach (var line in gameMap)
@@ -81,12 +90,19 @@ namespace ConsoleGame
             Size = (resultX, resultY);
         }
 
+        /// <summary>
+        /// Coordinates of the character of the game.
+        /// </summary>
         public (int x, int y) CharacterCoordinates { get; set; }
 
         private void CharacterLeft() => gameMap[CharacterCoordinates.x][CharacterCoordinates.y] = ' ';
 
         private void CharacterCame() => gameMap[CharacterCoordinates.x][CharacterCoordinates.y] = '@';
 
+        /// <summary>
+        /// Moves character.
+        /// </summary>
+        /// <param name="newCoordinates">Coordinates to move character.</param>
         public void MoveCharacter((int x, int y) newCoordinates)
 		{
             CharacterLeft();
