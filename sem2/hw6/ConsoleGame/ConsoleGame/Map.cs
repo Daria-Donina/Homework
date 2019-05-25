@@ -4,17 +4,31 @@ using System.IO;
 
 namespace ConsoleGame
 {
-    class Map
+    public class Map
     {
-        private List<List<char>> gameMap;
+        public (int x, int y) Size { get; private set; }
+        private readonly List<List<char>> gameMap;
+
         public Map(StreamReader data)
         {
-			int characterCounter = 0;
+            SizeReading(data);
+
+            int characterCounter = 0;
             gameMap = new List<List<char>>();
             for (int x = 0; data.EndOfStream != true; ++x)
             {
+                if (x >= Size.x)
+                {
+                    throw new WrongMapException();
+                }
+
                 var innerList = new List<char>();
                 var line = data.ReadLine();
+
+                if (line.Length != Size.y)
+                {
+                    throw new WrongMapException();
+                }
 
                 for (int y = 0; y < line.Length; ++y)
                 {
@@ -52,30 +66,44 @@ namespace ConsoleGame
             }
         }
 
+        private void SizeReading(StreamReader data)
+        {
+            if (!int.TryParse(data.ReadLine(), out int resultX))
+            {
+                throw new WrongMapException();
+            }
+
+            if (!int.TryParse(data.ReadLine(), out int resultY))
+            {
+                throw new WrongMapException();
+            }
+
+            Size = (resultX, resultY);
+        }
 
         public (int x, int y) CharacterCoordinates { get; set; }
 
-        public void CharacterCame()
-        {
-            int x = CharacterCoordinates.x;
-            int y = CharacterCoordinates.y;
-            gameMap[x][y] = '@';
-        }
+        private void CharacterLeft() => gameMap[CharacterCoordinates.x][CharacterCoordinates.y] = ' ';
 
-        public void CharacterLeft()
-		{
-            int x = CharacterCoordinates.x;
-            int y = CharacterCoordinates.y;
-            gameMap[x][y] = ' ';
-        }
+        private void CharacterCame() => gameMap[CharacterCoordinates.x][CharacterCoordinates.y] = '@';
 
-        public bool IsWall(int x, int y)
+        public void MoveCharacter((int x, int y) newCoordinates)
 		{
-			if (x >= gameMap.Count || y >= gameMap[x].Count)
+            CharacterLeft();
+
+			if (newCoordinates.x >= Size.x || newCoordinates.y >= Size.y)
 			{
 				throw new OutsideTheMapException();
 			}
-			return gameMap[x][y] == '#';
+
+            if (gameMap[newCoordinates.x][newCoordinates.y] == '#')
+            {
+                throw new WallCrushException();
+            }
+
+            CharacterCoordinates = newCoordinates;
+
+            CharacterCame();
 		}
     }
 }

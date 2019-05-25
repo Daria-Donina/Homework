@@ -2,37 +2,35 @@
 
 namespace ConsoleGame
 {
-    class Character
+    public class Character
     {
+        private (int x, int y) coordinates;
+
         public Character((int x, int y) initialCoordinates)
         {
             coordinates = initialCoordinates;
         }
 
-        private (int x, int y) coordinates;
+        public (int x, int y) Coordinates { get => coordinates; }
 
-        public void MoveLeft(Map map)
+        public void MoveLeft()
         {
             --coordinates.y;
-            map.CharacterCoordinates = coordinates;
         }
 
-        public void MoveRight(Map map)
+        public void MoveRight()
         {
             ++coordinates.y;
-            map.CharacterCoordinates = coordinates;
         }
 
-        public void MoveUp(Map map)
+        public void MoveUp()
         {
             --coordinates.x;
-            map.CharacterCoordinates = coordinates;
         }
 
-        public void MoveDown(Map map)
+        public void MoveDown()
         {
             ++coordinates.x;
-            map.CharacterCoordinates = coordinates;
         }
 
         public void Print()

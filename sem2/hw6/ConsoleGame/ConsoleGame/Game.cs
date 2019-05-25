@@ -5,9 +5,9 @@ namespace ConsoleGame
 {
     public class Game
     {
-        private static int welcomeMessageHigh = 5;
-        private Map map;
-        private Character character;
+        private static readonly int welcomeMessageHigh = 5;
+        private readonly Map map;
+        private readonly Character character;
 
         public Game(StreamReader data)
         {
@@ -23,96 +23,79 @@ namespace ConsoleGame
             character = new Character(initialCoordinates);
         }
 
+        private void MoveLeft()
+        {
+            character.MoveLeft();
+            map.MoveCharacter(character.Coordinates);
+        }
+        private void MoveRight()
+        {
+            character.MoveRight();
+            map.MoveCharacter(character.Coordinates);
+        }
+
+        private void MoveUp()
+        {
+            character.MoveUp();
+            map.MoveCharacter(character.Coordinates);
+        }
+
+        private void MoveDown()
+        {
+            character.MoveDown();
+            map.MoveCharacter(character.Coordinates);
+        }
+
         public void OnLeft(object sender, EventArgs args)
         {
-            if (!map.IsWall(map.CharacterCoordinates.x, map.CharacterCoordinates.y - 1))
-            {
-                map.CharacterLeft();
+            Console.Write(' ');
+            Console.CursorLeft -= 1;
 
-                Console.Write(' ');
-                Console.CursorLeft -= 1;
+            Console.CursorLeft -= 1;
 
-                Console.CursorLeft -= 1;
+            MoveLeft();
 
-                character.MoveLeft(map);
-                map.CharacterCame();
-
-                character.Print();
-                Console.CursorLeft -= 1;
-            }
-            else
-            {
-                throw new WallCrushException();
-            }
+            character.Print();
+            Console.CursorLeft -= 1;
         }
 
         public void OnRight(object sender, EventArgs args)
         {
-            if (!map.IsWall(map.CharacterCoordinates.x, map.CharacterCoordinates.y + 1))
-            {
-                map.CharacterLeft();
+            Console.Write(' ');
+            Console.CursorLeft -= 1;
 
-                Console.Write(' ');
-                Console.CursorLeft -= 1;
+            Console.CursorLeft += 1;
 
-                Console.CursorLeft += 1;
+            MoveRight();
 
-                character.MoveRight(map);
-                map.CharacterCame();
-
-                character.Print();
-                Console.CursorLeft -= 1;
-            }
-            else
-            {
-                throw new WallCrushException();
-            }
+            character.Print();
+            Console.CursorLeft -= 1;
         }
 
         public void OnUp(object sender, EventArgs args)
         {
-            if (!map.IsWall(map.CharacterCoordinates.x - 1, map.CharacterCoordinates.y))
-            {
-                map.CharacterLeft();
+            Console.Write(' ');
+            Console.CursorLeft -= 1;
 
-                Console.Write(' ');
-                Console.CursorLeft -= 1;
+            Console.CursorTop -= 1;
 
-                Console.CursorTop -= 1;
+            MoveUp();
 
-                character.MoveUp(map);
-                map.CharacterCame();
-
-                character.Print();
-                Console.CursorLeft -= 1;
-            }
-            else
-            {
-                throw new WallCrushException();
-            }
+            character.Print();
+            Console.CursorLeft -= 1;
         }
 
         public void OnDown(object sender, EventArgs args)
         {
-            if (!map.IsWall(map.CharacterCoordinates.x + 1, map.CharacterCoordinates.y))
-            {
-                map.CharacterLeft();
+            Console.Write(' ');
+            Console.CursorLeft -= 1;
 
-                Console.Write(' ');
-                Console.CursorLeft -= 1;
+            Console.CursorTop += 1;
 
-                Console.CursorTop += 1;
+            MoveDown();
 
-                character.MoveDown(map);
-                map.CharacterCame();
-
-                character.Print();
-                Console.CursorLeft -= 1;
-            }
-            else
-            {
-                throw new WallCrushException();
-            }
+            character.Print();
+            Console.CursorLeft -= 1;
         }
 
         private void WelcomeMessage()
