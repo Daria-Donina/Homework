@@ -64,7 +64,7 @@ namespace ConsoleGame
 
             MoveLeft();
 
-            character.Print();
+            Character.Print();
             Console.CursorLeft -= 1;
         }
 
@@ -82,7 +82,7 @@ namespace ConsoleGame
 
             MoveRight();
 
-            character.Print();
+            Character.Print();
             Console.CursorLeft -= 1;
         }
 
@@ -100,7 +100,7 @@ namespace ConsoleGame
 
             MoveUp();
 
-            character.Print();
+            Character.Print();
             Console.CursorLeft -= 1;
         }
 
@@ -118,7 +118,7 @@ namespace ConsoleGame
 
             MoveDown();
 
-            character.Print();
+            Character.Print();
             Console.CursorLeft -= 1;
         }
 

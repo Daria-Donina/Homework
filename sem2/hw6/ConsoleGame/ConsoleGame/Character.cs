@@ -39,6 +39,6 @@ namespace ConsoleGame
         /// <summary>
         /// Prints character.
         /// </summary>
-        public void Print() => Console.Write('@');
+        public static void Print() => Console.Write('@');
     }
 }
