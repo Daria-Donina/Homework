@@ -122,7 +122,7 @@ namespace ConsoleGame
             Console.CursorLeft -= 1;
         }
 
-        private void WelcomeMessage()
+        private static void WelcomeMessage()
         {
             Console.WriteLine("You are '@'");
             Console.WriteLine("Сontrol your character with the arrow keys");

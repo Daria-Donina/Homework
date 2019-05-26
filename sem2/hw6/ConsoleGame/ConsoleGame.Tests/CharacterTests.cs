@@ -5,7 +5,7 @@ namespace ConsoleGame.Tests
     [TestClass]
     public class CharacterTests
     {
-        Character character;
+        private Character character;
         [TestInitialize]
         public void Initialize()
         {
