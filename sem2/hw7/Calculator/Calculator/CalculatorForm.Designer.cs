@@ -287,6 +287,7 @@
             this.changeSignButton.TabIndex = 15;
             this.changeSignButton.Text = "±";
             this.changeSignButton.UseVisualStyleBackColor = true;
+            this.changeSignButton.Click += new System.EventHandler(this.OnChangeSignButtonClick);
             // 
             // decimalSeparatorButton
             // 
@@ -298,6 +299,7 @@
             this.decimalSeparatorButton.TabIndex = 16;
             this.decimalSeparatorButton.Text = ",";
             this.decimalSeparatorButton.UseVisualStyleBackColor = true;
+            this.decimalSeparatorButton.Click += new System.EventHandler(this.OnDecimalSeparatorButtonClick);
             // 
             // removeCurrentNumberButton
             // 
@@ -309,6 +311,7 @@
             this.removeCurrentNumberButton.TabIndex = 17;
             this.removeCurrentNumberButton.Text = "СE";
             this.removeCurrentNumberButton.UseVisualStyleBackColor = true;
+            this.removeCurrentNumberButton.Click += new System.EventHandler(this.OnRemoveCurrentNumberButtonClick);
             // 
             // clearButton
             // 
@@ -320,6 +323,7 @@
             this.clearButton.TabIndex = 18;
             this.clearButton.Text = "C";
             this.clearButton.UseVisualStyleBackColor = true;
+            this.clearButton.Click += new System.EventHandler(this.OnClearButtonClick);
             // 
             // backspaceButton
             // 
@@ -331,6 +335,7 @@
             this.backspaceButton.TabIndex = 19;
             this.backspaceButton.Text = "←";
             this.backspaceButton.UseVisualStyleBackColor = true;
+            this.backspaceButton.Click += new System.EventHandler(this.OnBackspaceButtonClick);
             // 
             // currentNumberTextBox
             // 
