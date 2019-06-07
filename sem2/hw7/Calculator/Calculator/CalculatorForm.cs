@@ -92,6 +92,7 @@ namespace Calculator
             currentNumberTextBox.Text = Calculator.Calculate().ToString();
             Calculator.OperationEntered = false;
             ChangeCalculatorData();
+            Calculator.SecondNumber = 0;
         }
 
         private void OnRemoveCurrentNumberButtonClick(object sender, EventArgs e)
@@ -132,7 +133,7 @@ namespace Calculator
             {
                 Calculator.Operation = $"{button.Text}";
                 Calculator.OperationEntered = true;
-                expressionLabel.Text += currentNumberTextBox.Text + $"{button.Text}";
+                expressionLabel.Text += " " + currentNumberTextBox.Text + " " + $"{button.Text}";
             }
             else if (Calculator.WasCalculated)
             {
@@ -145,10 +146,21 @@ namespace Calculator
             }
             else
             {
-                expressionLabel.Text += currentNumberTextBox.Text + $"{button.Text}";
+                expressionLabel.Text += " " + currentNumberTextBox.Text + " " + $"{button.Text}";
                 Calculator.FirstNumber = Calculator.Calculate();
                 Calculator.Operation = $"{button.Text}";
+                currentNumberTextBox.Text = $"{Calculator.FirstNumber}";
             }
         }
+
+        private void CalculatorFormKeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar >= '0' && e.KeyChar <= '9')
+            {
+                OnDigitButtonClick(sender, e);
+                e.Handled = true;
+            }
+        }
+
     }
 }

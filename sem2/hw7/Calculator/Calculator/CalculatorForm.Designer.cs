@@ -370,7 +370,7 @@
             this.tableLayoutPanel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
-
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CalculatorFormKeyPress);
         }
 
         #endregion
