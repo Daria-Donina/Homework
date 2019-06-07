@@ -18,6 +18,6 @@ namespace Clock
             updatingTimer.Start();
         }
 
-        public void UpdateTimerTick(object sender, EventArgs e) => timeLabel.Text = DateTime.Now.ToString("HH:mm:ss");
+        private void UpdateTimerTick(object sender, EventArgs e) => timeLabel.Text = DateTime.Now.ToString("HH:mm:ss");
     }
 }
