@@ -232,8 +232,6 @@ namespace Calculator
                     case '9':
                         OnDigitButtonClick(nineButton, e);
                         break;
-                    default:
-                        break;
                 }
             }
             else if (e.KeyChar == '+' || e.KeyChar == '-' || e.KeyChar == '*' || e.KeyChar == '/')
@@ -251,8 +249,6 @@ namespace Calculator
                         break;
                     case '/':
                         OnOperationButtonClick(divideButton, e);
-                        break;
-                    default:
                         break;
                 }
             }
