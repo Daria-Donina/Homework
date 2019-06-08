@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Calculator
@@ -17,13 +10,23 @@ namespace Calculator
             InitializeComponent();
         }
 
-        private void Calculator_Load(object sender, EventArgs e)
+        private void CalculatorLoad(object sender, EventArgs e)
         {
-
+            currentNumberTextBox.Select();
         }
+
+        private const string divideByZeroErrorText = "You cannot divide by zero";
+        private const string tooBigNumberErrorText = "The number is too big";
 
         private void OnDigitButtonClick(object sender, EventArgs e)
         {
+            if (expressionLabel.Text == divideByZeroErrorText ||
+                expressionLabel.Text == tooBigNumberErrorText)
+            {
+                expressionLabel.Text = "";
+            }
+
+            currentNumberTextBox.Enabled = true;
             var button = (Button)sender;
 
             if (Calculator.WasCalculated || currentNumberTextBox.Text == "0")
@@ -32,12 +35,19 @@ namespace Calculator
                 ChangeCalculatorData();
                 Calculator.WasCalculated = false;
             }
-            else if (Calculator.FirstNumber != 0 && !Calculator.OperationEntered 
-                || Calculator.SecondNumber != 0 && Calculator.OperationEntered)
+            else if (Calculator.FirstNumber != 0 && !Calculator.OperationEntered
+                || Calculator.SecondNumber != 0 && Calculator.OperationEntered
+                || currentNumberTextBox.Text == "0,")
             {
-                currentNumberTextBox.Text += button.Text;
-
-                ChangeCalculatorData();
+                if (currentNumberTextBox.Text.Length >= 10)
+                {
+                    ErrorHandling(sender, e, tooBigNumberErrorText);
+                }
+                else
+                {
+                    currentNumberTextBox.Text += button.Text;
+                    ChangeCalculatorData();
+                }
             }
             else
             {
@@ -89,41 +99,23 @@ namespace Calculator
         private void OnEqualButtonClick(object sender, EventArgs e)
         {
             expressionLabel.Text = "";
-            currentNumberTextBox.Text = Calculator.Calculate().ToString();
-            Calculator.OperationEntered = false;
-            ChangeCalculatorData();
-            Calculator.SecondNumber = 0;
-        }
+            var result = Calculator.Calculate();
 
-        private void OnRemoveCurrentNumberButtonClick(object sender, EventArgs e)
-        {
-            currentNumberTextBox.Text = "0";
-            ChangeCalculatorData();
-        }
-
-        private void OnClearButtonClick(object sender, EventArgs e)
-        {
-            currentNumberTextBox.Text = "0";
-            expressionLabel.Text = "";
-            Calculator.FirstNumber = 0;
-            Calculator.Operation = "";
-            Calculator.SecondNumber = 0;
-            Calculator.WasCalculated = false;
-            Calculator.OperationEntered = false;
-        }
-
-        private void OnBackspaceButtonClick(object sender, EventArgs e)
-        {
-            var number = currentNumberTextBox.Text;
-            number = number.Substring(0, number.Length - 1);
-
-            if (number == "")
+            if (result == double.PositiveInfinity || result == double.NegativeInfinity)
             {
-                number = "0";
+                ErrorHandling(sender, e, divideByZeroErrorText);
             }
-
-            currentNumberTextBox.Text = number;
-            ChangeCalculatorData();
+            else if (result.ToString().Length >= 10)
+            {
+                ErrorHandling(sender, e, tooBigNumberErrorText);
+            }
+            else
+            {
+                currentNumberTextBox.Text = result.ToString();
+                Calculator.OperationEntered = false;
+                ChangeCalculatorData();
+                Calculator.SecondNumber = 0;
+            }
         }
 
         private void OnOperationButtonClick(object sender, EventArgs e)
@@ -148,19 +140,132 @@ namespace Calculator
             {
                 expressionLabel.Text += " " + currentNumberTextBox.Text + " " + $"{button.Text}";
                 Calculator.FirstNumber = Calculator.Calculate();
-                Calculator.Operation = $"{button.Text}";
-                currentNumberTextBox.Text = $"{Calculator.FirstNumber}";
+
+                if (Calculator.FirstNumber == double.PositiveInfinity ||
+                    Calculator.FirstNumber == double.NegativeInfinity)
+                {
+                    ErrorHandling(sender, e, divideByZeroErrorText);
+                }
+                else
+                {
+                    Calculator.Operation = $"{button.Text}";
+                    currentNumberTextBox.Text = $"{Calculator.FirstNumber}";
+                }
             }
         }
 
-        private void CalculatorFormKeyPress(object sender, KeyPressEventArgs e)
+        private void ErrorHandling(object sender,EventArgs e, string errorText)
+        {
+            OnClearButtonClick(sender, e);
+            expressionLabel.Text = errorText;
+            currentNumberTextBox.Enabled = false;
+        }
+
+        private void OnRemoveCurrentNumberButtonClick(object sender, EventArgs e)
+        {
+            currentNumberTextBox.Text = "0";
+            ChangeCalculatorData();
+        }
+
+        private void OnClearButtonClick(object sender, EventArgs e)
+        {
+            currentNumberTextBox.Text = "0";
+            expressionLabel.Text = "";
+            Calculator.FirstNumber = 0;
+            Calculator.Operation = "";
+            Calculator.SecondNumber = 0;
+            Calculator.WasCalculated = false;
+            Calculator.OperationEntered = false;
+        }
+
+        private void OnBackspaceButtonClick(object sender, EventArgs e)
+        {
+            var number = currentNumberTextBox.Text;
+            number = number.Substring(0, number.Length - 1);
+
+            if (number == "" || number == "-")
+            {
+                number = "0";
+            }
+
+            currentNumberTextBox.Text = number;
+            ChangeCalculatorData();
+        }
+
+        private void CurrentNumberTextBoxTextChanged(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar >= '0' && e.KeyChar <= '9')
             {
-                OnDigitButtonClick(sender, e);
-                e.Handled = true;
+                switch (e.KeyChar)
+                {
+                    case '0':
+                        OnDigitButtonClick(zeroButton, e);
+                        break;
+                    case '1':
+                        OnDigitButtonClick(oneButton, e);
+                        break;
+                    case '2':
+                        OnDigitButtonClick(twoButton, e);
+                        break;
+                    case '3':
+                        OnDigitButtonClick(threeButton, e);
+                        break;
+                    case '4':
+                        OnDigitButtonClick(fourButton, e);
+                        break;
+                    case '5':
+                        OnDigitButtonClick(fiveButton, e);
+                        break;
+                    case '6':
+                        OnDigitButtonClick(sixButton, e);
+                        break;
+                    case '7':
+                        OnDigitButtonClick(sevenButton, e);
+                        break;
+                    case '8':
+                        OnDigitButtonClick(eightButton, e);
+                        break;
+                    case '9':
+                        OnDigitButtonClick(nineButton, e);
+                        break;
+                }
             }
-        }
+            else if (e.KeyChar == '+' || e.KeyChar == '-' || e.KeyChar == '*' || e.KeyChar == '/')
+            {
+                switch (e.KeyChar)
+                {
+                    case '+':
+                        OnOperationButtonClick(addButton, e);
+                        break;
+                    case '-':
+                        OnOperationButtonClick(subtractButton, e);
+                        break;
+                    case '*':
+                        OnOperationButtonClick(multiplyButton, e);
+                        break;
+                    case '/':
+                        OnOperationButtonClick(divideButton, e);
+                        break;
+                }
+            }
+            else if (e.KeyChar == '=' || e.KeyChar == (char)Keys.Enter)
+            {
+                OnEqualButtonClick(equalButton, e);
+            }
+            else if (e.KeyChar == (char)Keys.Escape)
+            {
+                OnClearButtonClick(clearButton, e);
+            }
+            else if (e.KeyChar == (char)Keys.Back)
+            {
+                OnBackspaceButtonClick(backspaceButton, e);
+            }
+            else if (e.KeyChar == ',')
+            {
+                OnDecimalSeparatorButtonClick(decimalSeparatorButton, e);
+            }
 
+            e.Handled = true;
+        }
     }
 }
