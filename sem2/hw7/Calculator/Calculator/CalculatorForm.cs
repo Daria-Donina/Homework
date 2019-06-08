@@ -17,6 +17,9 @@ namespace Calculator
 
         private const string divideByZeroErrorText = "You cannot divide by zero";
         private const string tooBigNumberErrorText = "The number is too big";
+        private const double maximum = 1000000000;
+        private const double minimum = -1000000000;
+        private const int maximumLength = 18;
 
         private void OnDigitButtonClick(object sender, EventArgs e)
         {
@@ -39,7 +42,9 @@ namespace Calculator
                 || Calculator.SecondNumber != 0 && Calculator.OperationEntered
                 || currentNumberTextBox.Text == "0,")
             {
-                if (currentNumberTextBox.Text.Length >= 10)
+                if (double.Parse(currentNumberTextBox.Text) >= maximum || 
+                    double.Parse(currentNumberTextBox.Text) <= minimum ||
+                    currentNumberTextBox.Text.Length >= maximumLength)
                 {
                     ErrorHandling(sender, e, tooBigNumberErrorText);
                 }
@@ -105,7 +110,7 @@ namespace Calculator
             {
                 ErrorHandling(sender, e, divideByZeroErrorText);
             }
-            else if (result.ToString().Length >= 10)
+            else if (result >= maximum || result <= minimum || result.ToString().Length >= maximumLength)
             {
                 ErrorHandling(sender, e, tooBigNumberErrorText);
             }
@@ -145,6 +150,11 @@ namespace Calculator
                     Calculator.FirstNumber == double.NegativeInfinity)
                 {
                     ErrorHandling(sender, e, divideByZeroErrorText);
+                }
+                else if (Calculator.FirstNumber >= maximum || Calculator.FirstNumber <= minimum ||
+                    Calculator.FirstNumber.ToString().Length >= maximumLength)
+                {
+                    ErrorHandling(sender, e, tooBigNumberErrorText);
                 }
                 else
                 {

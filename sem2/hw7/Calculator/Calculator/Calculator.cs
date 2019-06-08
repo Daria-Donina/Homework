@@ -2,7 +2,7 @@
 
 namespace Calculator
 {
-    static class Calculator
+    public static class Calculator
     {
         public static double FirstNumber { get; set; }
         public static double SecondNumber { get; set; }
@@ -12,6 +12,11 @@ namespace Calculator
 
         public static double Calculate()
         {
+            if (FirstNumber == 0 && SecondNumber == 0 && Operation == "/")
+            {
+                return double.PositiveInfinity;
+            }
+
             WasCalculated = true;
 
             switch (Operation)
@@ -22,7 +27,11 @@ namespace Calculator
                     return FirstNumber - SecondNumber;
                 case "×":
                     return FirstNumber * SecondNumber;
+                case "*":
+                    return FirstNumber * SecondNumber;
                 case "÷":
+                    return FirstNumber / SecondNumber;
+                case "/":
                     return FirstNumber / SecondNumber;
                 default:
                     throw new FormatException();
