@@ -5,15 +5,9 @@ namespace Calculator
 {
     public partial class CalculatorForm : Form
     {
-        public CalculatorForm()
-        {
-            InitializeComponent();
-        }
+        public CalculatorForm() => InitializeComponent();
 
-        private void CalculatorLoad(object sender, EventArgs e)
-        {
-            currentNumberTextBox.Select();
-        }
+        private void CalculatorLoad(object sender, EventArgs e) => currentNumberTextBox.Select();
 
         private const string divideByZeroErrorText = "You cannot divide by zero";
         private const string tooBigNumberErrorText = "The number is too big";
@@ -238,6 +232,8 @@ namespace Calculator
                     case '9':
                         OnDigitButtonClick(nineButton, e);
                         break;
+                    default:
+                        break;
                 }
             }
             else if (e.KeyChar == '+' || e.KeyChar == '-' || e.KeyChar == '*' || e.KeyChar == '/')
@@ -255,6 +251,8 @@ namespace Calculator
                         break;
                     case '/':
                         OnOperationButtonClick(divideButton, e);
+                        break;
+                    default:
                         break;
                 }
             }

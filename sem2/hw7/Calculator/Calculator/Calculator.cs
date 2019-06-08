@@ -19,22 +19,25 @@ namespace Calculator
 
             WasCalculated = true;
 
-            switch (Operation)
+            if (Operation == "+")
             {
-                case "+":
-                    return FirstNumber + SecondNumber;
-                case "-":
-                    return FirstNumber - SecondNumber;
-                case "×":
-                    return FirstNumber * SecondNumber;
-                case "*":
-                    return FirstNumber * SecondNumber;
-                case "÷":
-                    return FirstNumber / SecondNumber;
-                case "/":
-                    return FirstNumber / SecondNumber;
-                default:
-                    throw new FormatException();
+                return FirstNumber + SecondNumber;
+            }
+            else if (Operation == "-")
+            {
+                return FirstNumber - SecondNumber;
+            }
+            else if (Operation == "*" || Operation == "×")
+            {
+                return FirstNumber * SecondNumber;
+            }
+            else if (Operation == "/" || Operation == "÷")
+            {
+                return FirstNumber / SecondNumber;
+            }
+            else
+            {
+                throw new FormatException();
             }
         }
     }

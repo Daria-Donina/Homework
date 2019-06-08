@@ -6,7 +6,7 @@ namespace Calculator.Tests
     [TestClass]
     public class CalculatorTests
     {
-        private void Initialize(double firstNumber, double secondNumber, string operation)
+        private static void Initialize(double firstNumber, double secondNumber, string operation)
         {
             Calculator.FirstNumber = firstNumber;
             Calculator.SecondNumber = secondNumber;
@@ -89,7 +89,6 @@ namespace Calculator.Tests
         [TestMethod]
         public void WasCalculatedTest()
         {
-            Assert.IsFalse(Calculator.WasCalculated);
             Initialize(3, 98, "+");
             Calculator.Calculate();
             Assert.IsTrue(Calculator.WasCalculated);
