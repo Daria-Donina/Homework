@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace GenericsList
+namespace GenericList
 {
     /// <summary>
     /// Represents a strongly typed list of objects that can be accessed by index. 
@@ -70,7 +67,7 @@ namespace GenericsList
 
             var current = head;
 
-            for (int i = 1; i < index; ++i)
+            for (int i = 0; i < index; ++i)
             {
                 current = current.Next;
             }
@@ -115,6 +112,11 @@ namespace GenericsList
                 throw new ArgumentNullException();
             }
 
+            if (arrayIndex < 0)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+
             for (int i = 0; i < Count; ++i)
             {
                 if (i + arrayIndex < array.Length)
@@ -136,7 +138,7 @@ namespace GenericsList
         {
             var current = head;
 
-            for (int i = 0; i < Count; ++i)
+            while (current != null)
             {
                 yield return current.Item;
                 current = current.Next;
@@ -164,6 +166,7 @@ namespace GenericsList
                 {
                     return i;
                 }
+                current = current.Next;
             }
 
             return -1;
@@ -176,7 +179,7 @@ namespace GenericsList
         /// <param name="item">The object to insert into the List<T>.</param>
         public void Insert(int index, T item)
         {
-            if (!IsCorrectIndex(index))
+            if (!IsCorrectIndex(index) && index != Count)
             {
                 throw new ArgumentOutOfRangeException();
             }

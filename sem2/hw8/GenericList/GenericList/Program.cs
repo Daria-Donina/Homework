@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GenericList
+﻿namespace GenericList
 {
     class Program
     {
+        /// <summary>
+        /// Main entry point of the program.
+        /// </summary>
         static void Main(string[] args)
         {
         }
