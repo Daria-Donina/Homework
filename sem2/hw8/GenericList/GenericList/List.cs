@@ -33,7 +33,7 @@ namespace GenericList
             }
         }
 
-        private Node head;
+        private static Node head;
 
         private bool IsCorrectIndex(int index) => index >= 0 && index < Count;
 
@@ -75,7 +75,7 @@ namespace GenericList
             return current;
         }
 
-        private bool IsEmpty() => head == null;
+        private static bool IsEmpty() => head == null;
 
         /// <summary>
         /// Adds an item to the end of the List<T>.
