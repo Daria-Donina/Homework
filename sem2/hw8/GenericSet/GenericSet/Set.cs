@@ -387,7 +387,7 @@ namespace GenericSet
             return current;
         }
 
-        private Node MinimumRightNode(Node current)
+        private static Node MinimumRightNode(Node current)
         {
             while (current.LeftChild != null)
             {

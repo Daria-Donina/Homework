@@ -12,7 +12,7 @@ namespace GenericSet.Tests
         [TestInitialize]
         public void Initialize()
         {
-            set = new Set<int>() { 4, 7, 9, 5, 2, 6, 1, 3, 8 };
+            set = new Set<int> { 4, 7, 9, 5, 2, 6, 1, 3, 8 };
         }
 
         [TestMethod]
@@ -106,7 +106,7 @@ namespace GenericSet.Tests
         [TestMethod]
         public void ExceptWithTest()
         {
-            var collection = new List<int>() { 1, 3, 7, 15 };
+            var collection = new List<int> { 1, 3, 7, 15 };
             set.ExceptWith(collection);
             Assert.IsFalse(set.Contains(1));
             Assert.IsFalse(set.Contains(3));
@@ -124,7 +124,7 @@ namespace GenericSet.Tests
         [TestMethod]
         public void IntersectWithTest()
         {
-            var collection = new List<int>() { 1, 3, 7, 15 };
+            var collection = new List<int> { 1, 3, 7, 15 };
             set.IntersectWith(collection);
             for (int i = 1; i < 10; ++i)
             {
@@ -158,9 +158,9 @@ namespace GenericSet.Tests
         [TestMethod]
         public void IsProperSubsetOfTest()
         {
-            var collection1 = new List<int>() { 1, 3, 7 };
-            var collection2 = new List<int>() { -7, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11 };
-            var collection3 = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            var collection1 = new List<int> { 1, 3, 7 };
+            var collection2 = new List<int> { -7, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11 };
+            var collection3 = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
             Assert.IsFalse(set.IsProperSubsetOf(collection1));
             Assert.IsFalse(set.IsProperSubsetOf(collection3));
@@ -178,9 +178,9 @@ namespace GenericSet.Tests
         [TestMethod]
         public void IsProperSupersetOfTest()
         {
-            var collection1 = new List<int>() { 1, 3, 7 };
-            var collection2 = new List<int>() { -7, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11 };
-            var collection3 = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            var collection1 = new List<int> { 1, 3, 7 };
+            var collection2 = new List<int> { -7, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11 };
+            var collection3 = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
             Assert.IsTrue(set.IsProperSupersetOf(collection1));
             Assert.IsFalse(set.IsProperSupersetOf(collection3));
@@ -198,9 +198,9 @@ namespace GenericSet.Tests
         [TestMethod]
         public void IsSubsetOfTest()
         {
-            var collection1 = new List<int>() { 1, 3, 7 };
-            var collection2 = new List<int>() { -7, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11 };
-            var collection3 = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            var collection1 = new List<int> { 1, 3, 7 };
+            var collection2 = new List<int> { -7, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11 };
+            var collection3 = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
             Assert.IsFalse(set.IsSubsetOf(collection1));
             Assert.IsTrue(set.IsSubsetOf(collection3));
@@ -218,9 +218,9 @@ namespace GenericSet.Tests
         [TestMethod]
         public void IsSupersetOfTest()
         {
-            var collection1 = new List<int>() { 1, 3, 7 };
-            var collection2 = new List<int>() { -7, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11 };
-            var collection3 = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            var collection1 = new List<int> { 1, 3, 7 };
+            var collection2 = new List<int> { -7, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11 };
+            var collection3 = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
             Assert.IsTrue(set.IsSupersetOf(collection1));
             Assert.IsFalse(set.IsSupersetOf(collection2));
@@ -239,8 +239,8 @@ namespace GenericSet.Tests
         public void OverlapsTest()
         {
             var collection1 = new List<int>();
-            var collection2 = new List<int>() { -8, -7, 4, 11, 15 };
-            var collection3 = new List<int>() { -20, -19, -14, 30, 100 };
+            var collection2 = new List<int> { -8, -7, 4, 11, 15 };
+            var collection3 = new List<int> { -20, -19, -14, 30, 100 };
 
             Assert.IsFalse(set.Overlaps(collection1));
             Assert.IsFalse(set.Overlaps(collection3));
@@ -309,8 +309,8 @@ namespace GenericSet.Tests
         [TestMethod]
         public void SetEqualsTest()
         {
-            var collection1 = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-            var collection2 = new List<int>() { -8, -7, 4, 11, 15 };
+            var collection1 = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            var collection2 = new List<int> { -8, -7, 4, 11, 15 };
             var collection3 = new List<int>();
 
             Assert.IsFalse(set.SetEquals(collection2));
@@ -329,7 +329,7 @@ namespace GenericSet.Tests
         [TestMethod]
         public void SymmetricExceptWithTest()
         {
-            var collection = new List<int>() { 1, 3, 7, 15 };
+            var collection = new List<int> { 1, 3, 7, 15 };
             set.SymmetricExceptWith(collection);
 
             for (int i = 1; i < 10; ++i)
@@ -364,7 +364,7 @@ namespace GenericSet.Tests
         [TestMethod]
         public void UnionWithTest()
         {
-            var collection = new List<int>() { 1, 7, 15, -1, 4 };
+            var collection = new List<int> { 1, 7, 15, -1, 4 };
             set.UnionWith(collection);
 
             for (int i = 1; i < 10; ++i)
