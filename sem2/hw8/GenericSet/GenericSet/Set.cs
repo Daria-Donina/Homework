@@ -9,7 +9,7 @@ namespace GenericSet
     /// Representes a collection of objects.
     /// </summary>
     /// <typeparam name="T">The type of elements in the set.</typeparam>
-    class Set<T> : ISet<T> where T : IComparable<T>
+    public class Set<T> : ISet<T> where T : IComparable<T>
     {
         /// <summary>
         /// An element of the set.
@@ -49,9 +49,9 @@ namespace GenericSet
         /// </summary>
         public bool IsReadOnly { get; }
 
-        private static Node root;
+        private Node root;
 
-        private static bool IsEmpty() => root == null;
+        private bool IsEmpty() => root == null;
 
         /// <summary>
         /// Adds an element to the current set and 
@@ -61,18 +61,17 @@ namespace GenericSet
         /// <returns>true if the element is added to the set; false if the element is already in the set.</returns>
         public bool Add(T item)
         {
-            if (Contains(item))
-            {
-                return false;
-            }
-
             if (IsEmpty())
             {
                 root = new Node(item, null, null);
             }
-            else
+            else if (!Contains(item))
             {
                 root = RecursiveAdd(root, item);
+            }
+            else
+            {
+                return false;
             }
 
             ++Count;
@@ -83,17 +82,19 @@ namespace GenericSet
         {
             if (current == null)
             {
-                return current;
+                return new Node(item, null, null);
             }
 
             if (item.CompareTo(current.Item) < 0)
             {
-                return RecursiveAdd(current.LeftChild, item);
+                current.LeftChild = RecursiveAdd(current.LeftChild, item);
             }
             else
             {
-                return RecursiveAdd(current.RightChild, item);
+                current.RightChild = RecursiveAdd(current.RightChild, item);
             }
+
+            return current;
         }
 
         /// <summary>
@@ -120,14 +121,14 @@ namespace GenericSet
 
         private bool Contains(Node current, T item)
         {
-            if (Equals(current.Item, item))
-            {
-                return true;
-            }
-
             if (current == null)
             {
                 return false;
+            }
+
+            if (Equals(current.Item, item))
+            {
+                return true;
             }
 
             if (item.CompareTo(current.Item) < 0)
@@ -163,16 +164,17 @@ namespace GenericSet
                 throw new ArgumentException();
             }
 
-            CopyToInfixTraverse(root, array, arrayIndex);
+            CopyToInfixTraverse(root, array, ref arrayIndex);
         }
 
-        private void CopyToInfixTraverse(Node current, T[] array, int index)
+        private void CopyToInfixTraverse(Node current, T[] array, ref int index)
         {
             if (current != null)
             {
-                CopyToInfixTraverse(current.LeftChild, array, ++index);
+                CopyToInfixTraverse(current.LeftChild, array, ref index);
                 array[index] = current.Item;
-                CopyToInfixTraverse(current.RightChild, array, ++index);
+                ++index;
+                CopyToInfixTraverse(current.RightChild, array, ref index);
             }
         }
 
@@ -193,15 +195,26 @@ namespace GenericSet
             }
         }
 
-        public IEnumerator<T> GetEnumerator() => EnumeratorTraverse(root);
-
-        private IEnumerator<T> EnumeratorTraverse(Node current)
+        /// <summary>
+        /// Returns an enumerator that iterates through set.
+        /// </summary>
+        /// <returns>An IEnumerator object that can be used to iterate through set.</returns>
+        public IEnumerator<T> GetEnumerator()
         {
-            if (current != null)
+            var current = root;
+            var stack = new Stack<Node>();
+
+            while (current != null || stack.Count > 0)
             {
-                EnumeratorTraverse(current.LeftChild);
+                while (current != null)
+                {
+                    stack.Push(current);
+                    current = current.LeftChild;
+                }
+
+                current = stack.Pop();
                 yield return current.Item;
-                EnumeratorTraverse(current.RightChild);
+                current = current.RightChild;
             }
         }
 
@@ -223,13 +236,17 @@ namespace GenericSet
                 throw new ArgumentNullException();
             }
 
-            foreach(var item in other)
+            var toRemoveCollection = new List<T>();
+
+            foreach (var item in this)
             {
-                if (!Contains(item))
+                if (!other.Contains(item))
                 {
-                    Remove(item);
+                    toRemoveCollection.Add(item);
                 }
             }
+
+            ExceptWith(toRemoveCollection);
         }
 
         /// <summary>
@@ -330,6 +347,7 @@ namespace GenericSet
             else
             {
                 root = RecursiveRemove(root, item);
+                --Count;
                 return true;
             }
         }
@@ -360,7 +378,7 @@ namespace GenericSet
                 }
                 else
                 {
-                    var newCurrent = MinimumRightNode(current);
+                    var newCurrent = MinimumRightNode(current.RightChild);
                     (current.Item, newCurrent.Item) = (newCurrent.Item, current.Item);
                     current.RightChild = RecursiveRemove(current.RightChild, newCurrent.Item);
                 }
@@ -418,6 +436,11 @@ namespace GenericSet
         /// <param name="other">The collection to compare to the current set.</param>
         public void UnionWith(IEnumerable<T> other)
         {
+            if (other is null)
+            {
+                throw new ArgumentNullException();
+            }
+
             foreach (var item in other)
             {
                 Add(item);
