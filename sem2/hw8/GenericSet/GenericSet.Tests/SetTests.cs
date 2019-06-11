@@ -30,10 +30,7 @@ namespace GenericSet.Tests
         {
             for (int i = 1; i < 10; ++i)
             {
-                if (!set.Contains(i))
-                {
-                    Assert.Fail();
-                }
+                Assert.IsTrue(set.Contains(i));
             }
 
             Assert.IsFalse(set.Contains(10));
@@ -54,10 +51,7 @@ namespace GenericSet.Tests
             set.Clear();
             for (int i = 1; i < 10; ++i)
             {
-                if (set.Contains(i))
-                {
-                    Assert.Fail();
-                }
+                Assert.IsFalse(set.Contains(i));
             }
         }
 
@@ -69,10 +63,7 @@ namespace GenericSet.Tests
             set.CopyTo(array, 6);
             for (int i = 0; i < 9; ++i)
             {
-                if (array[i + 6] != i + 1)
-                {
-                    Assert.Fail();
-                }
+                Assert.AreEqual(array[i + 6], i + 1);
             }
         }
 
@@ -130,17 +121,11 @@ namespace GenericSet.Tests
             {
                 if (set.Contains(i))
                 {
-                    if (i != 1 && i != 3 && i != 7)
-                    {
-                        Assert.Fail();
-                    }
+                    Assert.IsTrue(i == 1 || i == 3 || i == 7);
                 }
                 else
                 {
-                    if (i == 1 || i == 3 || i == 7)
-                    {
-                        Assert.Fail();
-                    }
+                    Assert.IsFalse(i == 1 || i == 3 || i == 7);
                 }
             }
 
@@ -267,17 +252,11 @@ namespace GenericSet.Tests
             {
                 if (!set.Contains(i))
                 {
-                    if (i != 9 && i != 4 && i != 5 && i != 8)
-                    {
-                        Assert.Fail();
-                    }
+                    Assert.IsTrue(i == 9 || i == 4 || i == 5 || i == 8);
                 }
                 else
                 {
-                    if (i == 9 || i == 4 || i == 5 || i == 8)
-                    {
-                        Assert.Fail();
-                    }
+                    Assert.IsFalse(i == 9 || i == 4 || i == 5 || i == 8);
                 }
             }
         }
@@ -299,10 +278,7 @@ namespace GenericSet.Tests
 
             for (int i = 1; i < 10; ++i)
             {
-                if (set.Contains(i))
-                {
-                    Assert.Fail();
-                }
+                Assert.IsFalse(set.Contains(i));
             }
         }
 
@@ -336,17 +312,11 @@ namespace GenericSet.Tests
             {
                 if (!set.Contains(i))
                 {
-                    if (i != 1 && i != 3 && i != 7)
-                    {
-                        Assert.Fail();
-                    }
+                    Assert.IsFalse(i == 1 || i == 3 || i == 7);
                 }
                 else
                 {
-                    if (i == 3 || i == 1 || i == 7)
-                    {
-                        Assert.Fail();
-                    }
+                    Assert.IsTrue(i == 1 || i == 3 || i == 7);
                 }
             }
 
@@ -369,10 +339,7 @@ namespace GenericSet.Tests
 
             for (int i = 1; i < 10; ++i)
             {
-                if(!set.Contains(i))
-                {
-                    Assert.Fail();
-                }
+                Assert.IsTrue(set.Contains(i));
             }
 
             Assert.IsTrue(set.Contains(15));
