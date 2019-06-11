@@ -3,164 +3,100 @@ using System.Windows.Forms;
 
 namespace Calculator
 {
+    /// <summary>
+    /// Class implementing user interface of the calculator. 
+    /// </summary>
     public partial class CalculatorForm : Form
     {
-        public CalculatorForm() => InitializeComponent();
+        private Calculator calculator;
+        public CalculatorForm()
+        {
+            calculator = new Calculator();
+            InitializeComponent();
+        }
 
         private void CalculatorLoad(object sender, EventArgs e) => currentNumberTextBox.Select();
 
         private const string divideByZeroErrorText = "You cannot divide by zero";
         private const string tooBigNumberErrorText = "The number is too big";
-        private const double maximum = 1000000000;
-        private const double minimum = -1000000000;
-        private const int maximumLength = 18;
 
         private void OnDigitButtonClick(object sender, EventArgs e)
         {
-            if (expressionLabel.Text == divideByZeroErrorText ||
+            try
+            {
+                if (expressionLabel.Text == divideByZeroErrorText ||
                 expressionLabel.Text == tooBigNumberErrorText)
-            {
-                expressionLabel.Text = "";
-            }
-
-            currentNumberTextBox.Enabled = true;
-            var button = (Button)sender;
-
-            if (Calculator.WasCalculated || currentNumberTextBox.Text == "0")
-            {
-                currentNumberTextBox.Text = button.Text;
-                ChangeCalculatorData();
-                Calculator.WasCalculated = false;
-            }
-            else if (Calculator.FirstNumber != 0 && !Calculator.OperationEntered
-                || Calculator.SecondNumber != 0 && Calculator.OperationEntered
-                || currentNumberTextBox.Text == "0,")
-            {
-                if (double.Parse(currentNumberTextBox.Text) >= maximum || 
-                    double.Parse(currentNumberTextBox.Text) <= minimum ||
-                    currentNumberTextBox.Text.Length >= maximumLength)
                 {
-                    ErrorHandling(sender, e, tooBigNumberErrorText);
+                    expressionLabel.Text = "";
                 }
-                else
-                {
-                    currentNumberTextBox.Text += button.Text;
-                    ChangeCalculatorData();
-                }
+
+                currentNumberTextBox.Enabled = true;
+
+                var button = (Button)sender;
+
+                currentNumberTextBox.Text = calculator.DigitEntered(currentNumberTextBox.Text, button.Text);
             }
-            else
+            catch (ArgumentException)
             {
-                currentNumberTextBox.Text = button.Text;
-                ChangeCalculatorData();
+                ErrorHandling(tooBigNumberErrorText);
             }
         }
 
-        private void ChangeCalculatorData()
-        {
-            if (Calculator.OperationEntered)
-            {
-                Calculator.SecondNumber = double.Parse(currentNumberTextBox.Text);
-            }
-            else
-            {
-                Calculator.FirstNumber = double.Parse(currentNumberTextBox.Text);
-            }
-        }
-
-        private void OnChangeSignButtonClick(object sender, EventArgs e)
-        {
-            var number = currentNumberTextBox.Text;
-
-            if (double.Parse(number) > 0)
-            {
-                number = "-" + number;
-            }
-            else if (double.Parse(number) < 0)
-            {
-                number = number.Substring(1, number.Length - 1);
-            }
-
-            currentNumberTextBox.Text = number;
-            ChangeCalculatorData();
-        }
+        private void OnChangeSignButtonClick(object sender, EventArgs e) => currentNumberTextBox.Text = calculator.OnChangeSignButtonClick(currentNumberTextBox.Text);
 
         private void OnDecimalSeparatorButtonClick(object sender, EventArgs e)
         {
-            var number = currentNumberTextBox.Text;
-
-            if (!number.Contains(","))
+            if (currentNumberTextBox.Enabled)
             {
-                currentNumberTextBox.Text += ",";
-                ChangeCalculatorData();
+                currentNumberTextBox.Text = calculator.OnDecimalSeparatorButtonClick(currentNumberTextBox.Text);
             }
         }
 
         private void OnEqualButtonClick(object sender, EventArgs e)
         {
-            expressionLabel.Text = "";
-            var result = Calculator.Calculate();
+            if (currentNumberTextBox.Enabled)
+            {
+                expressionLabel.Text = "";
 
-            if (result == double.PositiveInfinity || result == double.NegativeInfinity)
-            {
-                ErrorHandling(sender, e, divideByZeroErrorText);
-            }
-            else if (result >= maximum || result <= minimum || result.ToString().Length >= maximumLength)
-            {
-                ErrorHandling(sender, e, tooBigNumberErrorText);
-            }
-            else
-            {
-                currentNumberTextBox.Text = result.ToString();
-                Calculator.OperationEntered = false;
-                ChangeCalculatorData();
-                Calculator.SecondNumber = 0;
+                try
+                {
+                    currentNumberTextBox.Text = calculator.OnEqualButtonClick(currentNumberTextBox.Text);
+                }
+                catch (DivideByZeroException)
+                {
+                    ErrorHandling(divideByZeroErrorText);
+                }
+                catch (ArgumentException)
+                {
+                    ErrorHandling(tooBigNumberErrorText);
+                }
             }
         }
 
         private void OnOperationButtonClick(object sender, EventArgs e)
         {
             var button = (Button)sender;
-            if (!Calculator.OperationEntered)
-            {
-                Calculator.Operation = $"{button.Text}";
-                Calculator.OperationEntered = true;
-                expressionLabel.Text += " " + currentNumberTextBox.Text + " " + $"{button.Text}";
-            }
-            else if (Calculator.WasCalculated)
-            {
-                var expression = expressionLabel.Text;
-                expression = expression.Substring(0, expression.Length - 1);
 
-                expression += $"{button.Text}";
-                expressionLabel.Text = expression;
-                Calculator.Operation = $"{button.Text}";
-            }
-            else
+            if (currentNumberTextBox.Enabled)
             {
-                expressionLabel.Text += " " + currentNumberTextBox.Text + " " + $"{button.Text}";
-                Calculator.FirstNumber = Calculator.Calculate();
-
-                if (Calculator.FirstNumber == double.PositiveInfinity ||
-                    Calculator.FirstNumber == double.NegativeInfinity)
+                try
                 {
-                    ErrorHandling(sender, e, divideByZeroErrorText);
+                    (currentNumberTextBox.Text, expressionLabel.Text) = calculator.OnOperationButtonClick(button.Text, currentNumberTextBox.Text, expressionLabel.Text);
                 }
-                else if (Calculator.FirstNumber >= maximum || Calculator.FirstNumber <= minimum ||
-                    Calculator.FirstNumber.ToString().Length >= maximumLength)
+                catch (DivideByZeroException)
                 {
-                    ErrorHandling(sender, e, tooBigNumberErrorText);
+                    ErrorHandling(divideByZeroErrorText);
                 }
-                else
+                catch (ArgumentException)
                 {
-                    Calculator.Operation = $"{button.Text}";
-                    currentNumberTextBox.Text = $"{Calculator.FirstNumber}";
+                    ErrorHandling(tooBigNumberErrorText);
                 }
             }
         }
 
-        private void ErrorHandling(object sender,EventArgs e, string errorText)
+        private void ErrorHandling(string errorText)
         {
-            OnClearButtonClick(sender, e);
+            calculator.OnClearButtonClick();
             expressionLabel.Text = errorText;
             currentNumberTextBox.Enabled = false;
         }
@@ -168,32 +104,22 @@ namespace Calculator
         private void OnRemoveCurrentNumberButtonClick(object sender, EventArgs e)
         {
             currentNumberTextBox.Text = "0";
-            ChangeCalculatorData();
+            calculator.OnRemoveCurrentNumberButtonClick(currentNumberTextBox.Text);
         }
 
         private void OnClearButtonClick(object sender, EventArgs e)
         {
-            currentNumberTextBox.Text = "0";
-            expressionLabel.Text = "";
-            Calculator.FirstNumber = 0;
-            Calculator.Operation = "";
-            Calculator.SecondNumber = 0;
-            Calculator.WasCalculated = false;
-            Calculator.OperationEntered = false;
+            if (currentNumberTextBox.Enabled)
+            {
+                expressionLabel.Text = "";
+                currentNumberTextBox.Text = "0";
+                calculator.OnClearButtonClick();
+            }
         }
 
         private void OnBackspaceButtonClick(object sender, EventArgs e)
         {
-            var number = currentNumberTextBox.Text;
-            number = number.Substring(0, number.Length - 1);
-
-            if (number == "" || number == "-")
-            {
-                number = "0";
-            }
-
-            currentNumberTextBox.Text = number;
-            ChangeCalculatorData();
+            currentNumberTextBox.Text = calculator.OnBackspaceButtonClick(currentNumberTextBox.Text);
         }
 
         private void CurrentNumberTextBoxTextChanged(object sender, KeyPressEventArgs e)
