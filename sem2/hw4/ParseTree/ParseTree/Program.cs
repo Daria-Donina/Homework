@@ -7,14 +7,16 @@ namespace ParseTree
     {
         static void Main(string[] args)
         {
-            var file = new StreamReader("input.txt");
-            var expression = file.ReadToEnd();
-            file.Close();
+			using (var file = new StreamReader("input.txt"))
+			{
+				var expression = file.ReadToEnd();
+				file.Close();
 
-            var calculator = new Calculator(expression);
-            calculator.PrintParseTree();
+				var calculator = new Calculator(expression);
+				calculator.PrintParseTree();
 
-            Console.WriteLine($"Result of the calculation: {calculator.Calculate()}");
+				Console.WriteLine($"Result of the calculation: {calculator.Calculate()}");
+			}
         }
     }
 }
