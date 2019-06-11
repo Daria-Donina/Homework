@@ -8,7 +8,7 @@
         /// <summary>
         /// String data of the node.
         /// </summary>
-        public virtual string Data { get; set; }
+        public virtual string Data { get; protected set; }
 
         /// <summary>
         /// Prints data of the node and its left and right subtrees.

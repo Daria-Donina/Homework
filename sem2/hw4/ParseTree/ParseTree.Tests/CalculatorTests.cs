@@ -6,7 +6,7 @@
     [TestClass]
     public class CalculatorTests
     {
-        Calculator calculator;
+        private Calculator calculator;
 
         [TestMethod]
         public void AdditionTest()
