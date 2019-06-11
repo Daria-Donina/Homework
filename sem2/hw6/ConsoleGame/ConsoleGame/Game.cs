@@ -28,27 +28,43 @@ namespace ConsoleGame
 
         private void MoveLeft()
         {
-            character.MoveLeft();
+			Console.CursorLeft -= 1;
+			character.MoveLeft();
             map.MoveCharacter(character.Coordinates);
         }
 
         private void MoveRight()
         {
-            character.MoveRight();
+			Console.CursorLeft += 1;
+			character.MoveRight();
             map.MoveCharacter(character.Coordinates);
         }
 
         private void MoveUp()
         {
-            character.MoveUp();
+			Console.CursorTop -= 1;
+			character.MoveUp();
             map.MoveCharacter(character.Coordinates);
         }
 
         private void MoveDown()
         {
-            character.MoveDown();
+			Console.CursorTop += 1;
+			character.MoveDown();
             map.MoveCharacter(character.Coordinates);
         }
+
+		private void RemovingOldCharacter()
+		{
+			Console.Write(' ');
+			Console.CursorLeft -= 1;
+		}
+
+		private void PrintingNewCharacter()
+		{
+			Character.Print();
+			Console.CursorLeft -= 1;
+		}
 
         /// <summary>
         /// Invoking method when left arrow button is pressed.
@@ -57,15 +73,9 @@ namespace ConsoleGame
         /// <param name="args">Extra information for handler.</param>
         public void OnLeft(object sender, EventArgs args)
         {
-            Console.Write(' ');
-            Console.CursorLeft -= 1;
-
-            Console.CursorLeft -= 1;
-
+			RemovingOldCharacter();
             MoveLeft();
-
-            Character.Print();
-            Console.CursorLeft -= 1;
+			PrintingNewCharacter();
         }
 
         /// <summary>
@@ -75,16 +85,10 @@ namespace ConsoleGame
         /// <param name="args">Extra information for handler.</param>
         public void OnRight(object sender, EventArgs args)
         {
-            Console.Write(' ');
-            Console.CursorLeft -= 1;
-
-            Console.CursorLeft += 1;
-
-            MoveRight();
-
-            Character.Print();
-            Console.CursorLeft -= 1;
-        }
+			RemovingOldCharacter();
+			MoveRight();
+			PrintingNewCharacter();
+		}
 
         /// <summary>
         /// Invoking method when up arrow button is pressed.
@@ -93,16 +97,10 @@ namespace ConsoleGame
         /// <param name="args">Extra information for handler.</param>
         public void OnUp(object sender, EventArgs args)
         {
-            Console.Write(' ');
-            Console.CursorLeft -= 1;
-
-            Console.CursorTop -= 1;
-
-            MoveUp();
-
-            Character.Print();
-            Console.CursorLeft -= 1;
-        }
+			RemovingOldCharacter();
+			MoveUp();
+			PrintingNewCharacter();
+		}
 
         /// <summary>
         /// Invoking method when down arrow button is pressed.
@@ -111,16 +109,10 @@ namespace ConsoleGame
         /// <param name="args">Extra information for handler.</param>
         public void OnDown(object sender, EventArgs args)
         {
-            Console.Write(' ');
-            Console.CursorLeft -= 1;
-
-            Console.CursorTop += 1;
-
-            MoveDown();
-
-            Character.Print();
-            Console.CursorLeft -= 1;
-        }
+			RemovingOldCharacter();
+			MoveDown();
+			PrintingNewCharacter();
+		}
 
         private static void WelcomeMessage()
         {
