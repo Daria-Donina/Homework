@@ -97,10 +97,10 @@ namespace ConsoleGame
         /// <param name="args">Extra information for handler.</param>
         public void OnUp(object sender, EventArgs args)
         {
-			RemovingOldCharacter();
-			MoveUp();
-			PrintingNewCharacter();
-		}
+            RemovingOldCharacter();
+            MoveUp();
+            PrintingNewCharacter();
+        }
 
         /// <summary>
         /// Invoking method when down arrow button is pressed.
@@ -109,12 +109,12 @@ namespace ConsoleGame
         /// <param name="args">Extra information for handler.</param>
         public void OnDown(object sender, EventArgs args)
         {
-			RemovingOldCharacter();
-			MoveDown();
-			PrintingNewCharacter();
-		}
+            RemovingOldCharacter();
+            MoveDown();
+            PrintingNewCharacter();
+        }
 
-        private static void WelcomeMessage()
+            private static void WelcomeMessage()
         {
             Console.WriteLine("You are '@'");
             Console.WriteLine("Сontrol your character with the arrow keys");
