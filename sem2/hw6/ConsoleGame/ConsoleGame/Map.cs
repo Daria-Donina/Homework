@@ -31,33 +31,33 @@ namespace ConsoleGame
                 var innerList = new List<char>();
                 var line = data.ReadLine();
 
-				if (line.Length != Size.y)
+                if (line.Length != Size.y)
                 {
                     throw new WrongMapException();
                 }
 
                 for (int y = 0; y < line.Length; ++y)
                 {
-					if (line[y] == '@')
-					{
-						CharacterCoordinates = (x, y);
-						++characterCounter;
-					}
-					else if (line[y] != '#' && line[y] != ' ')
-					{
-						throw new WrongMapException();
-					}
+	                if (line[y] == '@')
+                    {
+                        CharacterCoordinates = (x, y);
+                        ++characterCounter;
+                    }
+                    else if (line[y] != '#' && line[y] != ' ')
+                    {
+                        throw new WrongMapException();
+                    }
 
-					innerList.Add(line[y]);
-				}
+                    innerList.Add(line[y]);
+                }
 
                 gameMap.Add(innerList);
             }
 
-			if (characterCounter != 1)
-			{
-				throw new WrongMapException();
-			}
+            if (characterCounter != 1)
+            {
+                throw new WrongMapException();
+            }
 		}
 
         /// <summary>
@@ -75,17 +75,17 @@ namespace ConsoleGame
             }
         }
 
-		private void SizeReading(StreamReader data)
+        private void SizeReading(StreamReader data)
         {
             if (!int.TryParse(data.ReadLine(), out int resultX))
             {
-				throw new WrongMapException();
+                throw new WrongMapException();
             }
 
             if (!int.TryParse(data.ReadLine(), out int resultY))
             {
                 throw new WrongMapException();
-			}
+            }
 
             Size = (resultX, resultY);
         }
@@ -99,27 +99,27 @@ namespace ConsoleGame
 
         private void CharacterCame() => gameMap[CharacterCoordinates.x][CharacterCoordinates.y] = '@';
 
-		/// <summary>
-		/// Moves character.
-		/// </summary>
-		/// <param name="newCoordinates">Coordinates to move character.</param>
-		public void MoveCharacter((int x, int y) newCoordinates)
+        /// <summary>
+        /// Moves character.
+        /// </summary>
+        /// <param name="newCoordinates">Coordinates to move character.</param>
+        public void MoveCharacter((int x, int y) newCoordinates)
 	    {
-			CharacterLeft();
+            CharacterLeft();
 
-			if (newCoordinates.x >= Size.x || newCoordinates.y >= Size.y)
-			{
-				throw new OutsideTheMapException();
-			}
+            if (newCoordinates.x >= Size.x || newCoordinates.y >= Size.y)
+            {
+                throw new OutsideTheMapException();
+            }
 
-			if (gameMap[newCoordinates.x][newCoordinates.y] == '#')
-			{
-				throw new WallCrushException();
-			}
+            if (gameMap[newCoordinates.x][newCoordinates.y] == '#')
+            {
+                throw new WallCrushException();
+            }
 
-			CharacterCoordinates = newCoordinates;
+            CharacterCoordinates = newCoordinates;
 
-			CharacterCame();
-		}
+            CharacterCame();
+        }
     }
 }

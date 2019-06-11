@@ -6,6 +6,7 @@ namespace ConsoleGame.Tests
     public class CharacterTests
     {
         private Character character;
+
         [TestInitialize]
         public void Initialize()
         {
