@@ -38,7 +38,7 @@ namespace ConsoleGame
 
                 for (int y = 0; y < line.Length; ++y)
                 {
-	                if (line[y] == '@')
+                    if (line[y] == '@')
                     {
                         CharacterCoordinates = (x, y);
                         ++characterCounter;

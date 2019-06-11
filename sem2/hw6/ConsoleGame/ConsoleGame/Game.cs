@@ -28,29 +28,29 @@ namespace ConsoleGame
 
         private void MoveLeft()
         {
-			Console.CursorLeft -= 1;
-			character.MoveLeft();
+            Console.CursorLeft -= 1;
+            character.MoveLeft();
             map.MoveCharacter(character.Coordinates);
         }
 
         private void MoveRight()
         {
-			Console.CursorLeft += 1;
-			character.MoveRight();
+            Console.CursorLeft += 1;
+            character.MoveRight();
             map.MoveCharacter(character.Coordinates);
         }
 
         private void MoveUp()
         {
-			Console.CursorTop -= 1;
-			character.MoveUp();
+            Console.CursorTop -= 1;
+            character.MoveUp();
             map.MoveCharacter(character.Coordinates);
         }
 
         private void MoveDown()
         {
-			Console.CursorTop += 1;
-			character.MoveDown();
+            Console.CursorTop += 1;
+            character.MoveDown();
             map.MoveCharacter(character.Coordinates);
         }
 
@@ -114,7 +114,7 @@ namespace ConsoleGame
             PrintingNewCharacter();
         }
 
-            private static void WelcomeMessage()
+        private static void WelcomeMessage()
         {
             Console.WriteLine("You are '@'");
             Console.WriteLine("Сontrol your character with the arrow keys");
