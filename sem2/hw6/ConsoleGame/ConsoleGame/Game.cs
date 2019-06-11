@@ -28,30 +28,38 @@ namespace ConsoleGame
 
         private void MoveLeft()
         {
+            RemovingOldCharacter();
             Console.CursorLeft -= 1;
             character.MoveLeft();
             map.MoveCharacter(character.Coordinates);
+            PrintingNewCharacter();
         }
 
         private void MoveRight()
         {
+            RemovingOldCharacter();
             Console.CursorLeft += 1;
             character.MoveRight();
             map.MoveCharacter(character.Coordinates);
+            PrintingNewCharacter();
         }
 
         private void MoveUp()
         {
+            RemovingOldCharacter();
             Console.CursorTop -= 1;
             character.MoveUp();
             map.MoveCharacter(character.Coordinates);
+            PrintingNewCharacter();
         }
 
         private void MoveDown()
         {
+            RemovingOldCharacter();
             Console.CursorTop += 1;
             character.MoveDown();
             map.MoveCharacter(character.Coordinates);
+            PrintingNewCharacter();
         }
 
         private void RemovingOldCharacter()
@@ -71,48 +79,28 @@ namespace ConsoleGame
         /// </summary>
         /// <param name="sender">Left arrow button.</param>
         /// <param name="args">Extra information for handler.</param>
-        public void OnLeft(object sender, EventArgs args)
-        {
-            RemovingOldCharacter();
-            MoveLeft();
-            PrintingNewCharacter();
-        }
+        public void OnLeft(object sender, EventArgs args) => MoveLeft();
 
         /// <summary>
         /// Invoking method when right arrow button is pressed.
         /// </summary>
         /// <param name="sender">Right arrow button.</param>
         /// <param name="args">Extra information for handler.</param>
-        public void OnRight(object sender, EventArgs args)
-        {
-            RemovingOldCharacter();
-            MoveRight();
-            PrintingNewCharacter();
-        }
+        public void OnRight(object sender, EventArgs args) => MoveRight();
 
         /// <summary>
         /// Invoking method when up arrow button is pressed.
         /// </summary>
         /// <param name="sender">Up arrow button.</param>
         /// <param name="args">Extra information for handler.</param>
-        public void OnUp(object sender, EventArgs args)
-        {
-            RemovingOldCharacter();
-            MoveUp();
-            PrintingNewCharacter();
-        }
+        public void OnUp(object sender, EventArgs args) => MoveUp();
 
         /// <summary>
         /// Invoking method when down arrow button is pressed.
         /// </summary>
         /// <param name="sender">Down arrow button.</param>
         /// <param name="args">Extra information for handler.</param>
-        public void OnDown(object sender, EventArgs args)
-        {
-            RemovingOldCharacter();
-            MoveDown();
-            PrintingNewCharacter();
-        }
+        public void OnDown(object sender, EventArgs args) => MoveDown();
 
         private static void WelcomeMessage()
         {
