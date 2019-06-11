@@ -7,36 +7,36 @@ namespace Calculator
     /// </summary>
     public class Calculator
     {
-        public double FirstNumber { get; set; }
-        public double SecondNumber { get; set; }
-        public string Operation { private get; set; }
-        public bool WasCalculated { get; set; }
-        public bool OperationEntered { get; set; }
+        private double firstNumber;
+        private double secondNumber;
+        private string operation;
+        private bool wasCalculated;
+        private bool operationEntered;
 
         public double Calculate()
         {
-            if (FirstNumber == 0 && SecondNumber == 0 && Operation == "/")
+            if (firstNumber == 0 && secondNumber == 0 && operation == "/")
             {
                 return double.PositiveInfinity;
             }
 
-            WasCalculated = true;
+            wasCalculated = true;
 
-            if (Operation == "+")
+            if (operation == "+")
             {
-                return FirstNumber + SecondNumber;
+                return firstNumber + secondNumber;
             }
-            else if (Operation == "-")
+            else if (operation == "-")
             {
-                return FirstNumber - SecondNumber;
+                return firstNumber - secondNumber;
             }
-            else if (Operation == "*" || Operation == "×")
+            else if (operation == "*" || operation == "×")
             {
-                return FirstNumber * SecondNumber;
+                return firstNumber * secondNumber;
             }
-            else if (Operation == "/" || Operation == "÷")
+            else if (operation == "/" || operation == "÷")
             {
-                return FirstNumber / SecondNumber;
+                return firstNumber / secondNumber;
             }
             else
             {
@@ -48,95 +48,101 @@ namespace Calculator
         private const double minimum = -1000000000;
         private const int maximumLength = 18;
 
-        public string DigitEntered(string currentNumberTextBoxText, string buttonText)
+        public string CurrentNumberTextBoxText { get; private set; }
+        public bool CurrentNumberTextBoxEnabled { get; private set; }
+
+        private const string divideByZeroErrorText = "You cannot divide by zero";
+        private const string tooBigNumberErrorText = "The number is too big";
+
+        public void DigitEntered(string buttonText)
         {
-            if (WasCalculated || currentNumberTextBoxText == "0")
+            if (ExpressionLabelText == divideByZeroErrorText ||
+                ExpressionLabelText == tooBigNumberErrorText)
             {
-                currentNumberTextBoxText = buttonText;
-                ChangeCalculatorData(currentNumberTextBoxText);
-                WasCalculated = false;
+                ExpressionLabelText = "";
             }
-            else if (FirstNumber != 0 && !OperationEntered
-                || SecondNumber != 0 && OperationEntered
-                || currentNumberTextBoxText == "0,")
+
+            CurrentNumberTextBoxEnabled = true;
+
+            if (wasCalculated || CurrentNumberTextBoxText == "0")
             {
-                if (double.Parse(currentNumberTextBoxText) >= maximum ||
-                    double.Parse(currentNumberTextBoxText) <= minimum ||
-                    currentNumberTextBoxText.Length >= maximumLength)
+                CurrentNumberTextBoxText = buttonText;
+                ChangeCalculatorData();
+                wasCalculated = false;
+            }
+            else if (firstNumber != 0 && !operationEntered
+                || secondNumber != 0 && operationEntered
+                || CurrentNumberTextBoxText == "0,")
+            {
+                if (double.Parse(CurrentNumberTextBoxText) >= maximum ||
+                    double.Parse(CurrentNumberTextBoxText) <= minimum ||
+                    CurrentNumberTextBoxText.Length >= maximumLength)
                 {
-                    OnClearButtonClick();
+                    Clear();
                     throw new ArgumentException();
                 }
                 else
                 {
-                    currentNumberTextBoxText += buttonText;
-                    ChangeCalculatorData(currentNumberTextBoxText);
+                    CurrentNumberTextBoxText += buttonText;
+                    ChangeCalculatorData();
                 }
             }
             else
             {
-                currentNumberTextBoxText = buttonText;
-                ChangeCalculatorData(currentNumberTextBoxText);
+                CurrentNumberTextBoxText = buttonText;
+                ChangeCalculatorData();
             }
-
-            return currentNumberTextBoxText;
         }
 
-        public void OnClearButtonClick()
+        public void Clear()
         {
-            FirstNumber = 0;
-            Operation = "";
-            SecondNumber = 0;
-            WasCalculated = false;
-            OperationEntered = false;
+            firstNumber = 0;
+            operation = "";
+            secondNumber = 0;
+            wasCalculated = false;
+            operationEntered = false;
+            CurrentNumberTextBoxText = "0";
+            ExpressionLabelText = "";
         }
 
-        private void ChangeCalculatorData(string currentNumberTextBoxText)
+        private void ChangeCalculatorData()
         {
-            if (OperationEntered)
+            if (operationEntered)
             {
-                SecondNumber = double.Parse(currentNumberTextBoxText);
+                secondNumber = double.Parse(CurrentNumberTextBoxText);
             }
             else
             {
-                FirstNumber = double.Parse(currentNumberTextBoxText);
+                firstNumber = double.Parse(CurrentNumberTextBoxText);
             }
         }
 
-        public string OnChangeSignButtonClick(string currentNumberTextBoxText)
+        public void SignChanged()
         {
-            var number = currentNumberTextBoxText;
-
-            if (double.Parse(number) > 0)
+            if (double.Parse(CurrentNumberTextBoxText) > 0)
             {
-                number = "-" + number;
+                CurrentNumberTextBoxText = "-" + CurrentNumberTextBoxText;
             }
-            else if (double.Parse(number) < 0)
+            else if (double.Parse(CurrentNumberTextBoxText) < 0)
             {
-                number = number.Substring(1, number.Length - 1);
+                CurrentNumberTextBoxText = CurrentNumberTextBoxText.Substring(1, CurrentNumberTextBoxText.Length - 1);
             }
 
-            currentNumberTextBoxText = number;
-            ChangeCalculatorData(currentNumberTextBoxText);
-
-            return currentNumberTextBoxText;
+            ChangeCalculatorData();
         }
 
-        public string OnDecimalSeparatorButtonClick(string currentNumberTextBoxText)
+        public void DecimalSeparatorEntered()
         {
-            var number = currentNumberTextBoxText;
-
-            if (!number.Contains(","))
+            if (!CurrentNumberTextBoxText.Contains(","))
             {
-                currentNumberTextBoxText += ",";
-                ChangeCalculatorData(currentNumberTextBoxText);
+                CurrentNumberTextBoxText += ",";
+                ChangeCalculatorData();
             }
-
-            return currentNumberTextBoxText;
         }
 
-        public string OnEqualButtonClick(string currentNumberTextBoxText)
+        public void EqualPressed()
         {
+            ExpressionLabelText = "";
             var result = Calculate();
 
             if (result == double.PositiveInfinity || result == double.NegativeInfinity)
@@ -149,69 +155,70 @@ namespace Calculator
             }
             else
             {
-                currentNumberTextBoxText = result.ToString();
-                OperationEntered = false;
-                ChangeCalculatorData(currentNumberTextBoxText);
-                SecondNumber = 0;
-                return currentNumberTextBoxText;
+                CurrentNumberTextBoxText = result.ToString();
+                operationEntered = false;
+                ChangeCalculatorData();
+                secondNumber = 0;
             }
         }
 
-        public (string, string) OnOperationButtonClick(string buttonText, string currentNumberTextBoxText, string expressionLabelText)
+        public string ExpressionLabelText { get; private set; }
+
+        public void OperationPressed(string buttonText)
         {
-            if (!OperationEntered)
+            if (!operationEntered)
             {
-                Operation = $"{buttonText}";
-                OperationEntered = true;
-                expressionLabelText += " " + currentNumberTextBoxText + " " + $"{buttonText}";
+                operation = $"{buttonText}";
+                operationEntered = true;
+                ExpressionLabelText += " " + CurrentNumberTextBoxText + " " + $"{buttonText}";
             }
-            else if (WasCalculated)
+            else if (wasCalculated)
             {
-                expressionLabelText = expressionLabelText.Substring(0, expressionLabelText.Length - 1);
+                ExpressionLabelText = ExpressionLabelText.Substring(0, ExpressionLabelText.Length - 1);
 
-                expressionLabelText += $"{buttonText}";
+                ExpressionLabelText += $"{buttonText}";
 
-                Operation = $"{buttonText}";
+                operation = $"{buttonText}";
             }
             else
             {
-                expressionLabelText += " " + currentNumberTextBoxText + " " + $"{buttonText}";
-                FirstNumber = Calculate();
+                ExpressionLabelText += " " + CurrentNumberTextBoxText + " " + $"{buttonText}";
+                firstNumber = Calculate();
 
-                if (FirstNumber == double.PositiveInfinity ||
-                    FirstNumber == double.NegativeInfinity)
+                if (firstNumber == double.PositiveInfinity ||
+                    firstNumber == double.NegativeInfinity)
                 {
                     throw new DivideByZeroException();
                 }
-                else if (FirstNumber >= maximum || FirstNumber <= minimum ||
-                    FirstNumber.ToString().Length >= maximumLength)
+                else if (firstNumber >= maximum || firstNumber <= minimum ||
+                    firstNumber.ToString().Length >= maximumLength)
                 {
                     throw new ArgumentException();
                 }
                 else
                 {
-                    Operation = $"{buttonText}";
-                    currentNumberTextBoxText = $"{FirstNumber}";
+                    operation = $"{buttonText}";
+                    CurrentNumberTextBoxText = $"{firstNumber}";
                 }
             }
-
-            return (currentNumberTextBoxText, expressionLabelText);
         }
 
-        public string OnBackspaceButtonClick(string currentNumberTextBoxText)
+        public void RemoveLastDigit()
         {
-            currentNumberTextBoxText = currentNumberTextBoxText.Substring(0, currentNumberTextBoxText.Length - 1);
+            CurrentNumberTextBoxText = CurrentNumberTextBoxText.Substring(0, CurrentNumberTextBoxText.Length - 1);
 
-            if (currentNumberTextBoxText == "" || currentNumberTextBoxText == "-")
+            if (CurrentNumberTextBoxText == "" || CurrentNumberTextBoxText == "-")
             {
-                currentNumberTextBoxText = "0";
+                CurrentNumberTextBoxText = "0";
             }
 
-            ChangeCalculatorData(currentNumberTextBoxText);
-
-            return currentNumberTextBoxText;
+            ChangeCalculatorData();
         }
 
-        public void OnRemoveCurrentNumberButtonClick(string currentNumberTextBoxText) => ChangeCalculatorData(currentNumberTextBoxText);
+        public void RemoveCurrentNumber()
+        {
+            CurrentNumberTextBoxText = "0";
+            ChangeCalculatorData();
+        }
     }
 }
