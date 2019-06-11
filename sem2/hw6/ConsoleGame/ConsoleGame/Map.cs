@@ -58,7 +58,7 @@ namespace ConsoleGame
             {
                 throw new WrongMapException();
             }
-		}
+        }
 
         /// <summary>
         /// Prints the map.
@@ -104,7 +104,7 @@ namespace ConsoleGame
         /// </summary>
         /// <param name="newCoordinates">Coordinates to move character.</param>
         public void MoveCharacter((int x, int y) newCoordinates)
-	    {
+        {
             CharacterLeft();
 
             if (newCoordinates.x >= Size.x || newCoordinates.y >= Size.y)

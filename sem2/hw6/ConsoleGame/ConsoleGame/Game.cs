@@ -54,17 +54,17 @@ namespace ConsoleGame
             map.MoveCharacter(character.Coordinates);
         }
 
-		private void RemovingOldCharacter()
-		{
-			Console.Write(' ');
-			Console.CursorLeft -= 1;
-		}
+        private void RemovingOldCharacter()
+        {
+            Console.Write(' ');
+            Console.CursorLeft -= 1;
+        }
 
-		private void PrintingNewCharacter()
-		{
-			Character.Print();
-			Console.CursorLeft -= 1;
-		}
+        private void PrintingNewCharacter()
+        {
+            Character.Print();
+            Console.CursorLeft -= 1;
+        }
 
         /// <summary>
         /// Invoking method when left arrow button is pressed.
@@ -73,9 +73,9 @@ namespace ConsoleGame
         /// <param name="args">Extra information for handler.</param>
         public void OnLeft(object sender, EventArgs args)
         {
-			RemovingOldCharacter();
+            RemovingOldCharacter();
             MoveLeft();
-			PrintingNewCharacter();
+            PrintingNewCharacter();
         }
 
         /// <summary>
@@ -85,10 +85,10 @@ namespace ConsoleGame
         /// <param name="args">Extra information for handler.</param>
         public void OnRight(object sender, EventArgs args)
         {
-			RemovingOldCharacter();
-			MoveRight();
-			PrintingNewCharacter();
-		}
+            RemovingOldCharacter();
+            MoveRight();
+            PrintingNewCharacter();
+        }
 
         /// <summary>
         /// Invoking method when up arrow button is pressed.
